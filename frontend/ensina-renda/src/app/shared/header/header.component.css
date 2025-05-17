@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  max-height: 120;
+  height: 100%;
+}
+
+.navigation .list {
+  display: flex;
+  gap: 32px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 32px;
+  font-weight: 600;
+}
+
+.header-buttons .btn-login {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.header-buttons .btn-register {
+  display: flex;
+  padding: 23px 14px 23px 23px;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 38px;
+  font-weight: 600;
+  font-size: 20px;
+}
