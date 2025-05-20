@@ -82,7 +82,7 @@
   width: 50%;
 }
 
-.why h2 {
+.section-title {
   font-size: 64px;
   font-weight: 600;
   max-width: 450px;
@@ -114,4 +114,54 @@
 .item p {
   font-size: 28px;
   font-weight: 400;
+}
+
+/* Section 3 */
+.how-it-works {
+  margin-top: 150px;
+  width: 100%;
+  padding: 58px 76px 64px 76px;
+}
+
+.how-it-works .container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container .section-title {
+  text-align: center;
+  max-width: 100%;
+  margin-bottom: 76px;
+}
+
+.container .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.content .item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 340px;
+}
+
+.content .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 700;
+  background-color: var(--bg-color-1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.content .item img {
+  height: 180px;
+  margin: 0 auto 48px auto;
 }
