@@ -2,10 +2,17 @@ package interceptor
 
 import (
 	"context"
-	"log"
+	"ensina-renda/config/database"
+	"time"
 
 	"google.golang.org/grpc"
 )
+
+/*
+	Função de inicialização do banco de dados.
+	Basicamente, assim que o client (frontend) enviar uma requisição para o backend, o interceptor irá "interceptar" a requisição, e embedar
+	a conexão com o banco, para os repositórios poderem utilizar, antes do controllers iniciarem o uso efetivo do repositório.
+*/
 
 func DatabaseUnaryInterceptor(
 	ctx context.Context,
@@ -13,12 +20,32 @@ func DatabaseUnaryInterceptor(
 	info *grpc.UnaryServerInfo,
 	handler grpc.UnaryHandler,
 ) (interface{}, error) {
-	// Pre-processing
+	/*
+		1. Inicia o banco de dados
+		2. Inicia a função "defer" que garante que mesmo com crash do interceptor ou fim do programa, a conexão com o banco será fechada.
+	*/
+	db, err := database.InitDB()
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
 
-	// Call the handler
-	return handler(ctx, req)
+	/*
+		1. Inicia uma variável "timeout" com 10 segundos.
+		2. Atribui ao valor do ctx a duração de 10 segundos.
+		3. Garante que após 10 segundos, a requisição gRPC será cancelada.
+	*/
+	timeout := 10 * time.Second
+	ctx, cancel := context.WithTimeout(ctx, timeout)
+	defer cancel()
 
-	// Post-processing
-	log.Println("After handling:", info.FullMethod)
-	return resp, err
+	// Embeda um valor de par-chave no contexto, para os repositórios acessarem.
+	ctx = context.WithValue(ctx, database.DbContextKey, db)
+
+	// Passa o processo para o controller responsável e trata os possíveis erros.
+	resp, err := handler(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
 }

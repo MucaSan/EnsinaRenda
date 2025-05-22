@@ -2,31 +2,35 @@ package database
 
 import (
 	"context"
-	"fmt"
-	"log"
+	"database/sql"
 
-	"github.com/jackc/pgx/v5"
+	_ "github.com/lib/pq"
 )
 
-func main() {
-	// Connection configuration
-	connStr := "postgres://username:password@localhost:5432/database_name?sslmode=disable"
+type contextKey string
 
-	// Establish connection
-	conn, err := pgx.Connect(context.Background(), connStr)
+// Inicialização de variáveis de contexto do banco, para evitar colisões de tipos.
+const DbContextKey contextKey = "db"
+
+//Função responsável por inicializar o banco de dados pelo interceptor.
+
+func InitDB() (*sql.DB, error) {
+	// Inicializa a string de conexão com o banco de dados relacional postgres.
+	connStr := "host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"
+	postgresDB, err := sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatalf("Unable to connect to database: %v\n", err)
-	}
-	defer conn.Close(context.Background())
-
-	log.Println("Successfully connected to PostgreSQL database!")
-
-	// Test the connection
-	var greeting string
-	err = conn.QueryRow(context.Background(), "SELECT 'Hello, PostgreSQL!'").Scan(&greeting)
-	if err != nil {
-		log.Fatalf("Query failed: %v\n", err)
+		return nil, err
 	}
 
-	fmt.Println(greeting)
+	return postgresDB, nil
+}
+
+// Função responsável por ser chamada pelos repositories para operações com o banco.
+
+func GetDB(ctx context.Context) *sql.DB {
+	// Retorna a conexão com o banco de dados pela par de chaves configurado no interceptor.
+	if db, ok := ctx.Value(DbContextKey).(*sql.DB); ok {
+		return db
+	}
+	return nil
 }
