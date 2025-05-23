@@ -3,6 +3,7 @@
   --bg-color-1: #C2E3FF;
   --bg-color-2: #becedb;
   --green-color: #FAFFC2;
+  --medium-green-color: #CAE066;
   --body-font-color: #1E2124;
   --gray-color: #898989;
 }
@@ -12,6 +13,7 @@
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {

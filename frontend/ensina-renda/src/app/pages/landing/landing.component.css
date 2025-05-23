@@ -46,6 +46,13 @@
   font-size: 20px;
   margin-top: 50px;
   transition: all 0.3s ease-in-out;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    scale: 1.05;
+    filter: brightness(1.1);
+  }
 }
 
 /* Section 2 */
@@ -75,6 +82,12 @@
   border-radius: 38px;
   font-weight: 600;
   font-size: 20px;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    scale: 1.05;
+  }
 }
 
 .why .container,
