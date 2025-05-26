@@ -1,24 +1,21 @@
 syntax="proto3";
 
-import "google/protobuf/timestamp.proto";
-
 package ensina_renda;
 
 option go_package = ".;grpc";
 
 
 service EnsinaRendaService{ 
-    rpc CriarUsuario(CriarUsuarioRequest) returns (CriarUsuarioResponse);    
+    rpc CadastrarAluno(CadastrarAlunoRequest) returns (CadastrarAlunoResponse);    
 }
 
-message CriarUsuarioRequest{
+message CadastrarAlunoRequest{
     string nome = 1;
     string email  = 2;
     string senha = 3;
-    google.protobuf.Timestamp data_criacao = 4;
 }
 
-message CriarUsuarioResponse{
+message CadastrarAlunoResponse{
     string mensagem = 1; 
     bool sucesso = 2;
 }

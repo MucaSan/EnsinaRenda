@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EnsinaRendaService_CriarUsuario_FullMethodName = "/ensina_renda.EnsinaRendaService/CriarUsuario"
+	EnsinaRendaService_CadastrarAluno_FullMethodName = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EnsinaRendaServiceClient interface {
-	CriarUsuario(ctx context.Context, in *CriarUsuarioRequest, opts ...grpc.CallOption) (*CriarUsuarioResponse, error)
+	CadastrarAluno(ctx context.Context, in *CadastrarAlunoRequest, opts ...grpc.CallOption) (*CadastrarAlunoResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -37,10 +37,10 @@ func NewEnsinaRendaServiceClient(cc grpc.ClientConnInterface) EnsinaRendaService
 	return &ensinaRendaServiceClient{cc}
 }
 
-func (c *ensinaRendaServiceClient) CriarUsuario(ctx context.Context, in *CriarUsuarioRequest, opts ...grpc.CallOption) (*CriarUsuarioResponse, error) {
+func (c *ensinaRendaServiceClient) CadastrarAluno(ctx context.Context, in *CadastrarAlunoRequest, opts ...grpc.CallOption) (*CadastrarAlunoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CriarUsuarioResponse)
-	err := c.cc.Invoke(ctx, EnsinaRendaService_CriarUsuario_FullMethodName, in, out, cOpts...)
+	out := new(CadastrarAlunoResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_CadastrarAluno_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *ensinaRendaServiceClient) CriarUsuario(ctx context.Context, in *CriarUs
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
 type EnsinaRendaServiceServer interface {
-	CriarUsuario(context.Context, *CriarUsuarioRequest) (*CriarUsuarioResponse, error)
+	CadastrarAluno(context.Context, *CadastrarAlunoRequest) (*CadastrarAlunoResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -62,8 +62,8 @@ type EnsinaRendaServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedEnsinaRendaServiceServer struct{}
 
-func (UnimplementedEnsinaRendaServiceServer) CriarUsuario(context.Context, *CriarUsuarioRequest) (*CriarUsuarioResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CriarUsuario not implemented")
+func (UnimplementedEnsinaRendaServiceServer) CadastrarAluno(context.Context, *CadastrarAlunoRequest) (*CadastrarAlunoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CadastrarAluno not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -86,20 +86,20 @@ func RegisterEnsinaRendaServiceServer(s grpc.ServiceRegistrar, srv EnsinaRendaSe
 	s.RegisterService(&EnsinaRendaService_ServiceDesc, srv)
 }
 
-func _EnsinaRendaService_CriarUsuario_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CriarUsuarioRequest)
+func _EnsinaRendaService_CadastrarAluno_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CadastrarAlunoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(EnsinaRendaServiceServer).CriarUsuario(ctx, in)
+		return srv.(EnsinaRendaServiceServer).CadastrarAluno(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: EnsinaRendaService_CriarUsuario_FullMethodName,
+		FullMethod: EnsinaRendaService_CadastrarAluno_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EnsinaRendaServiceServer).CriarUsuario(ctx, req.(*CriarUsuarioRequest))
+		return srv.(EnsinaRendaServiceServer).CadastrarAluno(ctx, req.(*CadastrarAlunoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +112,8 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*EnsinaRendaServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CriarUsuario",
-			Handler:    _EnsinaRendaService_CriarUsuario_Handler,
+			MethodName: "CadastrarAluno",
+			Handler:    _EnsinaRendaService_CadastrarAluno_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

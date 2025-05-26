@@ -21,10 +21,16 @@ func DatabaseUnaryInterceptor(
 	handler grpc.UnaryHandler,
 ) (interface{}, error) {
 	/*
-		1. Inicia o banco de dados
-		2. Inicia a função "defer" que garante que mesmo com crash do interceptor ou fim do programa, a conexão com o banco será fechada.
+		1. Inicia o banco de dados com a abstração do GORM (*gorm.DB)
+		2. Inicia a conversão do modelo ORM para a conexão direta com o banco (tipo *sql.DB)
+		3. Inicia a função "defer" que garante que mesmo com crash do interceptor ou fim do programa, a conexão com o banco será fechada.
 	*/
-	db, err := database.InitDB()
+	gormDb, err := database.InitDB()
+	if err != nil {
+		return nil, err
+	}
+
+	db, err := gormDb.DB()
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +46,7 @@ func DatabaseUnaryInterceptor(
 	defer cancel()
 
 	// Embeda um valor de par-chave no contexto, para os repositórios acessarem.
-	ctx = context.WithValue(ctx, database.DbContextKey, db)
+	ctx = context.WithValue(ctx, database.DbContextKey, gormDb)
 
 	// Passa o processo para o controller responsável e trata os possíveis erros.
 	resp, err := handler(ctx, req)

@@ -2,34 +2,45 @@ package database
 
 import (
 	"context"
-	"database/sql"
+	"time"
 
-	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 type contextKey string
 
-// Inicialização de variáveis de contexto do banco, para evitar colisões de tipos.
+// Par de chave de acesso no contexto do banco.
 const DbContextKey contextKey = "db"
 
-//Função responsável por inicializar o banco de dados pelo interceptor.
+// InitDB initializes the database connection using GORM
+func InitDB() (*gorm.DB, error) {
+	// String de conexão no banco de dados
+	dsn := "host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"
 
-func InitDB() (*sql.DB, error) {
-	// Inicializa a string de conexão com o banco de dados relacional postgres.
-	connStr := "host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"
-	postgresDB, err := sql.Open("postgres", connStr)
+	// Abrir a ORM do GORM
+	gormDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
 
-	return postgresDB, nil
+	sqlDb, err := gormDb.DB()
+	if err != nil {
+		return nil, err
+	}
+
+	// Configura timeout para o banco
+	sqlDb.SetConnMaxLifetime(time.Minute * 5)
+	sqlDb.SetMaxOpenConns(10)
+	sqlDb.SetMaxIdleConns(5)
+
+	return gormDb, nil
 }
 
-// Função responsável por ser chamada pelos repositories para operações com o banco.
-
-func GetDB(ctx context.Context) *sql.DB {
-	// Retorna a conexão com o banco de dados pela par de chaves configurado no interceptor.
-	if db, ok := ctx.Value(DbContextKey).(*sql.DB); ok {
+// A função GetDB retorna a conexão atual do banco pelo contexto passado
+func GetDB(ctx context.Context) *gorm.DB {
+	// Realizando assert no valor da interface{} do ctx.Value e verificando se é *gorm.DB
+	if db, ok := ctx.Value(DbContextKey).(*gorm.DB); ok {
 		return db
 	}
 	return nil

@@ -1,0 +1,14 @@
+package iface
+
+import (
+	"context"
+	"ensina-renda/domain/model"
+
+	"github.com/google/uuid"
+)
+
+type UsuarioRepository interface {
+	CriarUsuario(ctx context.Context, usuario *model.Usuario) error
+	VerificarEmail(ctx context.Context, email string) (bool, error)
+	VerificarUsuarioCadastrado(ctx context.Context, id uuid.UUID) (bool, error)
+}
