@@ -13,6 +13,7 @@ message CadastrarAlunoRequest{
     string nome = 1;
     string email  = 2;
     string senha = 3;
+    string data_nascimento = 4;
 }
 
 message CadastrarAlunoResponse{
