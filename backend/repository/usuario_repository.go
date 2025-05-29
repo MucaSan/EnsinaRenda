@@ -11,6 +11,10 @@ import (
 type UsuarioRepository struct {
 }
 
+func NewUsuarioRepository() *UsuarioRepository {
+	return &UsuarioRepository{}
+}
+
 func (r *UsuarioRepository) CriarUsuario(ctx context.Context, usuario *model.Usuario) error {
 	err := database.GetDB(ctx).Save(usuario).Error
 	if err != nil {

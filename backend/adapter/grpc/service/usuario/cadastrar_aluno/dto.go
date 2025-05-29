@@ -12,10 +12,18 @@ import (
 	"github.com/google/uuid"
 )
 
-type UsuarioConverter struct{}
+type UsuarioConverter struct {
+	base any
+}
 
-func (uc *UsuarioConverter) ToDomain(ctx context.Context, base any) (*model.Usuario, error) {
-	cadastrarAlunoRequest, ok := base.(*pb.CadastrarAlunoRequest)
+func NewUsuarioConverter(base any) *UsuarioConverter {
+	return &UsuarioConverter{
+		base: base,
+	}
+}
+
+func (uc *UsuarioConverter) ToDomain(ctx context.Context) (*model.Usuario, error) {
+	cadastrarAlunoRequest, ok := uc.base.(*pb.CadastrarAlunoRequest)
 	if !ok {
 		return nil, errors.New("nao foi possivel converter base para cadastrar_aluno_request")
 	}

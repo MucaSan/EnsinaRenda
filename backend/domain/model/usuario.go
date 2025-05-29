@@ -22,15 +22,15 @@ type Usuario struct {
 func (u *Usuario) IsValid() error {
 	validate := validator.New()
 
-	if u.AtualizadoEm.Before(u.CriadoEm) {
+	if u.AtualizadoEm != nil && u.AtualizadoEm.Before(u.CriadoEm) {
 		return errors.New("o campo de atualizacao nao pode ser antes do campo de criacao")
 	}
 
-	if u.DeletadoEm.Before(u.CriadoEm) {
+	if u.DeletadoEm != nil && u.DeletadoEm.Before(u.CriadoEm) {
 		return errors.New("o campo de delecao nao pode ser antes do campo de delecao")
 	}
 
-	if u.DeletadoEm.Before(*u.AtualizadoEm) {
+	if u.AtualizadoEm != nil && u.DeletadoEm != nil && u.DeletadoEm.Before(*u.AtualizadoEm) {
 		return errors.New("o campo de delecao nao pode ser antes do campo de atualizacao")
 	}
 

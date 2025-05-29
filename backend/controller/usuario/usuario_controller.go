@@ -4,6 +4,7 @@ import (
 	"context"
 	"ensina-renda/domain/model"
 	"ensina-renda/repository/iface"
+	"fmt"
 )
 
 type UsuarioController struct {
@@ -16,6 +17,30 @@ func NewUsuarioController(usuarioRepository iface.UsuarioRepository) *UsuarioCon
 	}
 }
 
-func (uc *UsuarioController) CadastrarUsuario(ctx context.Context) (*model.Usuario, error) {
-	return nil, nil
+func (uc *UsuarioController) CadastrarUsuario(ctx context.Context, usuario *model.Usuario) error {
+	email := usuario.Email
+
+	temUsuario, err := uc.usuarioRepository.VerificarEmail(ctx, email)
+	if err != nil {
+		return err
+	}
+
+	if temUsuario {
+		return fmt.Errorf("ja existe um usuario com o email %s no sistema", email)
+	}
+
+	if err = uc.usuarioRepository.CriarUsuario(ctx, usuario); err != nil {
+		return err
+	}
+
+	usuarioCadastrado, err := uc.usuarioRepository.VerificarUsuarioCadastrado(ctx, usuario.Id)
+	if err != nil {
+		return err
+	}
+
+	if !usuarioCadastrado {
+		return fmt.Errorf("o usuario nao foi cadastrado com sucesso")
+	}
+
+	return nil
 }

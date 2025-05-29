@@ -6,5 +6,5 @@ import (
 )
 
 type UsuarioController interface {
-	CadastrarUsuario(ctx context.Context) (*model.Usuario, error)
+	CadastrarUsuario(ctx context.Context, usuario *model.Usuario) error
 }
