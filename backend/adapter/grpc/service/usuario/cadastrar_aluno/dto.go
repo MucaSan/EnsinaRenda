@@ -33,12 +33,13 @@ func (uc *UsuarioConverter) ToDomain(ctx context.Context) (*model.Usuario, error
 		return nil, err
 	}
 
+	dataNascimento, _ := time.Parse("02/01/2006", cadastrarAlunoRequest.DataNascimento)
 	modelUsuario := &model.Usuario{
 		Id:             uuid.New(),
 		Nome:           cadastrarAlunoRequest.Nome,
 		Email:          cadastrarAlunoRequest.Email,
 		Senha:          cadastrarAlunoRequest.Senha,
-		DataNascimento: cadastrarAlunoRequest.DataNascimento,
+		DataNascimento: dataNascimento,
 		CriadoEm:       time.Now(),
 	}
 

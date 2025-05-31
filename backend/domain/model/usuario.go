@@ -10,10 +10,10 @@ import (
 
 type Usuario struct {
 	Id             uuid.UUID  `validate:"required" gorm:"column:id"`
-	Nome           string     `validate:"required,min=3,max=255" gorm:"column: nome"`
-	Email          string     `validate:"required,email,max=64" gorm:"column: email"`
+	Nome           string     `validate:"required,min=3,max=255" gorm:"column:nome"`
+	Email          string     `validate:"required,max=64" gorm:"column:email"`
 	Senha          string     `validate:"required,min=4,max=64" gorm:"column:senha"`
-	DataNascimento string     `validate:"required,datetime=2006-01-02" gorm:"column:data_nascimento"`
+	DataNascimento time.Time  `validate:"required" gorm:"column:data_nascimento"`
 	CriadoEm       time.Time  `validate:"required" gorm:"column:criado_em"`
 	AtualizadoEm   *time.Time `gorm:"column:atualizado_em"`
 	DeletadoEm     *time.Time `gorm:"column:deletado_em"`
