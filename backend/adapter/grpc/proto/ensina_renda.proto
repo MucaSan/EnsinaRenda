@@ -1,22 +1,29 @@
-syntax="proto3";
+syntax = "proto3";
 
 package ensina_renda;
 
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+
 option go_package = ".;grpc";
 
-
-service EnsinaRendaService{ 
-    rpc CadastrarAluno(CadastrarAlunoRequest) returns (CadastrarAlunoResponse);    
+service EnsinaRendaService {
+    rpc CadastrarAluno(CadastrarAlunoRequest) returns (CadastrarAlunoResponse) {
+        option (google.api.http) = {    
+            post: "/v1/alunos"
+            body: "*"
+        };
+    }
 }
 
-message CadastrarAlunoRequest{
-    string nome = 1;
-    string email  = 2;
-    string senha = 3;
-    string data_nascimento = 4;
+message CadastrarAlunoRequest {
+    string nome = 1 [(google.api.field_behavior) = REQUIRED];
+    string email = 2 [(google.api.field_behavior) = REQUIRED];
+    string senha = 3 [(google.api.field_behavior) = REQUIRED];
+    string data_nascimento = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
-message CadastrarAlunoResponse{
-    string mensagem = 1; 
+message CadastrarAlunoResponse {
+    string mensagem = 1;
     bool sucesso = 2;
 }
