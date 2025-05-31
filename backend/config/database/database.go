@@ -16,7 +16,7 @@ const DbContextKey contextKey = "db"
 // InitDB initializes the database connection using GORM
 func InitDB() (*gorm.DB, error) {
 	// String de conexão no banco de dados
-	dsn := "host=localhost port=5432 user=postgres dbname=postgres sslmode=disable"
+	dsn := "host=localhost port=5432 user=postgres dbname=ensina_renda sslmode=disable"
 
 	// Abrir a ORM do GORM
 	gormDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})

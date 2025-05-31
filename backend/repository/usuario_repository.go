@@ -16,7 +16,7 @@ func NewUsuarioRepository() *UsuarioRepository {
 }
 
 func (r *UsuarioRepository) CriarUsuario(ctx context.Context, usuario *model.Usuario) error {
-	err := database.GetDB(ctx).Save(usuario).Error
+	err := database.GetDB(ctx).Create(usuario).Error
 	if err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func (r *UsuarioRepository) VerificarEmail(ctx context.Context, email string) (b
 		return false, err
 	}
 
-	if usuario != nil {
+	if usuario.Id != uuid.Nil {
 		return true, nil
 	}
 
@@ -47,7 +47,7 @@ func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id u
 		return false, err
 	}
 
-	if usuario != nil {
+	if usuario.Id != uuid.Nil {
 		return true, nil
 	}
 
