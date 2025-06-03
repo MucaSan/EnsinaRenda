@@ -142,6 +142,112 @@ func (x *CadastrarAlunoResponse) GetSucesso() bool {
 	return false
 }
 
+type VerificarAlunoRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Aqui é o hash SHA-256 do email
+	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	// Aqui é o hash SHA-256 da senha
+	Senha         string `protobuf:"bytes,2,opt,name=senha,proto3" json:"senha,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerificarAlunoRequest) Reset() {
+	*x = VerificarAlunoRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerificarAlunoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerificarAlunoRequest) ProtoMessage() {}
+
+func (x *VerificarAlunoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerificarAlunoRequest.ProtoReflect.Descriptor instead.
+func (*VerificarAlunoRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *VerificarAlunoRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *VerificarAlunoRequest) GetSenha() string {
+	if x != nil {
+		return x.Senha
+	}
+	return ""
+}
+
+type VerificarAlunoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,1,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,2,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VerificarAlunoResponse) Reset() {
+	*x = VerificarAlunoResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VerificarAlunoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerificarAlunoResponse) ProtoMessage() {}
+
+func (x *VerificarAlunoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerificarAlunoResponse.ProtoReflect.Descriptor instead.
+func (*VerificarAlunoResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *VerificarAlunoResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *VerificarAlunoResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
 var File_ensina_renda_proto protoreflect.FileDescriptor
 
 const file_ensina_renda_proto_rawDesc = "" +
@@ -154,10 +260,16 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x0fdata_nascimento\x18\x04 \x01(\tB\x03\xe0A\x02R\x0edataNascimento\"N\n" +
 	"\x16CadastrarAlunoResponse\x12\x1a\n" +
 	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x02 \x01(\bR\asucesso2\x88\x01\n" +
-	"\x12EnsinaRendaService\x12r\n" +
-	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v1/alunosB\bZ\x06.;grpcb\x06proto3"
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"M\n" +
+	"\x15VerificarAlunoRequest\x12\x19\n" +
+	"\x05email\x18\x01 \x01(\tB\x03\xe0A\x02R\x05email\x12\x19\n" +
+	"\x05senha\x18\x02 \x01(\tB\x03\xe0A\x02R\x05senha\"N\n" +
+	"\x16VerificarAlunoResponse\x12\x1a\n" +
+	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso2\x87\x02\n" +
+	"\x12EnsinaRendaService\x12q\n" +
+	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
+	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}B\bZ\x06.;grpcb\x06proto3"
 
 var (
 	file_ensina_renda_proto_rawDescOnce sync.Once
@@ -171,16 +283,20 @@ func file_ensina_renda_proto_rawDescGZIP() []byte {
 	return file_ensina_renda_proto_rawDescData
 }
 
-var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_ensina_renda_proto_goTypes = []any{
 	(*CadastrarAlunoRequest)(nil),  // 0: ensina_renda.CadastrarAlunoRequest
 	(*CadastrarAlunoResponse)(nil), // 1: ensina_renda.CadastrarAlunoResponse
+	(*VerificarAlunoRequest)(nil),  // 2: ensina_renda.VerificarAlunoRequest
+	(*VerificarAlunoResponse)(nil), // 3: ensina_renda.VerificarAlunoResponse
 }
 var file_ensina_renda_proto_depIdxs = []int32{
 	0, // 0: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
-	1, // 1: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
+	1, // 2: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
+	3, // 3: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -197,7 +313,7 @@ func file_ensina_renda_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ensina_renda_proto_rawDesc), len(file_ensina_renda_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

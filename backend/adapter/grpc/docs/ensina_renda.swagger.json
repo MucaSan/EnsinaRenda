@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/alunos": {
+    "/v1/aluno": {
       "post": {
         "operationId": "EnsinaRendaService_CadastrarAluno",
         "responses": {
@@ -41,6 +41,44 @@
             "schema": {
               "$ref": "#/definitions/ensina_rendaCadastrarAlunoRequest"
             }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
+    "/v1/aluno/{email}/{senha}": {
+      "get": {
+        "operationId": "EnsinaRendaService_VerificarAluno",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaVerificarAlunoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "description": "Aqui é o hash SHA-256 do email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "senha",
+            "description": "Aqui é o hash SHA-256 da senha",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -74,6 +112,17 @@
       ]
     },
     "ensina_rendaCadastrarAlunoResponse": {
+      "type": "object",
+      "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaVerificarAlunoResponse": {
       "type": "object",
       "properties": {
         "mensagem": {

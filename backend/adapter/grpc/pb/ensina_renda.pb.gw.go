@@ -59,6 +59,59 @@ func local_request_EnsinaRendaService_CadastrarAluno_0(ctx context.Context, mars
 	return msg, metadata, err
 }
 
+func request_EnsinaRendaService_VerificarAluno_0(ctx context.Context, marshaler runtime.Marshaler, client EnsinaRendaServiceClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq VerificarAlunoRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	io.Copy(io.Discard, req.Body)
+	val, ok := pathParams["email"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "email")
+	}
+	protoReq.Email, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "email", err)
+	}
+	val, ok = pathParams["senha"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "senha")
+	}
+	protoReq.Senha, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "senha", err)
+	}
+	msg, err := client.VerificarAluno(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_EnsinaRendaService_VerificarAluno_0(ctx context.Context, marshaler runtime.Marshaler, server EnsinaRendaServiceServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq VerificarAlunoRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["email"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "email")
+	}
+	protoReq.Email, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "email", err)
+	}
+	val, ok = pathParams["senha"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "senha")
+	}
+	protoReq.Senha, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "senha", err)
+	}
+	msg, err := server.VerificarAluno(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 // RegisterEnsinaRendaServiceHandlerServer registers the http handlers for service EnsinaRendaService to "mux".
 // UnaryRPC     :call EnsinaRendaServiceServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -71,7 +124,7 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/CadastrarAluno", runtime.WithHTTPPathPattern("/v1/alunos"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/CadastrarAluno", runtime.WithHTTPPathPattern("/v1/aluno"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -84,6 +137,26 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 			return
 		}
 		forward_EnsinaRendaService_CadastrarAluno_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_EnsinaRendaService_VerificarAluno_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/VerificarAluno", runtime.WithHTTPPathPattern("/v1/aluno/{email}/{senha}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_EnsinaRendaService_VerificarAluno_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_EnsinaRendaService_VerificarAluno_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
@@ -129,7 +202,7 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/CadastrarAluno", runtime.WithHTTPPathPattern("/v1/alunos"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/CadastrarAluno", runtime.WithHTTPPathPattern("/v1/aluno"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -142,13 +215,32 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		}
 		forward_EnsinaRendaService_CadastrarAluno_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_EnsinaRendaService_VerificarAluno_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/VerificarAluno", runtime.WithHTTPPathPattern("/v1/aluno/{email}/{senha}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_EnsinaRendaService_VerificarAluno_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_EnsinaRendaService_VerificarAluno_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	return nil
 }
 
 var (
-	pattern_EnsinaRendaService_CadastrarAluno_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "alunos"}, ""))
+	pattern_EnsinaRendaService_CadastrarAluno_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "aluno"}, ""))
+	pattern_EnsinaRendaService_VerificarAluno_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aluno", "email", "senha"}, ""))
 )
 
 var (
 	forward_EnsinaRendaService_CadastrarAluno_0 = runtime.ForwardResponseMessage
+	forward_EnsinaRendaService_VerificarAluno_0 = runtime.ForwardResponseMessage
 )

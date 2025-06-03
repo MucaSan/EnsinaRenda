@@ -10,8 +10,14 @@ option go_package = ".;grpc";
 service EnsinaRendaService {
     rpc CadastrarAluno(CadastrarAlunoRequest) returns (CadastrarAlunoResponse) {
         option (google.api.http) = {    
-            post: "/v1/alunos"
+            post: "/v1/aluno"
             body: "*"
+        };
+    }
+
+    rpc VerificarAluno(VerificarAlunoRequest) returns (VerificarAlunoResponse) {
+        option (google.api.http) = {    
+            get: "/v1/aluno/{email}/{senha}"
         };
     }
 }
@@ -24,6 +30,19 @@ message CadastrarAlunoRequest {
 }
 
 message CadastrarAlunoResponse {
+    string mensagem = 1;
+    bool sucesso = 2;
+}
+
+
+message VerificarAlunoRequest{
+    // Aqui é o hash SHA-256 do email
+    string email = 1 [(google.api.field_behavior) = REQUIRED];
+    // Aqui é o hash SHA-256 da senha
+    string senha = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message VerificarAlunoResponse {
     string mensagem = 1;
     bool sucesso = 2;
 }
