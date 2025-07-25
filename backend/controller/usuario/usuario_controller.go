@@ -44,3 +44,25 @@ func (uc *UsuarioController) CadastrarUsuario(ctx context.Context, usuario *mode
 
 	return nil
 }
+
+func (uc *UsuarioController) VerificarCredenciaisUsuario(ctx context.Context, usuario *model.Usuario) (bool, error) {
+	emailCerto, err := uc.usuarioRepository.VerificarEmailUsuario(ctx, usuario.Email)
+	if err != nil {
+		return false, err
+	}
+
+	senhaCerta, err := uc.usuarioRepository.VerificarSenhaUsuario(ctx, usuario.Senha)
+	if err != nil {
+		return false, err
+	}
+
+	if !emailCerto {
+		return false, nil
+	}
+
+	if !senhaCerta {
+		return false, nil
+	}
+
+	return true, nil
+}

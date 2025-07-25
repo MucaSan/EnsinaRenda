@@ -53,3 +53,31 @@ func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id u
 
 	return false, nil
 }
+
+func (r *UsuarioRepository) VerificarEmailUsuario(ctx context.Context, hash_email string) (bool, error) {
+	var usuario *model.Usuario
+	err := database.GetDB(ctx).Table("usuario").Where("email = ?", hash_email).Find(&usuario).Error
+	if err != nil {
+		return false, err
+	}
+
+	if usuario.Id != uuid.Nil {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func (r *UsuarioRepository) VerificarSenhaUsuario(ctx context.Context, hash_senha string) (bool, error) {
+	var usuario *model.Usuario
+	err := database.GetDB(ctx).Table("usuario").Where("senha = ?", hash_senha).Find(&usuario).Error
+	if err != nil {
+		return false, err
+	}
+
+	if usuario.Id != uuid.Nil {
+		return true, nil
+	}
+
+	return false, nil
+}
