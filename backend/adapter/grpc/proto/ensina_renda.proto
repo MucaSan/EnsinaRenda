@@ -20,6 +20,20 @@ service EnsinaRendaService {
             get: "/v1/aluno/{email}/{senha}"
         };
     }
+
+    rpc ConcluirAula(ConcluirAulaRequest) returns (ConcluirAulaResponse) {
+        option (google.api.http) = {    
+            post: "/v1/aluno/{id_usuario}/{id_aula}"
+            body: "*"
+        };
+    }
+
+    rpc ConcluirModulo(ConcluirModuloRequest) returns (ConcluirModuloResponse) {
+        option (google.api.http) = {    
+            post: "/v1/aluno/{id_usuario}/{id_modulo}"
+            body: "*"
+        };
+    }
 }
 
 message CadastrarAlunoRequest {
@@ -43,6 +57,26 @@ message VerificarAlunoRequest{
 }
 
 message VerificarAlunoResponse {
+    string mensagem = 1;
+    bool sucesso = 2;
+}
+
+message ConcluirAulaRequest{
+    int64 id_aula = 1 [(google.api.field_behavior) = REQUIRED];
+    string id_usuario = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ConcluirAulaResponse{
+    string mensagem = 1;
+    bool sucesso = 2;
+}
+
+message ConcluirModuloRequest{
+    string id_modulo = 1 [(google.api.field_behavior) = REQUIRED];
+    string id_usuario = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ConcluirModuloResponse{
     string mensagem = 1;
     bool sucesso = 2;
 }
