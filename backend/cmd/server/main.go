@@ -6,7 +6,8 @@ import (
 	"ensina-renda/adapter/grpc/service"
 	"ensina-renda/adapter/grpc/service/container"
 	"ensina-renda/config/interceptor"
-	controller "ensina-renda/controller/usuario"
+	aulaController "ensina-renda/controller/aula"
+	usuarioController "ensina-renda/controller/usuario"
 	"ensina-renda/repository"
 	"flag"
 	"fmt"
@@ -78,9 +79,13 @@ func subirServidorGRPC() error {
 
 	// Inicializa os repositórios para serem utilizados pelos controllers.
 	usuarioRepository := repository.NewUsuarioRepository()
+	aulaRepository := repository.NewAulaRepository()
 
 	// Container conterá todos os controllers do sistema, sendo utilizados pelos handlers
-	container := container.NewEnsinaRendaContainer(controller.NewUsuarioController(usuarioRepository))
+	container := container.NewEnsinaRendaContainer(
+		usuarioController.NewUsuarioController(usuarioRepository),
+		aulaController.NewAulaController(aulaRepository),
+	)
 
 	// Registra, respectivamente, o servidor gRPC (com os interceptors nele) e o serviço com a API gRPC.
 	servidorGrpc := grpc.NewServer(

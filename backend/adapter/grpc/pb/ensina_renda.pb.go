@@ -248,6 +248,214 @@ func (x *VerificarAlunoResponse) GetSucesso() bool {
 	return false
 }
 
+type ConcluirAulaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IdAula        int64                  `protobuf:"varint,1,opt,name=id_aula,json=idAula,proto3" json:"id_aula,omitempty"`
+	IdUsuario     string                 `protobuf:"bytes,2,opt,name=id_usuario,json=idUsuario,proto3" json:"id_usuario,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConcluirAulaRequest) Reset() {
+	*x = ConcluirAulaRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConcluirAulaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConcluirAulaRequest) ProtoMessage() {}
+
+func (x *ConcluirAulaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConcluirAulaRequest.ProtoReflect.Descriptor instead.
+func (*ConcluirAulaRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ConcluirAulaRequest) GetIdAula() int64 {
+	if x != nil {
+		return x.IdAula
+	}
+	return 0
+}
+
+func (x *ConcluirAulaRequest) GetIdUsuario() string {
+	if x != nil {
+		return x.IdUsuario
+	}
+	return ""
+}
+
+type ConcluirAulaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,1,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,2,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConcluirAulaResponse) Reset() {
+	*x = ConcluirAulaResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConcluirAulaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConcluirAulaResponse) ProtoMessage() {}
+
+func (x *ConcluirAulaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConcluirAulaResponse.ProtoReflect.Descriptor instead.
+func (*ConcluirAulaResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ConcluirAulaResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *ConcluirAulaResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
+type ConcluirModuloRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IdModulo      string                 `protobuf:"bytes,1,opt,name=id_modulo,json=idModulo,proto3" json:"id_modulo,omitempty"`
+	IdUsuario     string                 `protobuf:"bytes,2,opt,name=id_usuario,json=idUsuario,proto3" json:"id_usuario,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConcluirModuloRequest) Reset() {
+	*x = ConcluirModuloRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConcluirModuloRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConcluirModuloRequest) ProtoMessage() {}
+
+func (x *ConcluirModuloRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConcluirModuloRequest.ProtoReflect.Descriptor instead.
+func (*ConcluirModuloRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ConcluirModuloRequest) GetIdModulo() string {
+	if x != nil {
+		return x.IdModulo
+	}
+	return ""
+}
+
+func (x *ConcluirModuloRequest) GetIdUsuario() string {
+	if x != nil {
+		return x.IdUsuario
+	}
+	return ""
+}
+
+type ConcluirModuloResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,1,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,2,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConcluirModuloResponse) Reset() {
+	*x = ConcluirModuloResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConcluirModuloResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConcluirModuloResponse) ProtoMessage() {}
+
+func (x *ConcluirModuloResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConcluirModuloResponse.ProtoReflect.Descriptor instead.
+func (*ConcluirModuloResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ConcluirModuloResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *ConcluirModuloResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
 var File_ensina_renda_proto protoreflect.FileDescriptor
 
 const file_ensina_renda_proto_rawDesc = "" +
@@ -266,10 +474,26 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x05senha\x18\x02 \x01(\tB\x03\xe0A\x02R\x05senha\"N\n" +
 	"\x16VerificarAlunoResponse\x12\x1a\n" +
 	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x02 \x01(\bR\asucesso2\x87\x02\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"W\n" +
+	"\x13ConcluirAulaRequest\x12\x1c\n" +
+	"\aid_aula\x18\x01 \x01(\x03B\x03\xe0A\x02R\x06idAula\x12\"\n" +
+	"\n" +
+	"id_usuario\x18\x02 \x01(\tB\x03\xe0A\x02R\tidUsuario\"L\n" +
+	"\x14ConcluirAulaResponse\x12\x1a\n" +
+	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"]\n" +
+	"\x15ConcluirModuloRequest\x12 \n" +
+	"\tid_modulo\x18\x01 \x01(\tB\x03\xe0A\x02R\bidModulo\x12\"\n" +
+	"\n" +
+	"id_usuario\x18\x02 \x01(\tB\x03\xe0A\x02R\tidUsuario\"N\n" +
+	"\x16ConcluirModuloResponse\x12\x1a\n" +
+	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso2\xa5\x04\n" +
 	"\x12EnsinaRendaService\x12q\n" +
 	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
-	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}B\bZ\x06.;grpcb\x06proto3"
+	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12\x87\x01\n" +
+	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/aluno/{id_usuario}/aula/{id_aula}\x12\x91\x01\n" +
+	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/aluno/{id_usuario}/modulo/{id_modulo}B\bZ\x06.;grpcb\x06proto3"
 
 var (
 	file_ensina_renda_proto_rawDescOnce sync.Once
@@ -283,20 +507,28 @@ func file_ensina_renda_proto_rawDescGZIP() []byte {
 	return file_ensina_renda_proto_rawDescData
 }
 
-var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_ensina_renda_proto_goTypes = []any{
 	(*CadastrarAlunoRequest)(nil),  // 0: ensina_renda.CadastrarAlunoRequest
 	(*CadastrarAlunoResponse)(nil), // 1: ensina_renda.CadastrarAlunoResponse
 	(*VerificarAlunoRequest)(nil),  // 2: ensina_renda.VerificarAlunoRequest
 	(*VerificarAlunoResponse)(nil), // 3: ensina_renda.VerificarAlunoResponse
+	(*ConcluirAulaRequest)(nil),    // 4: ensina_renda.ConcluirAulaRequest
+	(*ConcluirAulaResponse)(nil),   // 5: ensina_renda.ConcluirAulaResponse
+	(*ConcluirModuloRequest)(nil),  // 6: ensina_renda.ConcluirModuloRequest
+	(*ConcluirModuloResponse)(nil), // 7: ensina_renda.ConcluirModuloResponse
 }
 var file_ensina_renda_proto_depIdxs = []int32{
 	0, // 0: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
 	2, // 1: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
-	1, // 2: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
-	3, // 3: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: ensina_renda.EnsinaRendaService.ConcluirAula:input_type -> ensina_renda.ConcluirAulaRequest
+	6, // 3: ensina_renda.EnsinaRendaService.ConcluirModulo:input_type -> ensina_renda.ConcluirModuloRequest
+	1, // 4: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
+	3, // 5: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
+	5, // 6: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
+	7, // 7: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -313,7 +545,7 @@ func file_ensina_renda_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ensina_renda_proto_rawDesc), len(file_ensina_renda_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
