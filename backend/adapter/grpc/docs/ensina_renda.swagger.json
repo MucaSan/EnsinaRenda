@@ -86,7 +86,7 @@
         ]
       }
     },
-    "/v1/aluno/{idUsuario}/{idAula}": {
+    "/v1/aluno/{idUsuario}/aula/{idAula}": {
       "post": {
         "operationId": "EnsinaRendaService_ConcluirAula",
         "responses": {
@@ -131,7 +131,7 @@
         ]
       }
     },
-    "/v1/aluno/{idUsuario}/{idModulo}": {
+    "/v1/aluno/{idUsuario}/modulo/{idModulo}": {
       "post": {
         "operationId": "EnsinaRendaService_ConcluirModulo",
         "responses": {

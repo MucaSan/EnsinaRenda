@@ -23,17 +23,18 @@ service EnsinaRendaService {
 
     rpc ConcluirAula(ConcluirAulaRequest) returns (ConcluirAulaResponse) {
         option (google.api.http) = {    
-            post: "/v1/aluno/{id_usuario}/{id_aula}"
+            post: "/v1/aluno/{id_usuario}/aula/{id_aula}"
             body: "*"
         };
     }
 
     rpc ConcluirModulo(ConcluirModuloRequest) returns (ConcluirModuloResponse) {
         option (google.api.http) = {    
-            post: "/v1/aluno/{id_usuario}/{id_modulo}"
+            post: "/v1/aluno/{id_usuario}/modulo/{id_modulo}"
             body: "*"
         };
     }
+
 }
 
 message CadastrarAlunoRequest {

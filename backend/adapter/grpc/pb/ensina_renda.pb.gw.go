@@ -280,7 +280,7 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/{id_aula}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/aula/{id_aula}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -300,7 +300,7 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/{id_modulo}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/modulo/{id_modulo}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -392,7 +392,7 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/{id_aula}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/aula/{id_aula}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -409,7 +409,7 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/{id_modulo}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/modulo/{id_modulo}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -428,8 +428,8 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 var (
 	pattern_EnsinaRendaService_CadastrarAluno_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "aluno"}, ""))
 	pattern_EnsinaRendaService_VerificarAluno_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aluno", "email", "senha"}, ""))
-	pattern_EnsinaRendaService_ConcluirAula_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aluno", "id_usuario", "id_aula"}, ""))
-	pattern_EnsinaRendaService_ConcluirModulo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aluno", "id_usuario", "id_modulo"}, ""))
+	pattern_EnsinaRendaService_ConcluirAula_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "aluno", "id_usuario", "aula", "id_aula"}, ""))
+	pattern_EnsinaRendaService_ConcluirModulo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "aluno", "id_usuario", "modulo", "id_modulo"}, ""))
 )
 
 var (

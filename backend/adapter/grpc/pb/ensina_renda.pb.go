@@ -488,12 +488,12 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"id_usuario\x18\x02 \x01(\tB\x03\xe0A\x02R\tidUsuario\"N\n" +
 	"\x16ConcluirModuloResponse\x12\x1a\n" +
 	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x02 \x01(\bR\asucesso2\x99\x04\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso2\xa5\x04\n" +
 	"\x12EnsinaRendaService\x12q\n" +
 	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
-	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12\x82\x01\n" +
-	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v1/aluno/{id_usuario}/{id_aula}\x12\x8a\x01\n" +
-	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/aluno/{id_usuario}/{id_modulo}B\bZ\x06.;grpcb\x06proto3"
+	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12\x87\x01\n" +
+	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/aluno/{id_usuario}/aula/{id_aula}\x12\x91\x01\n" +
+	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/aluno/{id_usuario}/modulo/{id_modulo}B\bZ\x06.;grpcb\x06proto3"
 
 var (
 	file_ensina_renda_proto_rawDescOnce sync.Once
