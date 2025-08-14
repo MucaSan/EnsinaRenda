@@ -3,6 +3,7 @@ package concluir_aula
 import (
 	"context"
 	pb "ensina-renda/adapter/grpc/pb"
+	"ensina-renda/controller/aula/converter"
 	"ensina-renda/domain/model"
 	"errors"
 
@@ -13,7 +14,7 @@ type UsuarioAulaConverter struct {
 	base any
 }
 
-func NewUsuarioAulaConverter(base any) *UsuarioAulaConverter {
+func NewUsuarioAulaConverter(base any) converter.UsuarioAulaConverterInterface {
 	return &UsuarioAulaConverter{
 		base: base,
 	}
@@ -22,7 +23,7 @@ func NewUsuarioAulaConverter(base any) *UsuarioAulaConverter {
 func (uc *UsuarioAulaConverter) ToDomain(ctx context.Context) (*model.UsuarioAula, error) {
 	concluirAulaRequest, ok := uc.base.(*pb.ConcluirAulaRequest)
 	if !ok {
-		return nil, errors.New("nao foi possivel converter base para cadastrar_aluno_request")
+		return nil, errors.New("nao foi possivel converter base para concluir_aula_request")
 	}
 
 	idUsuario, err := uuid.Parse(concluirAulaRequest.IdUsuario)

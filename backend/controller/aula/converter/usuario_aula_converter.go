@@ -6,5 +6,5 @@ import (
 )
 
 type UsuarioAulaConverterInterface interface {
-	ToDomain(ctx context.Context, base any) (*model.UsuarioAula, error)
+	ToDomain(ctx context.Context) (*model.UsuarioAula, error)
 }
