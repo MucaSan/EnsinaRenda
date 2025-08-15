@@ -41,5 +41,5 @@ func RespostaErro(err error) (*pb.VerificarAlunoResponse, error) {
 	return &pb.VerificarAlunoResponse{
 		Mensagem: err.Error(),
 		Sucesso:  false,
-	}, err
+	}, nil
 }
