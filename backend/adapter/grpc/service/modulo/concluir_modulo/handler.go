@@ -39,5 +39,5 @@ func RespostaErro(err error) (*pb.ConcluirModuloResponse, error) {
 	return &pb.ConcluirModuloResponse{
 		Mensagem: err.Error(),
 		Sucesso:  false,
-	}, err
+	}, nil
 }

@@ -17,7 +17,7 @@ func NewModuloRepository() *ModuloRepository {
 
 func (r *ModuloRepository) CompletarModulo(ctx context.Context, idModulo int, idUsuario uuid.UUID) error {
 	err := database.GetDB(ctx).Table("usuario_modulo").
-		Where("idModulo = ? ", idModulo).
+		Where("id_modulo = ? ", idModulo).
 		Where("id_usuario = ?", idUsuario).
 		Updates(map[string]interface{}{"concluido": true}).
 		Error

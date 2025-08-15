@@ -39,5 +39,5 @@ func RespostaErro(err error) (*pb.ConcluirAulaResponse, error) {
 	return &pb.ConcluirAulaResponse{
 		Mensagem: err.Error(),
 		Sucesso:  false,
-	}, err
+	}, nil
 }
