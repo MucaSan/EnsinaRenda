@@ -34,5 +34,9 @@ func (uc *ModuloController) GetUsuarioModulo(ctx context.Context, idAula int, id
 		return nil, fmt.Errorf("erro ao processar usuario_modulo para usuario: %v", err)
 	}
 
+	if usuarioModulo == nil || usuarioModulo.IDUsuario == uuid.Nil {
+		return nil, fmt.Errorf("nao existe registro para o usuario com o ID fornecido")
+	}
+
 	return usuarioModulo, nil
 }

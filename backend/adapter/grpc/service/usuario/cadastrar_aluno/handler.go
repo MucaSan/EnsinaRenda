@@ -34,5 +34,5 @@ func RespostaErro(err error) (*pb.CadastrarAlunoResponse, error) {
 	return &pb.CadastrarAlunoResponse{
 		Mensagem: err.Error(),
 		Sucesso:  false,
-	}, err
+	}, nil
 }
