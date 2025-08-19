@@ -21,6 +21,13 @@ service EnsinaRendaService {
         };
     }
 
+    rpc RealizarLogin(RealizarLoginRequest) returns (RealizarLoginResponse){
+        option (google.api.http) = {
+            post: "/v1/aluno/auth"
+            body: "*"
+        };
+    }
+
     rpc ConcluirAula(ConcluirAulaRequest) returns (ConcluirAulaResponse) {
         option (google.api.http) = {    
             post: "/v1/aluno/{id_usuario}/aula/{id_aula}"
@@ -60,6 +67,19 @@ message VerificarAlunoRequest{
 message VerificarAlunoResponse {
     string mensagem = 1;
     bool sucesso = 2;
+}
+
+message RealizarLoginRequest{
+  // Aqui é o hash SHA-256 do email
+  string email = 1 [(google.api.field_behavior) = REQUIRED];
+  // Aqui é o hash SHA-256 da senha
+  string senha = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message RealizarLoginResponse{
+  string token = 1;
+  string mensagem = 2;
+  bool sucesso = 3;
 }
 
 message ConcluirAulaRequest{

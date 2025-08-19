@@ -2,18 +2,22 @@ package controller
 
 import (
 	"context"
+	service "ensina-renda/adapter/grpc/service/auth"
 	"ensina-renda/domain/model"
+	domain "ensina-renda/domain/service"
 	"ensina-renda/repository/iface"
 	"fmt"
 )
 
 type UsuarioController struct {
 	usuarioRepository iface.UsuarioRepository
+	jwtService        domain.JwtServiceInterface
 }
 
 func NewUsuarioController(usuarioRepository iface.UsuarioRepository) *UsuarioController {
 	return &UsuarioController{
 		usuarioRepository: usuarioRepository,
+		jwtService:        service.NewJwtService(),
 	}
 }
 
@@ -65,4 +69,22 @@ func (uc *UsuarioController) VerificarCredenciaisUsuario(ctx context.Context, us
 	}
 
 	return true, nil
+}
+
+func (uc *UsuarioController) GetUsuario(ctx context.Context, usuario *model.Usuario) (*model.Usuario, error) {
+	usuario, err := uc.usuarioRepository.GetUsuario(ctx, usuario.Id)
+	if err != nil {
+		return nil, fmt.Errorf("houve um erro ao tentar procurar o usuario: %s", err.Error())
+	}
+
+	return usuario, nil
+}
+
+func (uc *UsuarioController) RealizarLogin(ctx context.Context, usuario *model.Usuario) (string, error) {
+	token, err := uc.jwtService.GerarJWT(ctx, usuario)
+	if err != nil {
+		return "", fmt.Errorf("houve um erro ao tentar gerar o jwt da sessao: %s", err.Error())
+	}
+
+	return token, nil
 }
