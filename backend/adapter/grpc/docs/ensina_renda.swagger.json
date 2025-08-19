@@ -48,6 +48,38 @@
         ]
       }
     },
+    "/v1/aluno/auth": {
+      "post": {
+        "operationId": "EnsinaRendaService_RealizarLogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaRealizarLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaRealizarLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/aluno/{email}/{senha}": {
       "get": {
         "operationId": "EnsinaRendaService_VerificarAluno",
@@ -231,6 +263,37 @@
     "ensina_rendaConcluirModuloResponse": {
       "type": "object",
       "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaRealizarLoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Aqui é o hash SHA-256 do email"
+        },
+        "senha": {
+          "type": "string",
+          "title": "Aqui é o hash SHA-256 da senha"
+        }
+      },
+      "required": [
+        "email",
+        "senha"
+      ]
+    },
+    "ensina_rendaRealizarLoginResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
         "mensagem": {
           "type": "string"
         },

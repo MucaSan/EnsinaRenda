@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	EnsinaRendaService_CadastrarAluno_FullMethodName = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
 	EnsinaRendaService_VerificarAluno_FullMethodName = "/ensina_renda.EnsinaRendaService/VerificarAluno"
+	EnsinaRendaService_RealizarLogin_FullMethodName  = "/ensina_renda.EnsinaRendaService/RealizarLogin"
 	EnsinaRendaService_ConcluirAula_FullMethodName   = "/ensina_renda.EnsinaRendaService/ConcluirAula"
 	EnsinaRendaService_ConcluirModulo_FullMethodName = "/ensina_renda.EnsinaRendaService/ConcluirModulo"
 )
@@ -31,6 +32,7 @@ const (
 type EnsinaRendaServiceClient interface {
 	CadastrarAluno(ctx context.Context, in *CadastrarAlunoRequest, opts ...grpc.CallOption) (*CadastrarAlunoResponse, error)
 	VerificarAluno(ctx context.Context, in *VerificarAlunoRequest, opts ...grpc.CallOption) (*VerificarAlunoResponse, error)
+	RealizarLogin(ctx context.Context, in *RealizarLoginRequest, opts ...grpc.CallOption) (*RealizarLoginResponse, error)
 	ConcluirAula(ctx context.Context, in *ConcluirAulaRequest, opts ...grpc.CallOption) (*ConcluirAulaResponse, error)
 	ConcluirModulo(ctx context.Context, in *ConcluirModuloRequest, opts ...grpc.CallOption) (*ConcluirModuloResponse, error)
 }
@@ -63,6 +65,16 @@ func (c *ensinaRendaServiceClient) VerificarAluno(ctx context.Context, in *Verif
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) RealizarLogin(ctx context.Context, in *RealizarLoginRequest, opts ...grpc.CallOption) (*RealizarLoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RealizarLoginResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_RealizarLogin_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *ensinaRendaServiceClient) ConcluirAula(ctx context.Context, in *ConcluirAulaRequest, opts ...grpc.CallOption) (*ConcluirAulaResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ConcluirAulaResponse)
@@ -89,6 +101,7 @@ func (c *ensinaRendaServiceClient) ConcluirModulo(ctx context.Context, in *Concl
 type EnsinaRendaServiceServer interface {
 	CadastrarAluno(context.Context, *CadastrarAlunoRequest) (*CadastrarAlunoResponse, error)
 	VerificarAluno(context.Context, *VerificarAlunoRequest) (*VerificarAlunoResponse, error)
+	RealizarLogin(context.Context, *RealizarLoginRequest) (*RealizarLoginResponse, error)
 	ConcluirAula(context.Context, *ConcluirAulaRequest) (*ConcluirAulaResponse, error)
 	ConcluirModulo(context.Context, *ConcluirModuloRequest) (*ConcluirModuloResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
@@ -106,6 +119,9 @@ func (UnimplementedEnsinaRendaServiceServer) CadastrarAluno(context.Context, *Ca
 }
 func (UnimplementedEnsinaRendaServiceServer) VerificarAluno(context.Context, *VerificarAlunoRequest) (*VerificarAlunoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerificarAluno not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) RealizarLogin(context.Context, *RealizarLoginRequest) (*RealizarLoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RealizarLogin not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) ConcluirAula(context.Context, *ConcluirAulaRequest) (*ConcluirAulaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConcluirAula not implemented")
@@ -170,6 +186,24 @@ func _EnsinaRendaService_VerificarAluno_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_RealizarLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RealizarLoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).RealizarLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_RealizarLogin_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).RealizarLogin(ctx, req.(*RealizarLoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EnsinaRendaService_ConcluirAula_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConcluirAulaRequest)
 	if err := dec(in); err != nil {
@@ -220,6 +254,10 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerificarAluno",
 			Handler:    _EnsinaRendaService_VerificarAluno_Handler,
+		},
+		{
+			MethodName: "RealizarLogin",
+			Handler:    _EnsinaRendaService_RealizarLogin_Handler,
 		},
 		{
 			MethodName: "ConcluirAula",
