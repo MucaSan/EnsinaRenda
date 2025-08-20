@@ -82,9 +82,12 @@ func (r *UsuarioRepository) VerificarSenhaUsuario(ctx context.Context, hash_senh
 	return false, nil
 }
 
-func (r *UsuarioRepository) GetUsuario(ctx context.Context, id uuid.UUID) (*model.Usuario, error) {
+func (r *UsuarioRepository) GetUsuario(ctx context.Context, email, senha string) (*model.Usuario, error) {
 	var usuario *model.Usuario
-	err := database.GetDB(ctx).Table("usuario").Where("id  = ?", id).Find(&usuario).Error
+
+	err := database.GetDB(ctx).Table("usuario").
+		Where("email  = ?", email).
+		Where("senha = ?", senha).Find(&usuario).Error
 	if err != nil {
 		return nil, err
 	}

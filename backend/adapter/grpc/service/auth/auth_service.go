@@ -29,7 +29,7 @@ func (s *JwtService) GerarJWT(ctx context.Context, usuario *model.Usuario) (stri
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString(jwtSecretKey)
+	tokenString, err := token.SignedString([]byte(jwtSecretKey))
 	if err != nil {
 		return "", status.Errorf(codes.Internal, "falha ao gerar o token")
 	}
