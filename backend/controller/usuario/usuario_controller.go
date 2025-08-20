@@ -72,7 +72,7 @@ func (uc *UsuarioController) VerificarCredenciaisUsuario(ctx context.Context, us
 }
 
 func (uc *UsuarioController) GetUsuario(ctx context.Context, usuario *model.Usuario) (*model.Usuario, error) {
-	usuario, err := uc.usuarioRepository.GetUsuario(ctx, usuario.Id)
+	usuario, err := uc.usuarioRepository.GetUsuario(ctx, usuario.Email, usuario.Senha)
 	if err != nil {
 		return nil, fmt.Errorf("houve um erro ao tentar procurar o usuario: %s", err.Error())
 	}
