@@ -2,10 +2,13 @@ package database
 
 import (
 	"context"
+	"log"
+	"os"
 	"time"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 type contextKey string
@@ -18,8 +21,19 @@ func InitDB() (*gorm.DB, error) {
 	// String de conexão no banco de dados
 	dsn := "host=localhost port=5432 user=postgres dbname=ensina_renda sslmode=disable"
 
+	novoLogger := logger.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold: time.Second, // Tempo de SQL para classificar como lento
+			LogLevel:      logger.Info, // Nivel de log
+			Colorful:      true,        // Ativar cores
+		},
+	)
+
 	// Abrir a ORM do GORM
-	gormDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	gormDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: novoLogger,
+	})
 	if err != nil {
 		return nil, err
 	}
