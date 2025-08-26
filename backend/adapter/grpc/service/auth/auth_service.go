@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var jwtSecretKey = os.Getenv("JWT_SECRET_KEY")
+var JwtSecretKey = os.Getenv("JWT_SECRET_KEY")
 
 type JwtService struct {
 }
@@ -29,7 +29,7 @@ func (s *JwtService) GerarJWT(ctx context.Context, usuario *model.Usuario) (stri
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(jwtSecretKey))
+	tokenString, err := token.SignedString([]byte(JwtSecretKey))
 	if err != nil {
 		return "", status.Errorf(codes.Internal, "falha ao gerar o token")
 	}

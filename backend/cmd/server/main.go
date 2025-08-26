@@ -92,7 +92,7 @@ func subirServidorGRPC() error {
 
 	// Registra, respectivamente, o servidor gRPC (com os interceptors nele) e o serviço com a API gRPC.
 	servidorGrpc := grpc.NewServer(
-		grpc.UnaryInterceptor(interceptor.DatabaseUnaryInterceptor),
+		grpc.ChainUnaryInterceptor(interceptor.AuthUnaryInterceptor, interceptor.DatabaseUnaryInterceptor),
 	)
 	ensinaRendaService := service.NewEnsinaRendaService(container)
 	pb.RegisterEnsinaRendaServiceServer(servidorGrpc, ensinaRendaService)
