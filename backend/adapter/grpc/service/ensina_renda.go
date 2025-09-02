@@ -4,6 +4,7 @@ import (
 	"context"
 	pb "ensina-renda/adapter/grpc/pb"
 	"ensina-renda/adapter/grpc/service/aula/concluir_aula"
+	"ensina-renda/adapter/grpc/service/aula/listar_modulo_aula"
 	"ensina-renda/adapter/grpc/service/auth/realizar_login"
 	"ensina-renda/adapter/grpc/service/container"
 	"ensina-renda/adapter/grpc/service/modulo/concluir_modulo"
@@ -40,4 +41,8 @@ func (s *EnsinaRendaService) ConcluirModulo(ctx context.Context, req *pb.Conclui
 
 func (s *EnsinaRendaService) RealizarLogin(ctx context.Context, req *pb.RealizarLoginRequest) (*pb.RealizarLoginResponse, error) {
 	return realizar_login.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) ListarModuloAulas(ctx context.Context, req *pb.ListarModuloAulasRequest) (*pb.ListarModuloAulasResponse, error) {
+	return listar_modulo_aula.Handle(ctx, s.container, req)
 }

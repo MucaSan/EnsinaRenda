@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EnsinaRendaService_CadastrarAluno_FullMethodName = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
-	EnsinaRendaService_VerificarAluno_FullMethodName = "/ensina_renda.EnsinaRendaService/VerificarAluno"
-	EnsinaRendaService_RealizarLogin_FullMethodName  = "/ensina_renda.EnsinaRendaService/RealizarLogin"
-	EnsinaRendaService_ConcluirAula_FullMethodName   = "/ensina_renda.EnsinaRendaService/ConcluirAula"
-	EnsinaRendaService_ConcluirModulo_FullMethodName = "/ensina_renda.EnsinaRendaService/ConcluirModulo"
+	EnsinaRendaService_CadastrarAluno_FullMethodName    = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
+	EnsinaRendaService_VerificarAluno_FullMethodName    = "/ensina_renda.EnsinaRendaService/VerificarAluno"
+	EnsinaRendaService_RealizarLogin_FullMethodName     = "/ensina_renda.EnsinaRendaService/RealizarLogin"
+	EnsinaRendaService_ConcluirAula_FullMethodName      = "/ensina_renda.EnsinaRendaService/ConcluirAula"
+	EnsinaRendaService_ConcluirModulo_FullMethodName    = "/ensina_renda.EnsinaRendaService/ConcluirModulo"
+	EnsinaRendaService_ListarModuloAulas_FullMethodName = "/ensina_renda.EnsinaRendaService/ListarModuloAulas"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
@@ -35,6 +36,7 @@ type EnsinaRendaServiceClient interface {
 	RealizarLogin(ctx context.Context, in *RealizarLoginRequest, opts ...grpc.CallOption) (*RealizarLoginResponse, error)
 	ConcluirAula(ctx context.Context, in *ConcluirAulaRequest, opts ...grpc.CallOption) (*ConcluirAulaResponse, error)
 	ConcluirModulo(ctx context.Context, in *ConcluirModuloRequest, opts ...grpc.CallOption) (*ConcluirModuloResponse, error)
+	ListarModuloAulas(ctx context.Context, in *ListarModuloAulasRequest, opts ...grpc.CallOption) (*ListarModuloAulasResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -95,6 +97,16 @@ func (c *ensinaRendaServiceClient) ConcluirModulo(ctx context.Context, in *Concl
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) ListarModuloAulas(ctx context.Context, in *ListarModuloAulasRequest, opts ...grpc.CallOption) (*ListarModuloAulasResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListarModuloAulasResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_ListarModuloAulas_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EnsinaRendaServiceServer is the server API for EnsinaRendaService service.
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type EnsinaRendaServiceServer interface {
 	RealizarLogin(context.Context, *RealizarLoginRequest) (*RealizarLoginResponse, error)
 	ConcluirAula(context.Context, *ConcluirAulaRequest) (*ConcluirAulaResponse, error)
 	ConcluirModulo(context.Context, *ConcluirModuloRequest) (*ConcluirModuloResponse, error)
+	ListarModuloAulas(context.Context, *ListarModuloAulasRequest) (*ListarModuloAulasResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedEnsinaRendaServiceServer) ConcluirAula(context.Context, *Conc
 }
 func (UnimplementedEnsinaRendaServiceServer) ConcluirModulo(context.Context, *ConcluirModuloRequest) (*ConcluirModuloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConcluirModulo not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) ListarModuloAulas(context.Context, *ListarModuloAulasRequest) (*ListarModuloAulasResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListarModuloAulas not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -240,6 +256,24 @@ func _EnsinaRendaService_ConcluirModulo_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_ListarModuloAulas_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListarModuloAulasRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).ListarModuloAulas(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_ListarModuloAulas_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).ListarModuloAulas(ctx, req.(*ListarModuloAulasRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EnsinaRendaService_ServiceDesc is the grpc.ServiceDesc for EnsinaRendaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConcluirModulo",
 			Handler:    _EnsinaRendaService_ConcluirModulo_Handler,
+		},
+		{
+			MethodName: "ListarModuloAulas",
+			Handler:    _EnsinaRendaService_ListarModuloAulas_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

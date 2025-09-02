@@ -42,6 +42,12 @@ service EnsinaRendaService {
         };
     }
 
+    rpc ListarModuloAulas(ListarModuloAulasRequest) returns (ListarModuloAulasResponse){
+        option (google.api.http) = {
+            get: "/v1/aluno/aulas"
+        };
+    }
+
 }
 
 message CadastrarAlunoRequest {
@@ -100,4 +106,23 @@ message ConcluirModuloRequest{
 message ConcluirModuloResponse{
     string mensagem = 1;
     bool sucesso = 2;
+}
+
+message ListarModuloAulasRequest{
+}
+
+message ListarModuloAulasResponse{
+    repeated ModuloAulaAluno modulo_aulas = 1;
+    string mensagem = 2;
+    bool sucesso = 3;
+}
+
+message ModuloAulaAluno{
+   string id_modulo = 1;
+   repeated Aula aulas = 2 ;
+}
+
+message Aula{
+    string id = 1;
+    bool status = 2;
 }

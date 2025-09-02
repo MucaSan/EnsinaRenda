@@ -88,3 +88,12 @@ func (uc *UsuarioController) RealizarLogin(ctx context.Context, usuario *model.U
 
 	return token, nil
 }
+
+func (uc *UsuarioController) GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error) {
+	usuario, err := uc.usuarioRepository.GetUsuarioPeloId(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("houve um erro ao tentar procurar o usuario: %s", err.Error())
+	}
+
+	return usuario, nil
+}

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"ensina-renda/config/auth"
 	"ensina-renda/config/database"
 	"ensina-renda/domain/model"
 
@@ -88,6 +89,17 @@ func (r *UsuarioRepository) GetUsuario(ctx context.Context, email, senha string)
 	err := database.GetDB(ctx).Table("usuario").
 		Where("email  = ?", email).
 		Where("senha = ?", senha).Find(&usuario).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return usuario, nil
+}
+
+func (r *UsuarioRepository) GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error) {
+	var usuario *model.Usuario
+	err := database.GetDB(ctx).Table("usuario").
+		Where("id = ?", auth.GetUserUuidPeloContext(ctx)).Find(&usuario).Error
 	if err != nil {
 		return nil, err
 	}

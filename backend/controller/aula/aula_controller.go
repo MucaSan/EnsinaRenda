@@ -36,3 +36,23 @@ func (uc *AulaController) GetUsuarioAula(ctx context.Context, idAula int, idUsua
 
 	return usuarioAula, nil
 }
+
+func (uc *AulaController) ListarUsuarioAulaModulo(
+	ctx context.Context,
+	idUsuario uuid.UUID,
+) (map[int][]*model.UsuarioModuloAula, error) {
+	moduloAulas, err := uc.aulaRepository.ListarUsuarioModuloAulas(ctx, idUsuario)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao processar usuario_aula para usuario %v", err)
+	}
+
+	moduloAulaMapa := make(map[int][]*model.UsuarioModuloAula)
+
+	for _, moduloAula := range moduloAulas {
+		idModulo := moduloAula.IDModulo
+
+		moduloAulaMapa[idModulo] = append(moduloAulaMapa[idModulo], moduloAula)
+	}
+
+	return moduloAulaMapa, nil
+}

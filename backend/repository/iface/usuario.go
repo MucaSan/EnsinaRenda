@@ -14,4 +14,5 @@ type UsuarioRepository interface {
 	VerificarEmailUsuario(ctx context.Context, hash_email string) (bool, error)
 	VerificarSenhaUsuario(ctx context.Context, hash_senha string) (bool, error)
 	GetUsuario(ctx context.Context, email, senha string) (*model.Usuario, error)
+	GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error)
 }

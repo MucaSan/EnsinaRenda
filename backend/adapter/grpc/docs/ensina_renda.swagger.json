@@ -48,6 +48,28 @@
         ]
       }
     },
+    "/v1/aluno/aulas": {
+      "get": {
+        "operationId": "EnsinaRendaService_ListarModuloAulas",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaListarModuloAulasResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/aluno/auth": {
       "post": {
         "operationId": "EnsinaRendaService_RealizarLogin",
@@ -215,6 +237,17 @@
     "EnsinaRendaServiceConcluirModuloBody": {
       "type": "object"
     },
+    "ensina_rendaAula": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        }
+      }
+    },
     "ensina_rendaCadastrarAlunoRequest": {
       "type": "object",
       "properties": {
@@ -268,6 +301,39 @@
         },
         "sucesso": {
           "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaListarModuloAulasResponse": {
+      "type": "object",
+      "properties": {
+        "moduloAulas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaModuloAulaAluno"
+          }
+        },
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaModuloAulaAluno": {
+      "type": "object",
+      "properties": {
+        "idModulo": {
+          "type": "string"
+        },
+        "aulas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaAula"
+          }
         }
       }
     },
