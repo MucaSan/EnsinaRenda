@@ -4,6 +4,7 @@ package ensina_renda;
 
 import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = ".;grpc";
 
@@ -48,6 +49,18 @@ service EnsinaRendaService {
         };
     }
 
+    rpc GetUsuarioPeloEmail(GetUsuarioPeloEmailRequest) returns (GetUsuarioPeloEmailResponse){
+        option (google.api.http) = {
+            get: "/v1/usuario/{email}"
+        };
+    }
+
+    rpc AtualizarSenha(AtualizarSenhaRequest) returns (AtualizarSenhaResponse) {
+        option (google.api.http) = {
+            put: "/v1/aluno/senha"
+            body: "*"
+        };
+    }
 }
 
 message CadastrarAlunoRequest {
@@ -125,4 +138,31 @@ message ModuloAulaAluno{
 message Aula{
     string id = 1;
     bool status = 2;
+}
+
+message GetUsuarioPeloEmailRequest{
+    string email =  1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetUsuarioPeloEmailResponse{
+    Usuario usuario = 1;
+    string mensagem = 2;
+    bool sucesso = 3;
+}
+
+message Usuario{
+   string id = 1;
+   string email = 2;
+   string nome = 3;
+   google.protobuf.Timestamp criado_em = 4;
+}
+
+message AtualizarSenhaRequest {
+   string id = 1 [(google.api.field_behavior) = REQUIRED];
+   string senha = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message AtualizarSenhaResponse{
+    string mensagem = 2;
+    bool sucesso = 3;
 }

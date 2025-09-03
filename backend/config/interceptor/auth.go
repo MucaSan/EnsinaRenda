@@ -28,6 +28,10 @@ func AuthUnaryInterceptor(
 		exigeAutenticar = false
 	case *pb.RealizarLoginRequest:
 		exigeAutenticar = false
+	case *pb.GetUsuarioPeloEmailRequest:
+		exigeAutenticar = false
+	case *pb.AtualizarSenhaRequest:
+		exigeAutenticar = false
 	default:
 	}
 

@@ -19,12 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EnsinaRendaService_CadastrarAluno_FullMethodName    = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
-	EnsinaRendaService_VerificarAluno_FullMethodName    = "/ensina_renda.EnsinaRendaService/VerificarAluno"
-	EnsinaRendaService_RealizarLogin_FullMethodName     = "/ensina_renda.EnsinaRendaService/RealizarLogin"
-	EnsinaRendaService_ConcluirAula_FullMethodName      = "/ensina_renda.EnsinaRendaService/ConcluirAula"
-	EnsinaRendaService_ConcluirModulo_FullMethodName    = "/ensina_renda.EnsinaRendaService/ConcluirModulo"
-	EnsinaRendaService_ListarModuloAulas_FullMethodName = "/ensina_renda.EnsinaRendaService/ListarModuloAulas"
+	EnsinaRendaService_CadastrarAluno_FullMethodName      = "/ensina_renda.EnsinaRendaService/CadastrarAluno"
+	EnsinaRendaService_VerificarAluno_FullMethodName      = "/ensina_renda.EnsinaRendaService/VerificarAluno"
+	EnsinaRendaService_RealizarLogin_FullMethodName       = "/ensina_renda.EnsinaRendaService/RealizarLogin"
+	EnsinaRendaService_ConcluirAula_FullMethodName        = "/ensina_renda.EnsinaRendaService/ConcluirAula"
+	EnsinaRendaService_ConcluirModulo_FullMethodName      = "/ensina_renda.EnsinaRendaService/ConcluirModulo"
+	EnsinaRendaService_ListarModuloAulas_FullMethodName   = "/ensina_renda.EnsinaRendaService/ListarModuloAulas"
+	EnsinaRendaService_GetUsuarioPeloEmail_FullMethodName = "/ensina_renda.EnsinaRendaService/GetUsuarioPeloEmail"
+	EnsinaRendaService_AtualizarSenha_FullMethodName      = "/ensina_renda.EnsinaRendaService/AtualizarSenha"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
@@ -37,6 +39,8 @@ type EnsinaRendaServiceClient interface {
 	ConcluirAula(ctx context.Context, in *ConcluirAulaRequest, opts ...grpc.CallOption) (*ConcluirAulaResponse, error)
 	ConcluirModulo(ctx context.Context, in *ConcluirModuloRequest, opts ...grpc.CallOption) (*ConcluirModuloResponse, error)
 	ListarModuloAulas(ctx context.Context, in *ListarModuloAulasRequest, opts ...grpc.CallOption) (*ListarModuloAulasResponse, error)
+	GetUsuarioPeloEmail(ctx context.Context, in *GetUsuarioPeloEmailRequest, opts ...grpc.CallOption) (*GetUsuarioPeloEmailResponse, error)
+	AtualizarSenha(ctx context.Context, in *AtualizarSenhaRequest, opts ...grpc.CallOption) (*AtualizarSenhaResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -107,6 +111,26 @@ func (c *ensinaRendaServiceClient) ListarModuloAulas(ctx context.Context, in *Li
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) GetUsuarioPeloEmail(ctx context.Context, in *GetUsuarioPeloEmailRequest, opts ...grpc.CallOption) (*GetUsuarioPeloEmailResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUsuarioPeloEmailResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_GetUsuarioPeloEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ensinaRendaServiceClient) AtualizarSenha(ctx context.Context, in *AtualizarSenhaRequest, opts ...grpc.CallOption) (*AtualizarSenhaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AtualizarSenhaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_AtualizarSenha_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EnsinaRendaServiceServer is the server API for EnsinaRendaService service.
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
@@ -117,6 +141,8 @@ type EnsinaRendaServiceServer interface {
 	ConcluirAula(context.Context, *ConcluirAulaRequest) (*ConcluirAulaResponse, error)
 	ConcluirModulo(context.Context, *ConcluirModuloRequest) (*ConcluirModuloResponse, error)
 	ListarModuloAulas(context.Context, *ListarModuloAulasRequest) (*ListarModuloAulasResponse, error)
+	GetUsuarioPeloEmail(context.Context, *GetUsuarioPeloEmailRequest) (*GetUsuarioPeloEmailResponse, error)
+	AtualizarSenha(context.Context, *AtualizarSenhaRequest) (*AtualizarSenhaResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -144,6 +170,12 @@ func (UnimplementedEnsinaRendaServiceServer) ConcluirModulo(context.Context, *Co
 }
 func (UnimplementedEnsinaRendaServiceServer) ListarModuloAulas(context.Context, *ListarModuloAulasRequest) (*ListarModuloAulasResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListarModuloAulas not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) GetUsuarioPeloEmail(context.Context, *GetUsuarioPeloEmailRequest) (*GetUsuarioPeloEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUsuarioPeloEmail not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) AtualizarSenha(context.Context, *AtualizarSenhaRequest) (*AtualizarSenhaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AtualizarSenha not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -274,6 +306,42 @@ func _EnsinaRendaService_ListarModuloAulas_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_GetUsuarioPeloEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUsuarioPeloEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).GetUsuarioPeloEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_GetUsuarioPeloEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).GetUsuarioPeloEmail(ctx, req.(*GetUsuarioPeloEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnsinaRendaService_AtualizarSenha_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AtualizarSenhaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).AtualizarSenha(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_AtualizarSenha_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).AtualizarSenha(ctx, req.(*AtualizarSenhaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EnsinaRendaService_ServiceDesc is the grpc.ServiceDesc for EnsinaRendaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -304,6 +372,14 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListarModuloAulas",
 			Handler:    _EnsinaRendaService_ListarModuloAulas_Handler,
+		},
+		{
+			MethodName: "GetUsuarioPeloEmail",
+			Handler:    _EnsinaRendaService_GetUsuarioPeloEmail_Handler,
+		},
+		{
+			MethodName: "AtualizarSenha",
+			Handler:    _EnsinaRendaService_AtualizarSenha_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

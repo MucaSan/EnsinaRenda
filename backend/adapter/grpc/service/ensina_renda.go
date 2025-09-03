@@ -8,7 +8,9 @@ import (
 	"ensina-renda/adapter/grpc/service/auth/realizar_login"
 	"ensina-renda/adapter/grpc/service/container"
 	"ensina-renda/adapter/grpc/service/modulo/concluir_modulo"
+	"ensina-renda/adapter/grpc/service/usuario/atualizar_senha"
 	"ensina-renda/adapter/grpc/service/usuario/cadastrar_aluno"
+	"ensina-renda/adapter/grpc/service/usuario/get_usuario_email"
 	"ensina-renda/adapter/grpc/service/usuario/verificar_aluno"
 )
 
@@ -45,4 +47,12 @@ func (s *EnsinaRendaService) RealizarLogin(ctx context.Context, req *pb.Realizar
 
 func (s *EnsinaRendaService) ListarModuloAulas(ctx context.Context, req *pb.ListarModuloAulasRequest) (*pb.ListarModuloAulasResponse, error) {
 	return listar_modulo_aula.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) AtualizarSenha(ctx context.Context, req *pb.AtualizarSenhaRequest) (*pb.AtualizarSenhaResponse, error) {
+	return atualizar_senha.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) GetUsuarioPeloEmail(ctx context.Context, req *pb.GetUsuarioPeloEmailRequest) (*pb.GetUsuarioPeloEmailResponse, error) {
+	return get_usuario_email.Handle(ctx, s.container, req)
 }

@@ -14,7 +14,7 @@ func Handle(
 	container container.EnsinaRendaContainerInterface,
 	in *pb.ListarModuloAulasRequest,
 ) (*pb.ListarModuloAulasResponse, error) {
-	usuario, err := container.UsuarioController().GetUsuarioPeloId(ctx)
+	usuario, err := container.UsuarioController().GetUsuarioPeloIdDoContexto(ctx)
 	if err != nil {
 		return RespostaErro(err)
 	}
