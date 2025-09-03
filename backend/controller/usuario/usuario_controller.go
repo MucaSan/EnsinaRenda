@@ -7,6 +7,7 @@ import (
 	domain "ensina-renda/domain/service"
 	"ensina-renda/repository/iface"
 	"fmt"
+	"time"
 )
 
 type UsuarioController struct {
@@ -89,11 +90,42 @@ func (uc *UsuarioController) RealizarLogin(ctx context.Context, usuario *model.U
 	return token, nil
 }
 
-func (uc *UsuarioController) GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error) {
-	usuario, err := uc.usuarioRepository.GetUsuarioPeloId(ctx)
+func (uc *UsuarioController) GetUsuarioPeloId(ctx context.Context, id string) (*model.Usuario, error) {
+	usuario, err := uc.usuarioRepository.GetUsuarioPeloId(ctx, id)
+	if err != nil {
+		return nil, fmt.Errorf("houve um erro ao tentar buscar o usuario pelo id: %s", err.Error())
+	}
+
+	return usuario, nil
+}
+
+func (uc *UsuarioController) GetUsuarioPeloIdDoContexto(ctx context.Context) (*model.Usuario, error) {
+	usuario, err := uc.usuarioRepository.GetUsuarioPeloIdDoContexto(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("houve um erro ao tentar procurar o usuario: %s", err.Error())
 	}
 
 	return usuario, nil
+}
+
+func (uc *UsuarioController) GetUsuarioPeloEmail(ctx context.Context, email string) (*model.Usuario, error) {
+	usuario, err := uc.usuarioRepository.GetUsuarioPeloEmail(ctx, email)
+	if err != nil {
+		return nil, fmt.Errorf("houve um erro ao tentar procurar o usuario pelo email: %s", err.Error())
+	}
+
+	return usuario, nil
+}
+
+func (uc *UsuarioController) AtualizarSenha(ctx context.Context, usuario *model.Usuario, senha string) error {
+	usuario.Senha = senha
+	horarioAtual := time.Now()
+	usuario.AtualizadoEm = &horarioAtual
+
+	err := uc.usuarioRepository.AtualizarUsuario(ctx, usuario)
+	if err != nil {
+		return fmt.Errorf("houve um erro ao tentar atualizar a senha do usuario: %s", err.Error())
+	}
+
+	return nil
 }

@@ -96,10 +96,43 @@ func (r *UsuarioRepository) GetUsuario(ctx context.Context, email, senha string)
 	return usuario, nil
 }
 
-func (r *UsuarioRepository) GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error) {
+func (r *UsuarioRepository) GetUsuarioPeloIdDoContexto(ctx context.Context) (*model.Usuario, error) {
 	var usuario *model.Usuario
 	err := database.GetDB(ctx).Table("usuario").
 		Where("id = ?", auth.GetUserUuidPeloContext(ctx)).Find(&usuario).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return usuario, nil
+}
+
+func (r *UsuarioRepository) GetUsuarioPeloEmail(ctx context.Context, email string) (*model.Usuario, error) {
+	var usuario *model.Usuario
+
+	err := database.GetDB(ctx).Table("usuario").
+		Where("email = ?", email).Find(&usuario).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return usuario, nil
+}
+
+func (r *UsuarioRepository) AtualizarUsuario(ctx context.Context, usuario *model.Usuario) error {
+	err := database.GetDB(ctx).Table("usuario").Save(usuario).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *UsuarioRepository) GetUsuarioPeloId(ctx context.Context, id string) (*model.Usuario, error) {
+	var usuario *model.Usuario
+
+	err := database.GetDB(ctx).Table("usuario").
+		Where("id = ?", id).Find(&usuario).Error
 	if err != nil {
 		return nil, err
 	}

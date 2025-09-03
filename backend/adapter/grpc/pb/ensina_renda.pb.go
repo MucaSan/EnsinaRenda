@@ -10,6 +10,7 @@ import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -770,11 +771,287 @@ func (x *Aula) GetStatus() bool {
 	return false
 }
 
+type GetUsuarioPeloEmailRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUsuarioPeloEmailRequest) Reset() {
+	*x = GetUsuarioPeloEmailRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUsuarioPeloEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUsuarioPeloEmailRequest) ProtoMessage() {}
+
+func (x *GetUsuarioPeloEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUsuarioPeloEmailRequest.ProtoReflect.Descriptor instead.
+func (*GetUsuarioPeloEmailRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetUsuarioPeloEmailRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type GetUsuarioPeloEmailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Usuario       *Usuario               `protobuf:"bytes,1,opt,name=usuario,proto3" json:"usuario,omitempty"`
+	Mensagem      string                 `protobuf:"bytes,2,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,3,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUsuarioPeloEmailResponse) Reset() {
+	*x = GetUsuarioPeloEmailResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUsuarioPeloEmailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUsuarioPeloEmailResponse) ProtoMessage() {}
+
+func (x *GetUsuarioPeloEmailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUsuarioPeloEmailResponse.ProtoReflect.Descriptor instead.
+func (*GetUsuarioPeloEmailResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetUsuarioPeloEmailResponse) GetUsuario() *Usuario {
+	if x != nil {
+		return x.Usuario
+	}
+	return nil
+}
+
+func (x *GetUsuarioPeloEmailResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *GetUsuarioPeloEmailResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
+type Usuario struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Nome          string                 `protobuf:"bytes,3,opt,name=nome,proto3" json:"nome,omitempty"`
+	CriadoEm      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=criado_em,json=criadoEm,proto3" json:"criado_em,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Usuario) Reset() {
+	*x = Usuario{}
+	mi := &file_ensina_renda_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Usuario) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Usuario) ProtoMessage() {}
+
+func (x *Usuario) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Usuario.ProtoReflect.Descriptor instead.
+func (*Usuario) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *Usuario) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *Usuario) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *Usuario) GetNome() string {
+	if x != nil {
+		return x.Nome
+	}
+	return ""
+}
+
+func (x *Usuario) GetCriadoEm() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CriadoEm
+	}
+	return nil
+}
+
+type AtualizarSenhaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Senha         string                 `protobuf:"bytes,2,opt,name=senha,proto3" json:"senha,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AtualizarSenhaRequest) Reset() {
+	*x = AtualizarSenhaRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AtualizarSenhaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AtualizarSenhaRequest) ProtoMessage() {}
+
+func (x *AtualizarSenhaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AtualizarSenhaRequest.ProtoReflect.Descriptor instead.
+func (*AtualizarSenhaRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *AtualizarSenhaRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *AtualizarSenhaRequest) GetSenha() string {
+	if x != nil {
+		return x.Senha
+	}
+	return ""
+}
+
+type AtualizarSenhaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,2,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,3,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AtualizarSenhaResponse) Reset() {
+	*x = AtualizarSenhaResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AtualizarSenhaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AtualizarSenhaResponse) ProtoMessage() {}
+
+func (x *AtualizarSenhaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AtualizarSenhaResponse.ProtoReflect.Descriptor instead.
+func (*AtualizarSenhaResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *AtualizarSenhaResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *AtualizarSenhaResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
 var File_ensina_renda_proto protoreflect.FileDescriptor
 
 const file_ensina_renda_proto_rawDesc = "" +
 	"\n" +
-	"\x12ensina_renda.proto\x12\fensina_renda\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\"\x94\x01\n" +
+	"\x12ensina_renda.proto\x12\fensina_renda\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x01\n" +
 	"\x15CadastrarAlunoRequest\x12\x17\n" +
 	"\x04nome\x18\x01 \x01(\tB\x03\xe0A\x02R\x04nome\x12\x19\n" +
 	"\x05email\x18\x02 \x01(\tB\x03\xe0A\x02R\x05email\x12\x19\n" +
@@ -820,14 +1097,33 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x05aulas\x18\x02 \x03(\v2\x12.ensina_renda.AulaR\x05aulas\".\n" +
 	"\x04Aula\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
-	"\x06status\x18\x02 \x01(\bR\x06status2\x99\x06\n" +
+	"\x06status\x18\x02 \x01(\bR\x06status\"7\n" +
+	"\x1aGetUsuarioPeloEmailRequest\x12\x19\n" +
+	"\x05email\x18\x01 \x01(\tB\x03\xe0A\x02R\x05email\"\x84\x01\n" +
+	"\x1bGetUsuarioPeloEmailResponse\x12/\n" +
+	"\ausuario\x18\x01 \x01(\v2\x15.ensina_renda.UsuarioR\ausuario\x12\x1a\n" +
+	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x03 \x01(\bR\asucesso\"|\n" +
+	"\aUsuario\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
+	"\x04nome\x18\x03 \x01(\tR\x04nome\x127\n" +
+	"\tcriado_em\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bcriadoEm\"G\n" +
+	"\x15AtualizarSenhaRequest\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x02R\x02id\x12\x19\n" +
+	"\x05senha\x18\x02 \x01(\tB\x03\xe0A\x02R\x05senha\"N\n" +
+	"\x16AtualizarSenhaResponse\x12\x1a\n" +
+	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x03 \x01(\bR\asucesso2\x9c\b\n" +
 	"\x12EnsinaRendaService\x12q\n" +
 	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
 	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12s\n" +
 	"\rRealizarLogin\x12\".ensina_renda.RealizarLoginRequest\x1a#.ensina_renda.RealizarLoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/aluno/auth\x12\x87\x01\n" +
 	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/aluno/{id_usuario}/aula/{id_aula}\x12\x91\x01\n" +
 	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/aluno/{id_usuario}/modulo/{id_modulo}\x12}\n" +
-	"\x11ListarModuloAulas\x12&.ensina_renda.ListarModuloAulasRequest\x1a'.ensina_renda.ListarModuloAulasResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/aluno/aulasB\bZ\x06.;grpcb\x06proto3"
+	"\x11ListarModuloAulas\x12&.ensina_renda.ListarModuloAulasRequest\x1a'.ensina_renda.ListarModuloAulasResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/aluno/aulas\x12\x87\x01\n" +
+	"\x13GetUsuarioPeloEmail\x12(.ensina_renda.GetUsuarioPeloEmailRequest\x1a).ensina_renda.GetUsuarioPeloEmailResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/usuario/{email}\x12w\n" +
+	"\x0eAtualizarSenha\x12#.ensina_renda.AtualizarSenhaRequest\x1a$.ensina_renda.AtualizarSenhaResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\x1a\x0f/v1/aluno/senhaB\bZ\x06.;grpcb\x06proto3"
 
 var (
 	file_ensina_renda_proto_rawDescOnce sync.Once
@@ -841,43 +1137,55 @@ func file_ensina_renda_proto_rawDescGZIP() []byte {
 	return file_ensina_renda_proto_rawDescData
 }
 
-var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_ensina_renda_proto_goTypes = []any{
-	(*CadastrarAlunoRequest)(nil),     // 0: ensina_renda.CadastrarAlunoRequest
-	(*CadastrarAlunoResponse)(nil),    // 1: ensina_renda.CadastrarAlunoResponse
-	(*VerificarAlunoRequest)(nil),     // 2: ensina_renda.VerificarAlunoRequest
-	(*VerificarAlunoResponse)(nil),    // 3: ensina_renda.VerificarAlunoResponse
-	(*RealizarLoginRequest)(nil),      // 4: ensina_renda.RealizarLoginRequest
-	(*RealizarLoginResponse)(nil),     // 5: ensina_renda.RealizarLoginResponse
-	(*ConcluirAulaRequest)(nil),       // 6: ensina_renda.ConcluirAulaRequest
-	(*ConcluirAulaResponse)(nil),      // 7: ensina_renda.ConcluirAulaResponse
-	(*ConcluirModuloRequest)(nil),     // 8: ensina_renda.ConcluirModuloRequest
-	(*ConcluirModuloResponse)(nil),    // 9: ensina_renda.ConcluirModuloResponse
-	(*ListarModuloAulasRequest)(nil),  // 10: ensina_renda.ListarModuloAulasRequest
-	(*ListarModuloAulasResponse)(nil), // 11: ensina_renda.ListarModuloAulasResponse
-	(*ModuloAulaAluno)(nil),           // 12: ensina_renda.ModuloAulaAluno
-	(*Aula)(nil),                      // 13: ensina_renda.Aula
+	(*CadastrarAlunoRequest)(nil),       // 0: ensina_renda.CadastrarAlunoRequest
+	(*CadastrarAlunoResponse)(nil),      // 1: ensina_renda.CadastrarAlunoResponse
+	(*VerificarAlunoRequest)(nil),       // 2: ensina_renda.VerificarAlunoRequest
+	(*VerificarAlunoResponse)(nil),      // 3: ensina_renda.VerificarAlunoResponse
+	(*RealizarLoginRequest)(nil),        // 4: ensina_renda.RealizarLoginRequest
+	(*RealizarLoginResponse)(nil),       // 5: ensina_renda.RealizarLoginResponse
+	(*ConcluirAulaRequest)(nil),         // 6: ensina_renda.ConcluirAulaRequest
+	(*ConcluirAulaResponse)(nil),        // 7: ensina_renda.ConcluirAulaResponse
+	(*ConcluirModuloRequest)(nil),       // 8: ensina_renda.ConcluirModuloRequest
+	(*ConcluirModuloResponse)(nil),      // 9: ensina_renda.ConcluirModuloResponse
+	(*ListarModuloAulasRequest)(nil),    // 10: ensina_renda.ListarModuloAulasRequest
+	(*ListarModuloAulasResponse)(nil),   // 11: ensina_renda.ListarModuloAulasResponse
+	(*ModuloAulaAluno)(nil),             // 12: ensina_renda.ModuloAulaAluno
+	(*Aula)(nil),                        // 13: ensina_renda.Aula
+	(*GetUsuarioPeloEmailRequest)(nil),  // 14: ensina_renda.GetUsuarioPeloEmailRequest
+	(*GetUsuarioPeloEmailResponse)(nil), // 15: ensina_renda.GetUsuarioPeloEmailResponse
+	(*Usuario)(nil),                     // 16: ensina_renda.Usuario
+	(*AtualizarSenhaRequest)(nil),       // 17: ensina_renda.AtualizarSenhaRequest
+	(*AtualizarSenhaResponse)(nil),      // 18: ensina_renda.AtualizarSenhaResponse
+	(*timestamppb.Timestamp)(nil),       // 19: google.protobuf.Timestamp
 }
 var file_ensina_renda_proto_depIdxs = []int32{
 	12, // 0: ensina_renda.ListarModuloAulasResponse.modulo_aulas:type_name -> ensina_renda.ModuloAulaAluno
 	13, // 1: ensina_renda.ModuloAulaAluno.aulas:type_name -> ensina_renda.Aula
-	0,  // 2: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
-	2,  // 3: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
-	4,  // 4: ensina_renda.EnsinaRendaService.RealizarLogin:input_type -> ensina_renda.RealizarLoginRequest
-	6,  // 5: ensina_renda.EnsinaRendaService.ConcluirAula:input_type -> ensina_renda.ConcluirAulaRequest
-	8,  // 6: ensina_renda.EnsinaRendaService.ConcluirModulo:input_type -> ensina_renda.ConcluirModuloRequest
-	10, // 7: ensina_renda.EnsinaRendaService.ListarModuloAulas:input_type -> ensina_renda.ListarModuloAulasRequest
-	1,  // 8: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
-	3,  // 9: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
-	5,  // 10: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
-	7,  // 11: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
-	9,  // 12: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
-	11, // 13: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
-	8,  // [8:14] is the sub-list for method output_type
-	2,  // [2:8] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	16, // 2: ensina_renda.GetUsuarioPeloEmailResponse.usuario:type_name -> ensina_renda.Usuario
+	19, // 3: ensina_renda.Usuario.criado_em:type_name -> google.protobuf.Timestamp
+	0,  // 4: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
+	2,  // 5: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
+	4,  // 6: ensina_renda.EnsinaRendaService.RealizarLogin:input_type -> ensina_renda.RealizarLoginRequest
+	6,  // 7: ensina_renda.EnsinaRendaService.ConcluirAula:input_type -> ensina_renda.ConcluirAulaRequest
+	8,  // 8: ensina_renda.EnsinaRendaService.ConcluirModulo:input_type -> ensina_renda.ConcluirModuloRequest
+	10, // 9: ensina_renda.EnsinaRendaService.ListarModuloAulas:input_type -> ensina_renda.ListarModuloAulasRequest
+	14, // 10: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:input_type -> ensina_renda.GetUsuarioPeloEmailRequest
+	17, // 11: ensina_renda.EnsinaRendaService.AtualizarSenha:input_type -> ensina_renda.AtualizarSenhaRequest
+	1,  // 12: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
+	3,  // 13: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
+	5,  // 14: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
+	7,  // 15: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
+	9,  // 16: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
+	11, // 17: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
+	15, // 18: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:output_type -> ensina_renda.GetUsuarioPeloEmailResponse
+	18, // 19: ensina_renda.EnsinaRendaService.AtualizarSenha:output_type -> ensina_renda.AtualizarSenhaResponse
+	12, // [12:20] is the sub-list for method output_type
+	4,  // [4:12] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_ensina_renda_proto_init() }
@@ -891,7 +1199,7 @@ func file_ensina_renda_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ensina_renda_proto_rawDesc), len(file_ensina_renda_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

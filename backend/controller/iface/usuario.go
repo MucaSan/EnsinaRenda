@@ -10,5 +10,8 @@ type UsuarioController interface {
 	VerificarCredenciaisUsuario(ctx context.Context, usuario *model.Usuario) (bool, error)
 	GetUsuario(ctx context.Context, usuario *model.Usuario) (*model.Usuario, error)
 	RealizarLogin(ctx context.Context, usuario *model.Usuario) (string, error)
-	GetUsuarioPeloId(ctx context.Context) (*model.Usuario, error)
+	GetUsuarioPeloIdDoContexto(ctx context.Context) (*model.Usuario, error)
+	GetUsuarioPeloEmail(ctx context.Context, email string) (*model.Usuario, error)
+	AtualizarSenha(ctx context.Context, usuario *model.Usuario, senha string) error
+	GetUsuarioPeloId(ctx context.Context, id string) (*model.Usuario, error)
 }

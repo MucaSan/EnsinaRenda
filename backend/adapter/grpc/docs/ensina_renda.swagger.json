@@ -102,6 +102,38 @@
         ]
       }
     },
+    "/v1/aluno/senha": {
+      "put": {
+        "operationId": "EnsinaRendaService_AtualizarSenha",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaAtualizarSenhaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaAtualizarSenhaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/aluno/{email}/{senha}": {
       "get": {
         "operationId": "EnsinaRendaService_VerificarAluno",
@@ -228,6 +260,36 @@
           "EnsinaRendaService"
         ]
       }
+    },
+    "/v1/usuario/{email}": {
+      "get": {
+        "operationId": "EnsinaRendaService_GetUsuarioPeloEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaGetUsuarioPeloEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -236,6 +298,32 @@
     },
     "EnsinaRendaServiceConcluirModuloBody": {
       "type": "object"
+    },
+    "ensina_rendaAtualizarSenhaRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "senha": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "senha"
+      ]
+    },
+    "ensina_rendaAtualizarSenhaResponse": {
+      "type": "object",
+      "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
     },
     "ensina_rendaAula": {
       "type": "object",
@@ -296,6 +384,20 @@
     "ensina_rendaConcluirModuloResponse": {
       "type": "object",
       "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaGetUsuarioPeloEmailResponse": {
+      "type": "object",
+      "properties": {
+        "usuario": {
+          "$ref": "#/definitions/ensina_rendaUsuario"
+        },
         "mensagem": {
           "type": "string"
         },
@@ -365,6 +467,24 @@
         },
         "sucesso": {
           "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaUsuario": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "criadoEm": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

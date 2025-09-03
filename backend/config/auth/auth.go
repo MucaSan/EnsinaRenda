@@ -12,6 +12,6 @@ func GetUserUuidPeloContext(ctx context.Context) string {
 	return ctx.Value(UserUuidContextKey).(string)
 }
 
-func GetEmailPeloContext(ctx context.Context) ContextKey {
-	return ctx.Value(EmailContextKey).(ContextKey)
+func GetEmailPeloContext(ctx context.Context) string {
+	return ctx.Value(EmailContextKey).(string)
 }
