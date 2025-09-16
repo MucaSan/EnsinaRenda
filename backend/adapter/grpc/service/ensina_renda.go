@@ -8,6 +8,7 @@ import (
 	"ensina-renda/adapter/grpc/service/auth/realizar_login"
 	"ensina-renda/adapter/grpc/service/container"
 	"ensina-renda/adapter/grpc/service/modulo/concluir_modulo"
+	"ensina-renda/adapter/grpc/service/prova/gerar_prova"
 	"ensina-renda/adapter/grpc/service/usuario/atualizar_senha"
 	"ensina-renda/adapter/grpc/service/usuario/cadastrar_aluno"
 	"ensina-renda/adapter/grpc/service/usuario/get_usuario_email"
@@ -55,4 +56,20 @@ func (s *EnsinaRendaService) AtualizarSenha(ctx context.Context, req *pb.Atualiz
 
 func (s *EnsinaRendaService) GetUsuarioPeloEmail(ctx context.Context, req *pb.GetUsuarioPeloEmailRequest) (*pb.GetUsuarioPeloEmailResponse, error) {
 	return get_usuario_email.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) GerarProva(ctx context.Context, req *pb.GerarProvaRequest) (*pb.GerarProvaResponse, error) {
+	return gerar_prova.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) CorrigirProva(ctx context.Context, req *pb.CorrigirProvaRequest) (*pb.CorrigirProvaResponse, error) {
+	return nil, nil
+}
+
+func (s *EnsinaRendaService) GetProvaGerada(ctx context.Context, req *pb.GetProvaGeradaRequest) (*pb.GetProvaGeradaResponse, error) {
+	return nil, nil
+}
+
+func (s *EnsinaRendaService) GetProvCorrigida(ctx context.Context, req *pb.GetProvaCorrigidaRequest) (*pb.GetProvaCorrigidaResponse, error) {
+	return nil, nil
 }

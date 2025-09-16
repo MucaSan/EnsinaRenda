@@ -27,6 +27,10 @@ const (
 	EnsinaRendaService_ListarModuloAulas_FullMethodName   = "/ensina_renda.EnsinaRendaService/ListarModuloAulas"
 	EnsinaRendaService_GetUsuarioPeloEmail_FullMethodName = "/ensina_renda.EnsinaRendaService/GetUsuarioPeloEmail"
 	EnsinaRendaService_AtualizarSenha_FullMethodName      = "/ensina_renda.EnsinaRendaService/AtualizarSenha"
+	EnsinaRendaService_GerarProva_FullMethodName          = "/ensina_renda.EnsinaRendaService/GerarProva"
+	EnsinaRendaService_GetProvaGerada_FullMethodName      = "/ensina_renda.EnsinaRendaService/GetProvaGerada"
+	EnsinaRendaService_CorrigirProva_FullMethodName       = "/ensina_renda.EnsinaRendaService/CorrigirProva"
+	EnsinaRendaService_GetProvaCorrigida_FullMethodName   = "/ensina_renda.EnsinaRendaService/GetProvaCorrigida"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
@@ -41,6 +45,10 @@ type EnsinaRendaServiceClient interface {
 	ListarModuloAulas(ctx context.Context, in *ListarModuloAulasRequest, opts ...grpc.CallOption) (*ListarModuloAulasResponse, error)
 	GetUsuarioPeloEmail(ctx context.Context, in *GetUsuarioPeloEmailRequest, opts ...grpc.CallOption) (*GetUsuarioPeloEmailResponse, error)
 	AtualizarSenha(ctx context.Context, in *AtualizarSenhaRequest, opts ...grpc.CallOption) (*AtualizarSenhaResponse, error)
+	GerarProva(ctx context.Context, in *GerarProvaRequest, opts ...grpc.CallOption) (*GerarProvaResponse, error)
+	GetProvaGerada(ctx context.Context, in *GetProvaGeradaRequest, opts ...grpc.CallOption) (*GetProvaGeradaResponse, error)
+	CorrigirProva(ctx context.Context, in *CorrigirProvaRequest, opts ...grpc.CallOption) (*CorrigirProvaResponse, error)
+	GetProvaCorrigida(ctx context.Context, in *GetProvaCorrigidaRequest, opts ...grpc.CallOption) (*GetProvaCorrigidaResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -131,6 +139,46 @@ func (c *ensinaRendaServiceClient) AtualizarSenha(ctx context.Context, in *Atual
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) GerarProva(ctx context.Context, in *GerarProvaRequest, opts ...grpc.CallOption) (*GerarProvaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GerarProvaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_GerarProva_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ensinaRendaServiceClient) GetProvaGerada(ctx context.Context, in *GetProvaGeradaRequest, opts ...grpc.CallOption) (*GetProvaGeradaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProvaGeradaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_GetProvaGerada_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ensinaRendaServiceClient) CorrigirProva(ctx context.Context, in *CorrigirProvaRequest, opts ...grpc.CallOption) (*CorrigirProvaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CorrigirProvaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_CorrigirProva_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ensinaRendaServiceClient) GetProvaCorrigida(ctx context.Context, in *GetProvaCorrigidaRequest, opts ...grpc.CallOption) (*GetProvaCorrigidaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProvaCorrigidaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_GetProvaCorrigida_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EnsinaRendaServiceServer is the server API for EnsinaRendaService service.
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
@@ -143,6 +191,10 @@ type EnsinaRendaServiceServer interface {
 	ListarModuloAulas(context.Context, *ListarModuloAulasRequest) (*ListarModuloAulasResponse, error)
 	GetUsuarioPeloEmail(context.Context, *GetUsuarioPeloEmailRequest) (*GetUsuarioPeloEmailResponse, error)
 	AtualizarSenha(context.Context, *AtualizarSenhaRequest) (*AtualizarSenhaResponse, error)
+	GerarProva(context.Context, *GerarProvaRequest) (*GerarProvaResponse, error)
+	GetProvaGerada(context.Context, *GetProvaGeradaRequest) (*GetProvaGeradaResponse, error)
+	CorrigirProva(context.Context, *CorrigirProvaRequest) (*CorrigirProvaResponse, error)
+	GetProvaCorrigida(context.Context, *GetProvaCorrigidaRequest) (*GetProvaCorrigidaResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -176,6 +228,18 @@ func (UnimplementedEnsinaRendaServiceServer) GetUsuarioPeloEmail(context.Context
 }
 func (UnimplementedEnsinaRendaServiceServer) AtualizarSenha(context.Context, *AtualizarSenhaRequest) (*AtualizarSenhaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AtualizarSenha not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) GerarProva(context.Context, *GerarProvaRequest) (*GerarProvaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GerarProva not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) GetProvaGerada(context.Context, *GetProvaGeradaRequest) (*GetProvaGeradaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProvaGerada not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) CorrigirProva(context.Context, *CorrigirProvaRequest) (*CorrigirProvaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CorrigirProva not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) GetProvaCorrigida(context.Context, *GetProvaCorrigidaRequest) (*GetProvaCorrigidaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProvaCorrigida not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -342,6 +406,78 @@ func _EnsinaRendaService_AtualizarSenha_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_GerarProva_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GerarProvaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).GerarProva(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_GerarProva_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).GerarProva(ctx, req.(*GerarProvaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnsinaRendaService_GetProvaGerada_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProvaGeradaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).GetProvaGerada(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_GetProvaGerada_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).GetProvaGerada(ctx, req.(*GetProvaGeradaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnsinaRendaService_CorrigirProva_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CorrigirProvaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).CorrigirProva(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_CorrigirProva_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).CorrigirProva(ctx, req.(*CorrigirProvaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EnsinaRendaService_GetProvaCorrigida_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProvaCorrigidaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).GetProvaCorrigida(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_GetProvaCorrigida_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).GetProvaCorrigida(ctx, req.(*GetProvaCorrigidaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EnsinaRendaService_ServiceDesc is the grpc.ServiceDesc for EnsinaRendaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +516,22 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AtualizarSenha",
 			Handler:    _EnsinaRendaService_AtualizarSenha_Handler,
+		},
+		{
+			MethodName: "GerarProva",
+			Handler:    _EnsinaRendaService_GerarProva_Handler,
+		},
+		{
+			MethodName: "GetProvaGerada",
+			Handler:    _EnsinaRendaService_GetProvaGerada_Handler,
+		},
+		{
+			MethodName: "CorrigirProva",
+			Handler:    _EnsinaRendaService_CorrigirProva_Handler,
+		},
+		{
+			MethodName: "GetProvaCorrigida",
+			Handler:    _EnsinaRendaService_GetProvaCorrigida_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
