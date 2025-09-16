@@ -261,6 +261,130 @@
         ]
       }
     },
+    "/v1/prova/corrigida/{idModulo}": {
+      "get": {
+        "operationId": "EnsinaRendaService_GetProvaCorrigida",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaGetProvaCorrigidaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idModulo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
+    "/v1/prova/corrigir": {
+      "post": {
+        "operationId": "EnsinaRendaService_CorrigirProva",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaCorrigirProvaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaCorrigirProvaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
+    "/v1/prova/gerada/{idModulo}": {
+      "get": {
+        "operationId": "EnsinaRendaService_GetProvaGerada",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaGetProvaGeradaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "idModulo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
+    "/v1/prova/gerar": {
+      "post": {
+        "operationId": "EnsinaRendaService_GerarProva",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaGerarProvaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaGerarProvaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/usuario/{email}": {
       "get": {
         "operationId": "EnsinaRendaService_GetUsuarioPeloEmail",
@@ -392,6 +516,85 @@
         }
       }
     },
+    "ensina_rendaCorrigirProvaRequest": {
+      "type": "object",
+      "properties": {
+        "idModulo": {
+          "type": "string"
+        },
+        "provaRespondida": {
+          "$ref": "#/definitions/ensina_rendaProvaRespondida"
+        }
+      },
+      "required": [
+        "idModulo",
+        "provaRespondida"
+      ]
+    },
+    "ensina_rendaCorrigirProvaResponse": {
+      "type": "object",
+      "properties": {
+        "provaCorrigida": {
+          "$ref": "#/definitions/ensina_rendaProvaCorrigida"
+        }
+      }
+    },
+    "ensina_rendaGerarProvaRequest": {
+      "type": "object",
+      "properties": {
+        "idModulo": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "idModulo"
+      ]
+    },
+    "ensina_rendaGerarProvaResponse": {
+      "type": "object",
+      "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaGetProvaCorrigidaResponse": {
+      "type": "object",
+      "properties": {
+        "tituloProva": {
+          "type": "string"
+        },
+        "questoesCorrigidas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaQuestaoCorrigida"
+          }
+        },
+        "nota": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ensina_rendaGetProvaGeradaResponse": {
+      "type": "object",
+      "properties": {
+        "prova": {
+          "$ref": "#/definitions/ensina_rendaProva"
+        },
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
     "ensina_rendaGetUsuarioPeloEmailResponse": {
       "type": "object",
       "properties": {
@@ -436,6 +639,124 @@
             "type": "object",
             "$ref": "#/definitions/ensina_rendaAula"
           }
+        }
+      }
+    },
+    "ensina_rendaProva": {
+      "type": "object",
+      "properties": {
+        "tituloProva": {
+          "type": "string"
+        },
+        "questoes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaQuestao"
+          }
+        }
+      }
+    },
+    "ensina_rendaProvaCorrigida": {
+      "type": "object",
+      "properties": {
+        "tituloProva": {
+          "type": "string"
+        },
+        "questoesCorrigidas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaQuestaoCorrigida"
+          }
+        },
+        "nota": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ensina_rendaProvaRespondida": {
+      "type": "object",
+      "properties": {
+        "tituloProva": {
+          "type": "string"
+        },
+        "questoesRespondidas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ensina_rendaQuestaoRespondida"
+          }
+        }
+      }
+    },
+    "ensina_rendaQuestao": {
+      "type": "object",
+      "properties": {
+        "numQuestao": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enunciado": {
+          "type": "string"
+        },
+        "opcoes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ensina_rendaQuestaoCorrigida": {
+      "type": "object",
+      "properties": {
+        "numQuestao": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enunciado": {
+          "type": "string"
+        },
+        "opcoes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resposeCorreta": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "respostaUsuario": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "feedback": {
+          "type": "string"
+        }
+      }
+    },
+    "ensina_rendaQuestaoRespondida": {
+      "type": "object",
+      "properties": {
+        "numQuestao": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enunciado": {
+          "type": "string"
+        },
+        "opcoes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "respostaUsuario": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

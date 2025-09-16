@@ -5,9 +5,11 @@ import (
 	pb "ensina-renda/adapter/grpc/pb"
 	"ensina-renda/adapter/grpc/service"
 	"ensina-renda/adapter/grpc/service/container"
+	httpAgenteProfessor "ensina-renda/adapter/http"
 	"ensina-renda/config/interceptor"
 	aulaController "ensina-renda/controller/aula"
 	moduloController "ensina-renda/controller/modulo"
+	provaController "ensina-renda/controller/prova"
 	usuarioController "ensina-renda/controller/usuario"
 	"ensina-renda/repository"
 	"flag"
@@ -78,16 +80,21 @@ func subirServidorGRPC() error {
 		fmt.Printf("\nNao foi possivel criar um listener para o localhost na :9090. \nErro encontrado: %s", err.Error())
 	}
 
+	// Inicializa os serviços do microserviço
+	agenteProfessor := httpAgenteProfessor.NewAgenteProfessor()
+
 	// Inicializa os repositórios para serem utilizados pelos controllers.
 	usuarioRepository := repository.NewUsuarioRepository()
 	aulaRepository := repository.NewAulaRepository()
 	moduloRepository := repository.NewModuloRepository()
+	provaRepository := repository.NewProvaRepository()
 
 	// Container conterá todos os controllers do sistema, sendo utilizados pelos handlers
 	container := container.NewEnsinaRendaContainer(
 		usuarioController.NewUsuarioController(usuarioRepository),
 		aulaController.NewAulaController(aulaRepository),
 		moduloController.NewModuloController(moduloRepository),
+		provaController.NewProvaController(provaRepository, agenteProfessor),
 	)
 
 	// Registra, respectivamente, o servidor gRPC (com os interceptors nele) e o serviço com a API gRPC.

@@ -28,7 +28,7 @@ func (r *UsuarioRepository) CriarUsuario(ctx context.Context, usuario *model.Usu
 func (r *UsuarioRepository) VerificarEmail(ctx context.Context, email string) (bool, error) {
 	var usuario *model.Usuario
 
-	err := database.GetDB(ctx).Table("usuario").Where("email = ?", email).Find(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("email = ?", email).First(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -43,7 +43,7 @@ func (r *UsuarioRepository) VerificarEmail(ctx context.Context, email string) (b
 func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id uuid.UUID) (bool, error) {
 	var usuario *model.Usuario
 
-	err := database.GetDB(ctx).Table("usuario").Where("id = ?", id).Find(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("id = ?", id).First(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -57,7 +57,7 @@ func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id u
 
 func (r *UsuarioRepository) VerificarEmailUsuario(ctx context.Context, hash_email string) (bool, error) {
 	var usuario *model.Usuario
-	err := database.GetDB(ctx).Table("usuario").Where("email = ?", hash_email).Find(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("email = ?", hash_email).First(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -71,7 +71,7 @@ func (r *UsuarioRepository) VerificarEmailUsuario(ctx context.Context, hash_emai
 
 func (r *UsuarioRepository) VerificarSenhaUsuario(ctx context.Context, hash_senha string) (bool, error) {
 	var usuario *model.Usuario
-	err := database.GetDB(ctx).Table("usuario").Where("senha = ?", hash_senha).Find(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("senha = ?", hash_senha).First(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -88,7 +88,7 @@ func (r *UsuarioRepository) GetUsuario(ctx context.Context, email, senha string)
 
 	err := database.GetDB(ctx).Table("usuario").
 		Where("email  = ?", email).
-		Where("senha = ?", senha).Find(&usuario).Error
+		Where("senha = ?", senha).First(&usuario).Error
 	if err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func (r *UsuarioRepository) GetUsuario(ctx context.Context, email, senha string)
 func (r *UsuarioRepository) GetUsuarioPeloIdDoContexto(ctx context.Context) (*model.Usuario, error) {
 	var usuario *model.Usuario
 	err := database.GetDB(ctx).Table("usuario").
-		Where("id = ?", auth.GetUserUuidPeloContext(ctx)).Find(&usuario).Error
+		Where("id = ?", auth.GetUserUuidPeloContext(ctx)).First(&usuario).Error
 	if err != nil {
 		return nil, err
 	}
@@ -111,7 +111,7 @@ func (r *UsuarioRepository) GetUsuarioPeloEmail(ctx context.Context, email strin
 	var usuario *model.Usuario
 
 	err := database.GetDB(ctx).Table("usuario").
-		Where("email = ?", email).Find(&usuario).Error
+		Where("email = ?", email).First(&usuario).Error
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ func (r *UsuarioRepository) GetUsuarioPeloId(ctx context.Context, id string) (*m
 	var usuario *model.Usuario
 
 	err := database.GetDB(ctx).Table("usuario").
-		Where("id = ?", id).Find(&usuario).Error
+		Where("id = ?", id).First(&usuario).Error
 	if err != nil {
 		return nil, err
 	}

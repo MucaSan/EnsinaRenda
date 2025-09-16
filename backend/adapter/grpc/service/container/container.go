@@ -8,23 +8,27 @@ type EnsinaRendaContainerInterface interface {
 	UsuarioController() ifaceController.UsuarioController
 	AulaController() ifaceController.AulaController
 	ModuloController() ifaceController.ModuloController
+	ProvaController() ifaceController.ProvaController
 }
 
 type EnsinaRendaContainer struct {
 	usuarioController ifaceController.UsuarioController
 	aulaController    ifaceController.AulaController
 	moduloController  ifaceController.ModuloController
+	provaController   ifaceController.ProvaController
 }
 
 func NewEnsinaRendaContainer(
 	usuarioController ifaceController.UsuarioController,
 	aulaController ifaceController.AulaController,
 	moduloController ifaceController.ModuloController,
+	provaController ifaceController.ProvaController,
 ) *EnsinaRendaContainer {
 	return &EnsinaRendaContainer{
 		usuarioController: usuarioController,
 		aulaController:    aulaController,
 		moduloController:  moduloController,
+		provaController:   provaController,
 	}
 }
 
@@ -38,4 +42,8 @@ func (c *EnsinaRendaContainer) AulaController() ifaceController.AulaController {
 
 func (c *EnsinaRendaContainer) ModuloController() ifaceController.ModuloController {
 	return c.moduloController
+}
+
+func (c *EnsinaRendaContainer) ProvaController() ifaceController.ProvaController {
+	return c.provaController
 }
