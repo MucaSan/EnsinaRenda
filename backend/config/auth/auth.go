@@ -1,12 +1,13 @@
 package auth
 
-import "context"
-
-type ContextKey string
+import (
+	"context"
+	context_config "ensina-renda/config/context"
+)
 
 // Par de chave e acesso aos dados de autenticacao do usuario
-const UserUuidContextKey ContextKey = "user_uuid"
-const EmailContextKey ContextKey = "email"
+const UserUuidContextKey context_config.ContextKey = "user_uuid"
+const EmailContextKey context_config.ContextKey = "email"
 
 func GetUserUuidPeloContext(ctx context.Context) string {
 	return ctx.Value(UserUuidContextKey).(string)

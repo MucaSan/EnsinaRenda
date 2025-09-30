@@ -194,7 +194,7 @@ message AtualizarSenhaResponse{
 }
 
 message GerarProvaRequest{
-    int32 id_modulo = 1 [(google.api.field_behavior) = REQUIRED];
+    string id_modulo = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message GerarProvaResponse{
@@ -226,11 +226,13 @@ message Questao {
 
 message CorrigirProvaRequest{
     string id_modulo = 1 [(google.api.field_behavior) = REQUIRED];
-    ProvaRespondida provaRespondida = 2 [(google.api.field_behavior) = REQUIRED];
+    string provaRespondida = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 message CorrigirProvaResponse{
     ProvaCorrigida provaCorrigida = 1;
+    string mensagem = 2;
+    bool sucesso = 3;
 }
 
 message GetProvaCorrigidaRequest{
@@ -241,6 +243,8 @@ message GetProvaCorrigidaResponse{
     string tituloProva = 1;
     repeated QuestaoCorrigida questoesCorrigidas = 2;
     int32 nota = 3;
+    string mensagem = 4;
+    bool sucesso = 5;
 }
 
 message ProvaRespondida {

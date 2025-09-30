@@ -24,7 +24,7 @@ func NewProvaController(provaRepository iface.ProvaRepository, agente domain.Age
 	}
 }
 
-func (pc *ProvaController) GetProvaBase(ctx context.Context, idModulo int) (*model.ProvaBase, error) {
+func (pc *ProvaController) GetProvaBase(ctx context.Context, idModulo string) (*model.ProvaBase, error) {
 	provaBase, err := pc.provaRepository.GetProvaBase(ctx, idModulo)
 
 	if err != nil {
@@ -83,7 +83,7 @@ func (pc *ProvaController) GerarProva(ctx context.Context, provaBase *model.Prov
 	return nil
 }
 
-func (pc *ProvaController) GetProvaUsuario(ctx context.Context, idModulo int) (*model.ProvaUsuario, error) {
+func (pc *ProvaController) GetProvaUsuario(ctx context.Context, idModulo string) (*model.ProvaUsuario, error) {
 	provaUsuario, err := pc.provaRepository.GetProvaUsuario(ctx, idModulo)
 	if err != nil {
 		return nil, err

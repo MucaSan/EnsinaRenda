@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	context_config "ensina-renda/config/context"
 	"log"
 	"os"
 	"time"
@@ -11,10 +12,8 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-type contextKey string
-
 // Par de chave de acesso no contexto do banco.
-const DbContextKey contextKey = "db"
+const DbContextKey context_config.ContextKey = "db"
 
 // InitDB initializes the database connection using GORM
 func InitDB() (*gorm.DB, error) {
