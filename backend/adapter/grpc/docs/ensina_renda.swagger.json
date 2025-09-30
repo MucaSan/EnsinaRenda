@@ -523,7 +523,7 @@
           "type": "string"
         },
         "provaRespondida": {
-          "$ref": "#/definitions/ensina_rendaProvaRespondida"
+          "type": "string"
         }
       },
       "required": [
@@ -536,6 +536,12 @@
       "properties": {
         "provaCorrigida": {
           "$ref": "#/definitions/ensina_rendaProvaCorrigida"
+        },
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
         }
       }
     },
@@ -543,8 +549,7 @@
       "type": "object",
       "properties": {
         "idModulo": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         }
       },
       "required": [
@@ -578,6 +583,12 @@
         "nota": {
           "type": "integer",
           "format": "int32"
+        },
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
         }
       }
     },
@@ -676,21 +687,6 @@
         }
       }
     },
-    "ensina_rendaProvaRespondida": {
-      "type": "object",
-      "properties": {
-        "tituloProva": {
-          "type": "string"
-        },
-        "questoesRespondidas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/ensina_rendaQuestaoRespondida"
-          }
-        }
-      }
-    },
     "ensina_rendaQuestao": {
       "type": "object",
       "properties": {
@@ -735,28 +731,6 @@
         },
         "feedback": {
           "type": "string"
-        }
-      }
-    },
-    "ensina_rendaQuestaoRespondida": {
-      "type": "object",
-      "properties": {
-        "numQuestao": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enunciado": {
-          "type": "string"
-        },
-        "opcoes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "respostaUsuario": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },

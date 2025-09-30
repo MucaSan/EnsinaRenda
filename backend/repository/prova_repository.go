@@ -14,12 +14,12 @@ func NewProvaRepository() *ProvaRepository {
 	return &ProvaRepository{}
 }
 
-func (r *ProvaRepository) GetProvaBase(ctx context.Context, id_modulo int) (*model.ProvaBase, error) {
+func (r *ProvaRepository) GetProvaBase(ctx context.Context, idModulo string) (*model.ProvaBase, error) {
 	var provaBase *model.ProvaBase
 
 	err := database.GetDB(ctx).
 		Table("provas_base").
-		Where("id_modulo  = ?", id_modulo).
+		Where("id_modulo  = ?", idModulo).
 		Find(&provaBase).Error
 
 	if err != nil {
@@ -39,13 +39,13 @@ func (r *ProvaRepository) SalvarProva(ctx context.Context, provaBase *model.Prov
 	return nil
 }
 
-func (r *ProvaRepository) GetProvaUsuario(ctx context.Context, id_modulo int) (*model.ProvaUsuario, error) {
+func (r *ProvaRepository) GetProvaUsuario(ctx context.Context, idModulo string) (*model.ProvaUsuario, error) {
 	var provaUsuario *model.ProvaUsuario
 
 	err := database.GetDB(ctx).
 		Table("provas_usuario").
 		Where("id_usuario = ?", auth.GetUserUuidPeloContext(ctx)).
-		Where("id_modulo = ?", id_modulo).
+		Where("id_modulo = ?", idModulo).
 		First(&provaUsuario).Error
 	if err != nil {
 		return nil, err
