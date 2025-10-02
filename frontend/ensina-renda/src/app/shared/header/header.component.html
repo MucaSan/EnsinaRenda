@@ -1,0 +1,24 @@
+<header id="header" *ngIf="headerConfig$ | async as config">
+  <div class="header">
+    <a routerLink="/" class="logo-link">
+      <img src="assets/Logo.svg" alt="Logotipo" class="logo" />
+    </a>
+    <nav class="navigation" *ngIf="config.showNavigation">
+      <ul class="list">
+        <li><a routerLink='/'>Sobre nós</a></li>
+        <li><a routerLink='/' fragment="porque">Por que renda fixa?</a></li>
+        <li><a routerLink='/' fragment="faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-buttons">
+      <button class="btn btn-login" routerLink="/login" *ngIf="config.showLogin">
+        Log In <img src="assets/icons/arrow-icon.svg" alt="seta para a direta" />
+      </button>
+      <a class="btn btn-register" routerLink="/signup" *ngIf="config.showRegister">
+        Cadastrar-se
+        <img src="assets/icons/arrow-circle-right.svg" alt="seta para a direita" />
+      </a>
+    </div>
+  </div>
+</header>

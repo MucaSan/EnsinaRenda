@@ -1,0 +1,58 @@
+footer {
+    padding: 52px 64px;
+}
+
+footer .footer-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--body-font-color);
+}
+
+.footer-content p strong {
+    font-weight: 900;
+}
+
+.footer-content .return-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 14px;
+    border-radius: 32px;
+    background-color: var(--medium-green-color);
+    transition: all 0.3s ease;
+
+    &:hover {
+        scale: 1.1;
+        animation: shake 0.5s ease-in-out;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    75% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

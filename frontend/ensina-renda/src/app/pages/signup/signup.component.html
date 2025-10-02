@@ -1,0 +1,83 @@
+<app-header></app-header>
+
+<div class="signup">
+  <div class="signup-container">
+    <form>
+      <div class="title-container">
+        <img src="assets/icons/logo-icon.svg" alt="Ícone do logo" />
+        <h3>Cadastre-se para continuar</h3>
+      </div>
+
+      <div class="form-container">
+        <div class="input-group fullname">
+          <label for="fullname">Nome completo</label>
+          <input
+            id="fullname"
+            type="text"
+            placeholder="Insira seu nome completo"
+            required
+          />
+        </div>
+
+        <div class="input-group email">
+          <label for="email">E-mail</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Insira seu email"
+            required
+          />
+        </div>
+
+        <div class="input-group birthdate">
+          <label for="birthdate">Data de nascimento</label>
+          <input id="birthdate" type="date" required />
+        </div>
+
+        <div class="input-group password">
+          <label for="password">Senha</label>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            id="password"
+            placeholder="Insira sua senha"
+            required
+          />
+          <div class="show-password">
+            <input type="checkbox" name="show-password" id="show-password" (change)="togglePassword()" />
+            <label for="show-password">{{showPassword ? 'Ocultar senha' : 'Visualizar senha'}}</label>
+          </div>
+        </div>
+
+        <div class="input-group confirm-password">
+          <label for="confirm-password">Confirmar senha</label>
+          <input
+            id="confirm-password"
+            type="password"
+            placeholder="Confirme sua senha"
+            required
+          />
+        </div>
+
+        <button class="create-btn" type="submit">
+          <span>Criar conta</span>
+          <img
+            src="assets/icons/arrow-circle-right.svg"
+            alt="Seta para a direita"
+          />
+        </button>
+        <p class="have-account">
+          Já possui uma conta? <a routerLink="/login" class="link">Entrar</a>
+        </p>
+      </div>
+    </form>
+
+    <div class="form-hero">
+      <div class="container">
+        <h2>Olá, <br /><strong>bem-vindo!</strong></h2>
+        <p>Comece hoje a investir no seu futuro com segurança.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

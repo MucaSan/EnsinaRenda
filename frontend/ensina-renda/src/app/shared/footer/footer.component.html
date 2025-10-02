@@ -1,0 +1,9 @@
+<footer id="footer" *ngIf="footerConfig$ | async as config">
+    <div class="footer-content">
+        <img src="assets/Logo.svg" alt="Logotipo">
+        <p>Site design by <strong>AMIGURINHOS</strong></p>
+        <a routerLink="/" fragment="header" *ngIf="config.showGoTop" class="return-btn">
+          <img src="assets/icons/arrow-up.svg" alt="Seta para cima">  
+        </a>
+    </div>
+</footer>

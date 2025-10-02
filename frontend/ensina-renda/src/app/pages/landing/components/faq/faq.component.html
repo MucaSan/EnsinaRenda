@@ -1,0 +1,25 @@
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 class="section-title">Está com dúvidas?</h2>
+    <div class="btn-container">
+      <p>Possui mais perguntas?</p>
+      <p>Entre em contato.</p>
+      <button class="btn btn-secondary">Enviar e-mail</button>
+    </div>
+  </div>
+  <div class="questions-container">
+    <div *ngFor="let item of faqs; let i = index" class="question-container">
+      <div class="question" (click)="toggleAnswer(i)">
+        <div class="content">
+          <h3>{{ item.question }}</h3>
+          <button class="btn-show-answer">
+            <img src="assets/icons/add.svg" alt="icone de mais" />
+          </button>
+        </div>
+        <div class="answer" [ngClass]="{ 'show': openedIndex === i, 'hide': openedIndex !== i}">
+          <p>{{ item.answer }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
