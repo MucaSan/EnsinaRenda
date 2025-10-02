@@ -3,12 +3,17 @@ footer {
 }
 
 footer .footer-content {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .footer-content p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
     font-size: 14px;
     font-weight: 300;
     color: var(--body-font-color);

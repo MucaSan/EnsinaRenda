@@ -1,0 +1,73 @@
+<app-header></app-header>
+
+<div class="login">
+  <div class="login-container">
+    <div class="form-hero">
+      <div class="container">
+        <h2>Bem-vindo, <br /><strong>investidor!</strong></h2>
+        <p>
+          O futuro financeiro que você deseja está a alguns cliques de
+          distância.
+        </p>
+      </div>
+    </div>
+
+    <form>
+      <div class="title-container">
+        <img src="assets/icons/logo-icon.svg" alt="Ícone do logo" />
+        <h3>Entre para continuar</h3>
+      </div>
+
+      <div class="form-container">
+        <div class="input-group email">
+          <label for="email">E-mail</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Insira seu email"
+            required
+          />
+        </div>
+
+        <div class="input-group password">
+          <label for="password">Senha</label>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+            id="password"
+            placeholder="Insira sua senha"
+            required
+          />
+          <div class="password-container">
+            <div class="show-password">
+              <input
+                type="checkbox"
+                name="show-password"
+                id="show-password"
+                (change)="togglePassword()"
+              />
+              <label for="show-password">{{
+                showPassword ? "Ocultar senha" : "Visualizar senha"
+              }}</label>
+            </div>
+            <a routerLink="/reset-password" class="link">Esqueceu a senha?</a>
+          </div>
+        </div>
+
+        <button class="login-btn" type="submit">
+          <span>Continuar</span>
+          <img
+            src="assets/icons/arrow-circle-right.svg"
+            alt="Seta para a direita"
+          />
+        </button>
+        <p class="dont-have-account">
+          Não possui uma conta?
+          <a routerLink="/signup" class="link">Criar conta</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,11 +1,13 @@
 :root {
-  --primary-color: #0066ba;
+  --primary-color: #3078B3;
   --bg-color-1: #C2E3FF;
   --bg-color-2: #becedb;
   --green-color: #FAFFC2;
   --medium-green-color: #CAE066;
   --body-font-color: #1E2124;
   --gray-color: #898989;
+  --slate-gray-color: #637B91;
+  --dark-slate-gray-color: #4B6D91;
 }
 
 * {
@@ -17,7 +19,7 @@
 }
 
 body {
-  color: #333;
+  color: var(--body-font-color);
 }
 
 a,

@@ -21,6 +21,16 @@ header {
   font-size: 20px;
 }
 
+.navigation .list li a {
+  color: var(--body-font-color);
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--primary-color);
+    scale: 1.05;
+  }
+}
+
 .header-buttons {
   display: flex;
   gap: 32px;
