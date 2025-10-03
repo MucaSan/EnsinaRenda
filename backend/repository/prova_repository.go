@@ -53,3 +53,13 @@ func (r *ProvaRepository) GetProvaUsuario(ctx context.Context, idModulo string) 
 
 	return provaUsuario, nil
 }
+
+func (r *ProvaRepository) SalvarCorrecaoProva(ctx context.Context, correcaoProva *model.CorrecaoProva) error {
+	err := database.GetDB(ctx).
+		Table("correcao_prova").Save(correcaoProva).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

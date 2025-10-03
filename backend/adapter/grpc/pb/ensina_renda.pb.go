@@ -1412,12 +1412,11 @@ func (x *CorrigirProvaRequest) GetProvaRespondida() string {
 }
 
 type CorrigirProvaResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ProvaCorrigida *ProvaCorrigida        `protobuf:"bytes,1,opt,name=provaCorrigida,proto3" json:"provaCorrigida,omitempty"`
-	Mensagem       string                 `protobuf:"bytes,2,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
-	Sucesso        bool                   `protobuf:"varint,3,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,1,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,2,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CorrigirProvaResponse) Reset() {
@@ -1448,13 +1447,6 @@ func (x *CorrigirProvaResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CorrigirProvaResponse.ProtoReflect.Descriptor instead.
 func (*CorrigirProvaResponse) Descriptor() ([]byte, []int) {
 	return file_ensina_renda_proto_rawDescGZIP(), []int{26}
-}
-
-func (x *CorrigirProvaResponse) GetProvaCorrigida() *ProvaCorrigida {
-	if x != nil {
-		return x.ProvaCorrigida
-	}
-	return nil
 }
 
 func (x *CorrigirProvaResponse) GetMensagem() string {
@@ -1945,11 +1937,10 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x06opcoes\x18\x03 \x03(\tR\x06opcoes\"g\n" +
 	"\x14CorrigirProvaRequest\x12 \n" +
 	"\tid_modulo\x18\x01 \x01(\tB\x03\xe0A\x02R\bidModulo\x12-\n" +
-	"\x0fprovaRespondida\x18\x02 \x01(\tB\x03\xe0A\x02R\x0fprovaRespondida\"\x93\x01\n" +
-	"\x15CorrigirProvaResponse\x12D\n" +
-	"\x0eprovaCorrigida\x18\x01 \x01(\v2\x1c.ensina_renda.ProvaCorrigidaR\x0eprovaCorrigida\x12\x1a\n" +
-	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x03 \x01(\bR\asucesso\"<\n" +
+	"\x0fprovaRespondida\x18\x02 \x01(\tB\x03\xe0A\x02R\x0fprovaRespondida\"M\n" +
+	"\x15CorrigirProvaResponse\x12\x1a\n" +
+	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"<\n" +
 	"\x18GetProvaCorrigidaRequest\x12 \n" +
 	"\tid_modulo\x18\x01 \x01(\tB\x03\xe0A\x02R\bidModulo\"\xd7\x01\n" +
 	"\x19GetProvaCorrigidaResponse\x12 \n" +
@@ -2052,39 +2043,38 @@ var file_ensina_renda_proto_depIdxs = []int32{
 	33, // 3: ensina_renda.Usuario.criado_em:type_name -> google.protobuf.Timestamp
 	23, // 4: ensina_renda.GetProvaGeradaResponse.prova:type_name -> ensina_renda.Prova
 	24, // 5: ensina_renda.Prova.questoes:type_name -> ensina_renda.Questao
-	31, // 6: ensina_renda.CorrigirProvaResponse.provaCorrigida:type_name -> ensina_renda.ProvaCorrigida
-	32, // 7: ensina_renda.GetProvaCorrigidaResponse.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
-	30, // 8: ensina_renda.ProvaRespondida.questoesRespondidas:type_name -> ensina_renda.QuestaoRespondida
-	32, // 9: ensina_renda.ProvaCorrigida.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
-	0,  // 10: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
-	2,  // 11: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
-	4,  // 12: ensina_renda.EnsinaRendaService.RealizarLogin:input_type -> ensina_renda.RealizarLoginRequest
-	6,  // 13: ensina_renda.EnsinaRendaService.ConcluirAula:input_type -> ensina_renda.ConcluirAulaRequest
-	8,  // 14: ensina_renda.EnsinaRendaService.ConcluirModulo:input_type -> ensina_renda.ConcluirModuloRequest
-	10, // 15: ensina_renda.EnsinaRendaService.ListarModuloAulas:input_type -> ensina_renda.ListarModuloAulasRequest
-	14, // 16: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:input_type -> ensina_renda.GetUsuarioPeloEmailRequest
-	17, // 17: ensina_renda.EnsinaRendaService.AtualizarSenha:input_type -> ensina_renda.AtualizarSenhaRequest
-	19, // 18: ensina_renda.EnsinaRendaService.GerarProva:input_type -> ensina_renda.GerarProvaRequest
-	21, // 19: ensina_renda.EnsinaRendaService.GetProvaGerada:input_type -> ensina_renda.GetProvaGeradaRequest
-	25, // 20: ensina_renda.EnsinaRendaService.CorrigirProva:input_type -> ensina_renda.CorrigirProvaRequest
-	27, // 21: ensina_renda.EnsinaRendaService.GetProvaCorrigida:input_type -> ensina_renda.GetProvaCorrigidaRequest
-	1,  // 22: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
-	3,  // 23: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
-	5,  // 24: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
-	7,  // 25: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
-	9,  // 26: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
-	11, // 27: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
-	15, // 28: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:output_type -> ensina_renda.GetUsuarioPeloEmailResponse
-	18, // 29: ensina_renda.EnsinaRendaService.AtualizarSenha:output_type -> ensina_renda.AtualizarSenhaResponse
-	20, // 30: ensina_renda.EnsinaRendaService.GerarProva:output_type -> ensina_renda.GerarProvaResponse
-	22, // 31: ensina_renda.EnsinaRendaService.GetProvaGerada:output_type -> ensina_renda.GetProvaGeradaResponse
-	26, // 32: ensina_renda.EnsinaRendaService.CorrigirProva:output_type -> ensina_renda.CorrigirProvaResponse
-	28, // 33: ensina_renda.EnsinaRendaService.GetProvaCorrigida:output_type -> ensina_renda.GetProvaCorrigidaResponse
-	22, // [22:34] is the sub-list for method output_type
-	10, // [10:22] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	32, // 6: ensina_renda.GetProvaCorrigidaResponse.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
+	30, // 7: ensina_renda.ProvaRespondida.questoesRespondidas:type_name -> ensina_renda.QuestaoRespondida
+	32, // 8: ensina_renda.ProvaCorrigida.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
+	0,  // 9: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
+	2,  // 10: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
+	4,  // 11: ensina_renda.EnsinaRendaService.RealizarLogin:input_type -> ensina_renda.RealizarLoginRequest
+	6,  // 12: ensina_renda.EnsinaRendaService.ConcluirAula:input_type -> ensina_renda.ConcluirAulaRequest
+	8,  // 13: ensina_renda.EnsinaRendaService.ConcluirModulo:input_type -> ensina_renda.ConcluirModuloRequest
+	10, // 14: ensina_renda.EnsinaRendaService.ListarModuloAulas:input_type -> ensina_renda.ListarModuloAulasRequest
+	14, // 15: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:input_type -> ensina_renda.GetUsuarioPeloEmailRequest
+	17, // 16: ensina_renda.EnsinaRendaService.AtualizarSenha:input_type -> ensina_renda.AtualizarSenhaRequest
+	19, // 17: ensina_renda.EnsinaRendaService.GerarProva:input_type -> ensina_renda.GerarProvaRequest
+	21, // 18: ensina_renda.EnsinaRendaService.GetProvaGerada:input_type -> ensina_renda.GetProvaGeradaRequest
+	25, // 19: ensina_renda.EnsinaRendaService.CorrigirProva:input_type -> ensina_renda.CorrigirProvaRequest
+	27, // 20: ensina_renda.EnsinaRendaService.GetProvaCorrigida:input_type -> ensina_renda.GetProvaCorrigidaRequest
+	1,  // 21: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
+	3,  // 22: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
+	5,  // 23: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
+	7,  // 24: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
+	9,  // 25: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
+	11, // 26: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
+	15, // 27: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:output_type -> ensina_renda.GetUsuarioPeloEmailResponse
+	18, // 28: ensina_renda.EnsinaRendaService.AtualizarSenha:output_type -> ensina_renda.AtualizarSenhaResponse
+	20, // 29: ensina_renda.EnsinaRendaService.GerarProva:output_type -> ensina_renda.GerarProvaResponse
+	22, // 30: ensina_renda.EnsinaRendaService.GetProvaGerada:output_type -> ensina_renda.GetProvaGeradaResponse
+	26, // 31: ensina_renda.EnsinaRendaService.CorrigirProva:output_type -> ensina_renda.CorrigirProvaResponse
+	28, // 32: ensina_renda.EnsinaRendaService.GetProvaCorrigida:output_type -> ensina_renda.GetProvaCorrigidaResponse
+	21, // [21:33] is the sub-list for method output_type
+	9,  // [9:21] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_ensina_renda_proto_init() }

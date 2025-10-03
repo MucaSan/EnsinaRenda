@@ -8,6 +8,7 @@ import (
 	"ensina-renda/adapter/grpc/service/auth/realizar_login"
 	"ensina-renda/adapter/grpc/service/container"
 	"ensina-renda/adapter/grpc/service/modulo/concluir_modulo"
+	"ensina-renda/adapter/grpc/service/prova/corrigir_prova"
 	"ensina-renda/adapter/grpc/service/prova/gerar_prova"
 	"ensina-renda/adapter/grpc/service/usuario/atualizar_senha"
 	"ensina-renda/adapter/grpc/service/usuario/cadastrar_aluno"
@@ -63,7 +64,7 @@ func (s *EnsinaRendaService) GerarProva(ctx context.Context, req *pb.GerarProvaR
 }
 
 func (s *EnsinaRendaService) CorrigirProva(ctx context.Context, req *pb.CorrigirProvaRequest) (*pb.CorrigirProvaResponse, error) {
-	return nil, nil
+	return corrigir_prova.Handle(ctx, s.container, req)
 }
 
 func (s *EnsinaRendaService) GetProvaGerada(ctx context.Context, req *pb.GetProvaGeradaRequest) (*pb.GetProvaGeradaResponse, error) {

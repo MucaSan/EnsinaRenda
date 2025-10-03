@@ -7,5 +7,5 @@ import (
 
 type AgenteProfessor interface {
 	GerarProva(ctx context.Context, provaBase string) (string, error)
-	CorrigirProva(ctx context.Context, questaoRespondida *model.ProvaRespondida) ([]string, error)
+	CorrigirProva(ctx context.Context, provaRespondida *model.ProvaRespondida) (*model.ProvaCorrigida, error)
 }
