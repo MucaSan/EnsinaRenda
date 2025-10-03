@@ -9,7 +9,10 @@ import (
 	domain "ensina-renda/domain/service"
 	"ensina-renda/repository/iface"
 	"fmt"
+	"strconv"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type ProvaController struct {
@@ -90,4 +93,88 @@ func (pc *ProvaController) GetProvaUsuario(ctx context.Context, idModulo string)
 	}
 
 	return provaUsuario, nil
+}
+
+func (pc *ProvaController) CorrigirProva(ctx context.Context, idModulo string, provaRespondida *model.ProvaRespondida) error {
+	provaUsuario, err := pc.provaRepository.GetProvaUsuario(ctx, idModulo)
+	if err != nil {
+		return fmt.Errorf("erro ao pegar prova do usuario do modulo fornecido: %v", err)
+	}
+
+	provaGerada, err := provaUsuario.FormatarConteudoParaProva()
+	if err != nil {
+		return fmt.Errorf("erro ao formatar prova do usuario do conteudo: %v", err)
+	}
+
+	err = adicionarRespostasCorretas(provaGerada, provaRespondida)
+	if err != nil {
+		return err
+	}
+
+	provaCorrigida, err := pc.agenteProfessor.CorrigirProva(ctx, provaRespondida)
+	if err != nil {
+		return fmt.Errorf("erro ao corrigir prova respondida: %v", err)
+	}
+
+	correcaoProva, err := gerarCorrecaoProva(ctx, provaCorrigida, idModulo)
+	if err != nil {
+		return err
+	}
+
+	err = pc.provaRepository.SalvarCorrecaoProva(ctx, correcaoProva)
+	if err != nil {
+		return fmt.Errorf("erro ao salvar prova corrigida: %v", err)
+	}
+
+	return nil
+}
+
+func adicionarRespostasCorretas(provaGerada *model.ProvaGerada, provaRespondida *model.ProvaRespondida) error {
+	if provaGerada == nil {
+		return fmt.Errorf("prova gerada esta vazia, gere outra prova")
+	}
+
+	if provaRespondida == nil {
+		return fmt.Errorf("prova respondida esta vazia")
+	}
+
+	quantidadeQuestoesGeradas := len(provaGerada.Questoes)
+	quantidadeQuestoesRespondidas := len(provaRespondida.QuestoesRespondidas)
+
+	if quantidadeQuestoesGeradas != quantidadeQuestoesRespondidas {
+		return fmt.Errorf("provas estao com tamanhos diferentes, houve algum erro no processamento das provas")
+	}
+
+	for i, questaoGerada := range provaGerada.Questoes {
+		provaRespondida.QuestoesRespondidas[i].RespostaCorreta = questaoGerada.RespostaCorreta
+	}
+
+	return nil
+}
+
+func gerarCorrecaoProva(
+	ctx context.Context,
+	provaCorrigida *model.ProvaCorrigida,
+	idModulo string,
+) (*model.CorrecaoProva, error) {
+	conteudoCorrecaoProva, err := provaCorrigida.FormatarParaJSONString()
+	if err != nil {
+		return nil, fmt.Errorf("erro ao formatar para JSON: %v", err)
+	}
+
+	usuarioUuid, err := uuid.Parse(auth.GetUserUuidPeloContext(ctx))
+	if err != nil {
+		return nil, fmt.Errorf("erro ao gerar uuid do usuario: %v", err)
+	}
+
+	numeroIdModulo, err := strconv.Atoi(idModulo)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao gerar numero id modulo: %v", err)
+	}
+
+	return &model.CorrecaoProva{
+		IDUsuario:       usuarioUuid,
+		IDModulo:        numeroIdModulo,
+		ConteudoAnalise: conteudoCorrecaoProva,
+	}, nil
 }

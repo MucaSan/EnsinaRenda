@@ -534,9 +534,6 @@
     "ensina_rendaCorrigirProvaResponse": {
       "type": "object",
       "properties": {
-        "provaCorrigida": {
-          "$ref": "#/definitions/ensina_rendaProvaCorrigida"
-        },
         "mensagem": {
           "type": "string"
         },
@@ -665,25 +662,6 @@
             "type": "object",
             "$ref": "#/definitions/ensina_rendaQuestao"
           }
-        }
-      }
-    },
-    "ensina_rendaProvaCorrigida": {
-      "type": "object",
-      "properties": {
-        "tituloProva": {
-          "type": "string"
-        },
-        "questoesCorrigidas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/ensina_rendaQuestaoCorrigida"
-          }
-        },
-        "nota": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },

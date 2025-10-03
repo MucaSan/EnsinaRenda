@@ -4,7 +4,6 @@ import (
 	"context"
 	pb "ensina-renda/adapter/grpc/pb"
 	"ensina-renda/adapter/grpc/service/container"
-	"strconv"
 )
 
 func Handle(
@@ -16,19 +15,17 @@ func Handle(
 	converter := NewCorrigirProvaConverter(in)
 
 	provaRespondida, err := converter.ToDomain(ctx)
-
-	provaBase, err := container.ProvaController().CorrigirProva(ctx, idModulo, provaRespondida)
 	if err != nil {
-		return RespostaErro(err)
+		return nil, err
 	}
 
-	err = container.ProvaController().GerarProva(ctx, provaBase)
+	err = container.ProvaController().CorrigirProva(ctx, in.IdModulo, provaRespondida)
 	if err != nil {
 		return RespostaErro(err)
 	}
 
 	return &pb.CorrigirProvaResponse{
-		Mensagem: "prova gerada com sucesso!",
+		Mensagem: "prova corrigida com sucesso!",
 		Sucesso:  true,
 	}, nil
 }

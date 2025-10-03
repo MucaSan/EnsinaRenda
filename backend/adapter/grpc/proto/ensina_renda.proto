@@ -230,9 +230,8 @@ message CorrigirProvaRequest{
 }
 
 message CorrigirProvaResponse{
-    ProvaCorrigida provaCorrigida = 1;
-    string mensagem = 2;
-    bool sucesso = 3;
+    string mensagem = 1;
+    bool sucesso = 2;
 }
 
 message GetProvaCorrigidaRequest{

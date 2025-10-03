@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"slices"
 	"strings"
 	"sync"
 )
@@ -52,7 +53,7 @@ var url = "https://api.openai.com/v1/chat/completions"
 const (
 	promptAgenteGerarProva = "Você é um agente especializado em educação financeira em renda fixa. Sua tarefa principal é customizar uma prova fornecida em formato JSON. Mantenha o formato JSON idêntico ao original, mas obrigatóriamente modifique o conteúdo das questões para torná-las mais desafiadoras. Transforme perguntas genéricas em questões mais complexas, e mude questões muito técnicas para situações-problema envolventes. O título da prova deve ser mantido ou levemente adaptado para refletir a nova dificuldade. A quantidade de questões não podem se alterar. Sua resposta deve ser APENAS o JSON da prova modificada, sem nenhum texto adicional."
 
-	promptAgenteAnalisarProva = `Você é um professor de finanças. Seu objetivo é analisar as respostas de um aluno para uma prova em JSON e gerar um feedback detalhado. A prova base já contém as respostas corretas. Compare as respostas do aluno com as corretas: Se a resposta estiver errada, explique o erro e sugira um ponto de melhoria. Mantenha um tom de apoio. Se a resposta estiver correta, dê uma mensagem de incentivo e adicione uma curiosidade breve sobre o tema. A sua resposta deve conter somente o texto do feedback, e nada mais.`
+	promptAgenteAnalisarProva = `Você é um professor de finanças. Seu objetivo é analisar as respostas de um aluno para uma prova em JSON e gerar um feedback detalhado. A prova base já contém as respostas corretas. Compare as respostas do aluno com as corretas: Se a resposta estiver errada, explique o erro e sugira um ponto de melhoria. Mantenha um tom de apoio. Se a resposta estiver correta, dê uma mensagem de incentivo e adicione uma curiosidade breve sobre o tema. Para realizar a comparação, apenas verifique se o JSON do da questão do campo "resposta_usuario" e "resposta_correta", sendo iguais, não é necessário considerar como errado e sim como certo. A sua resposta deve conter somente o texto do feedback, e nada mais.`
 )
 
 func (a *AgenteProfessor) GerarProva(ctx context.Context, provaBase string) (string, error) {
@@ -60,17 +61,20 @@ func (a *AgenteProfessor) GerarProva(ctx context.Context, provaBase string) (str
 
 }
 
-func (a *AgenteProfessor) CorrigirProva(ctx context.Context, questaoRespondida *model.ProvaRespondida) ([]string, error) {
+func (a *AgenteProfessor) CorrigirProva(ctx context.Context, provaRespondida *model.ProvaRespondida) (*model.ProvaCorrigida, error) {
 	semaforo := make(chan struct{}, 5)
 	var grupoEspera sync.WaitGroup
 	var mutex sync.Mutex
-	var canalErros = make(chan error, len(questaoRespondida.QuestoesRespondidas))
+	var canalErros = make(chan error, len(provaRespondida.QuestoesRespondidas))
 
-	var feedbacks []string
+	provaCorrigida := &model.ProvaCorrigida{
+		TituloProva: provaRespondida.TituloProva,
+	}
 
-	for _, questao := range questaoRespondida.QuestoesRespondidas {
+	for _, questao := range provaRespondida.QuestoesRespondidas {
 		grupoEspera.Add(1)
 		semaforo <- struct{}{}
+
 		go func() {
 			defer grupoEspera.Done()
 			defer func() { <-semaforo }()
@@ -81,7 +85,16 @@ func (a *AgenteProfessor) CorrigirProva(ctx context.Context, questaoRespondida *
 			}
 
 			mutex.Lock()
-			feedbacks = append(feedbacks, feedback)
+			provaCorrigida.QuestoesCorrigidas = append(provaCorrigida.QuestoesCorrigidas, model.QuestaoCorrigida{
+				Questao: model.Questao{
+					NumQuestao:      questao.NumQuestao,
+					Enunciado:       questao.Enunciado,
+					Opcoes:          questao.Opcoes,
+					RespostaCorreta: questao.RespostaCorreta,
+				},
+				RespostaUsuario: questao.RespostaUsuario,
+				Feedback:        feedback,
+			})
 			mutex.Unlock()
 		}()
 	}
@@ -94,7 +107,20 @@ func (a *AgenteProfessor) CorrigirProva(ctx context.Context, questaoRespondida *
 		return nil, err
 	}
 
-	return feedbacks, nil
+	// ordenada por ordem crescente do número de questoes
+	slices.SortFunc(provaCorrigida.QuestoesCorrigidas, func(primeiraQuestao, segundaQuestao model.QuestaoCorrigida) int {
+		if primeiraQuestao.NumQuestao < segundaQuestao.NumQuestao {
+			return -1
+		}
+
+		if primeiraQuestao.NumQuestao > segundaQuestao.NumQuestao {
+			return 1
+		}
+
+		return 0
+	})
+
+	return provaCorrigida, nil
 }
 
 func realizarRequisicao(promptAgente, promptAnalise string) (string, error) {
@@ -191,10 +217,11 @@ func realizarRequisicaoPorQuestao(promptAgente string, questaoRespondida model.Q
 			{
 				Role: "user",
 				Content: fmt.Sprintf(
-					"Enunciado: %s Opcoes: %s Resposta do Usuario: %d",
+					"Enunciado: %s Opcoes: %s Resposta do Usuario: %d Resposta Correta: %s",
 					questaoRespondida.Enunciado,
 					strings.Join(questaoRespondida.Opcoes, " , "),
 					questaoRespondida.RespostaUsuario,
+					questaoRespondida.RespostaCorreta,
 				),
 			},
 		},
