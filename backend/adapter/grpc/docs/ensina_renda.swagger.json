@@ -567,19 +567,8 @@
     "ensina_rendaGetProvaCorrigidaResponse": {
       "type": "object",
       "properties": {
-        "tituloProva": {
+        "provaCorrigida": {
           "type": "string"
-        },
-        "questoesCorrigidas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/ensina_rendaQuestaoCorrigida"
-          }
-        },
-        "nota": {
-          "type": "integer",
-          "format": "int32"
         },
         "mensagem": {
           "type": "string"
@@ -592,8 +581,8 @@
     "ensina_rendaGetProvaGeradaResponse": {
       "type": "object",
       "properties": {
-        "prova": {
-          "$ref": "#/definitions/ensina_rendaProva"
+        "provaGerada": {
+          "type": "string"
         },
         "mensagem": {
           "type": "string"
@@ -647,68 +636,6 @@
             "type": "object",
             "$ref": "#/definitions/ensina_rendaAula"
           }
-        }
-      }
-    },
-    "ensina_rendaProva": {
-      "type": "object",
-      "properties": {
-        "tituloProva": {
-          "type": "string"
-        },
-        "questoes": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/ensina_rendaQuestao"
-          }
-        }
-      }
-    },
-    "ensina_rendaQuestao": {
-      "type": "object",
-      "properties": {
-        "numQuestao": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enunciado": {
-          "type": "string"
-        },
-        "opcoes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ensina_rendaQuestaoCorrigida": {
-      "type": "object",
-      "properties": {
-        "numQuestao": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "enunciado": {
-          "type": "string"
-        },
-        "opcoes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "resposeCorreta": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "respostaUsuario": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "feedback": {
-          "type": "string"
         }
       }
     },

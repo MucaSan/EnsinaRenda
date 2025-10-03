@@ -207,7 +207,7 @@ message GetProvaGeradaRequest{
 }
 
 message GetProvaGeradaResponse{
-    Prova prova = 1;
+    string prova_gerada = 1;
     string mensagem = 2;
     bool sucesso = 3;
 }
@@ -239,11 +239,9 @@ message GetProvaCorrigidaRequest{
 }
 
 message GetProvaCorrigidaResponse{
-    string tituloProva = 1;
-    repeated QuestaoCorrigida questoesCorrigidas = 2;
-    int32 nota = 3;
-    string mensagem = 4;
-    bool sucesso = 5;
+    string prova_corrigida = 1;
+    string mensagem = 2;
+    bool sucesso = 3;
 }
 
 message ProvaRespondida {

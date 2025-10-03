@@ -63,3 +63,18 @@ func (r *ProvaRepository) SalvarCorrecaoProva(ctx context.Context, correcaoProva
 
 	return nil
 }
+
+func (r *ProvaRepository) GetCorrecaoProva(ctx context.Context, idModulo string) (*model.CorrecaoProva, error) {
+	var correcaoProva *model.CorrecaoProva
+
+	err := database.GetDB(ctx).
+		Table("correcao_prova").
+		Where("id_usuario = ?", auth.GetUserUuidPeloContext(ctx)).
+		Where("id_modulo = ?", idModulo).
+		First(&correcaoProva).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return correcaoProva, nil
+}

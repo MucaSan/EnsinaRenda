@@ -178,3 +178,13 @@ func gerarCorrecaoProva(
 		ConteudoAnalise: conteudoCorrecaoProva,
 	}, nil
 }
+
+func (pc *ProvaController) GetCorrecaoProva(ctx context.Context, idModulo string) (*model.CorrecaoProva, error) {
+	correcaoProva, err := pc.provaRepository.GetCorrecaoProva(ctx, idModulo)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao tentar buscar prova de corrigida: %v", err)
+	}
+
+	return correcaoProva, nil
+
+}
