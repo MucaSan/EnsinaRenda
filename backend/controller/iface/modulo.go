@@ -10,4 +10,5 @@ import (
 type ModuloController interface {
 	CompletarModulo(ctx context.Context, usuarioModulo *model.UsuarioModulo) error
 	GetUsuarioModulo(ctx context.Context, idAula int, idUsuario uuid.UUID) (*model.UsuarioModulo, error)
+	ListarModulos(ctx context.Context) ([]*model.Modulo, error)
 }

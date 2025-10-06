@@ -148,29 +148,12 @@ func request_EnsinaRendaService_ConcluirAula_0(ctx context.Context, marshaler ru
 	var (
 		protoReq ConcluirAulaRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
-	}
-	val, ok := pathParams["id_usuario"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_usuario")
-	}
-	protoReq.IdUsuario, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_usuario", err)
-	}
-	val, ok = pathParams["id_aula"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_aula")
-	}
-	protoReq.IdAula, err = runtime.Int64(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_aula", err)
 	}
 	msg, err := client.ConcluirAula(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -180,26 +163,9 @@ func local_request_EnsinaRendaService_ConcluirAula_0(ctx context.Context, marsha
 	var (
 		protoReq ConcluirAulaRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	val, ok := pathParams["id_usuario"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_usuario")
-	}
-	protoReq.IdUsuario, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_usuario", err)
-	}
-	val, ok = pathParams["id_aula"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_aula")
-	}
-	protoReq.IdAula, err = runtime.Int64(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_aula", err)
 	}
 	msg, err := server.ConcluirAula(ctx, &protoReq)
 	return msg, metadata, err
@@ -209,29 +175,12 @@ func request_EnsinaRendaService_ConcluirModulo_0(ctx context.Context, marshaler 
 	var (
 		protoReq ConcluirModuloRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
-	}
-	val, ok := pathParams["id_usuario"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_usuario")
-	}
-	protoReq.IdUsuario, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_usuario", err)
-	}
-	val, ok = pathParams["id_modulo"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_modulo")
-	}
-	protoReq.IdModulo, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_modulo", err)
 	}
 	msg, err := client.ConcluirModulo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -241,26 +190,9 @@ func local_request_EnsinaRendaService_ConcluirModulo_0(ctx context.Context, mars
 	var (
 		protoReq ConcluirModuloRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	val, ok := pathParams["id_usuario"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_usuario")
-	}
-	protoReq.IdUsuario, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_usuario", err)
-	}
-	val, ok = pathParams["id_modulo"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id_modulo")
-	}
-	protoReq.IdModulo, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id_modulo", err)
 	}
 	msg, err := server.ConcluirModulo(ctx, &protoReq)
 	return msg, metadata, err
@@ -557,7 +489,7 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/aula/{id_aula}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/aula"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -577,7 +509,7 @@ func RegisterEnsinaRendaServiceHandlerServer(ctx context.Context, mux *runtime.S
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/modulo/{id_modulo}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/modulo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -826,7 +758,7 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/aula/{id_aula}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirAula", runtime.WithHTTPPathPattern("/v1/aluno/aula"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -843,7 +775,7 @@ func RegisterEnsinaRendaServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/{id_usuario}/modulo/{id_modulo}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/ensina_renda.EnsinaRendaService/ConcluirModulo", runtime.WithHTTPPathPattern("/v1/aluno/modulo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -982,8 +914,8 @@ var (
 	pattern_EnsinaRendaService_CadastrarAluno_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "aluno"}, ""))
 	pattern_EnsinaRendaService_VerificarAluno_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aluno", "email", "senha"}, ""))
 	pattern_EnsinaRendaService_RealizarLogin_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aluno", "auth"}, ""))
-	pattern_EnsinaRendaService_ConcluirAula_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "aluno", "id_usuario", "aula", "id_aula"}, ""))
-	pattern_EnsinaRendaService_ConcluirModulo_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "aluno", "id_usuario", "modulo", "id_modulo"}, ""))
+	pattern_EnsinaRendaService_ConcluirAula_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aluno", "aula"}, ""))
+	pattern_EnsinaRendaService_ConcluirModulo_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aluno", "modulo"}, ""))
 	pattern_EnsinaRendaService_ListarModuloAulas_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aluno", "aulas"}, ""))
 	pattern_EnsinaRendaService_GetUsuarioPeloEmail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "usuario", "email"}, ""))
 	pattern_EnsinaRendaService_AtualizarSenha_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aluno", "senha"}, ""))

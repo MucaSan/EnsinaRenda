@@ -28,7 +28,7 @@ func (r *UsuarioRepository) CriarUsuario(ctx context.Context, usuario *model.Usu
 func (r *UsuarioRepository) VerificarEmail(ctx context.Context, email string) (bool, error) {
 	var usuario *model.Usuario
 
-	err := database.GetDB(ctx).Table("usuario").Where("email = ?", email).First(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("email = ?", email).Find(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -43,7 +43,7 @@ func (r *UsuarioRepository) VerificarEmail(ctx context.Context, email string) (b
 func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id uuid.UUID) (bool, error) {
 	var usuario *model.Usuario
 
-	err := database.GetDB(ctx).Table("usuario").Where("id = ?", id).First(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("id = ?", id).Find(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -57,7 +57,7 @@ func (r *UsuarioRepository) VerificarUsuarioCadastrado(ctx context.Context, id u
 
 func (r *UsuarioRepository) VerificarEmailUsuario(ctx context.Context, hash_email string) (bool, error) {
 	var usuario *model.Usuario
-	err := database.GetDB(ctx).Table("usuario").Where("email = ?", hash_email).First(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("email = ?", hash_email).Find(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -71,7 +71,7 @@ func (r *UsuarioRepository) VerificarEmailUsuario(ctx context.Context, hash_emai
 
 func (r *UsuarioRepository) VerificarSenhaUsuario(ctx context.Context, hash_senha string) (bool, error) {
 	var usuario *model.Usuario
-	err := database.GetDB(ctx).Table("usuario").Where("senha = ?", hash_senha).First(&usuario).Error
+	err := database.GetDB(ctx).Table("usuario").Where("senha = ?", hash_senha).Find(&usuario).Error
 	if err != nil {
 		return false, err
 	}
@@ -138,4 +138,22 @@ func (r *UsuarioRepository) GetUsuarioPeloId(ctx context.Context, id string) (*m
 	}
 
 	return usuario, nil
+}
+
+func (r *UsuarioRepository) ProvisionarUsuarioModulos(ctx context.Context, usuarioModulos []*model.UsuarioModulo) error {
+	err := database.GetDB(ctx).Table("usuario_modulo").Create(usuarioModulos).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *UsuarioRepository) ProvisionarUsuarioAulas(ctx context.Context, usuarioAulas []*model.UsuarioAula) error {
+	err := database.GetDB(ctx).Table("usuario_aula").Create(usuarioAulas).Error
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

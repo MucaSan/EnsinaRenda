@@ -366,7 +366,6 @@ func (x *RealizarLoginResponse) GetSucesso() bool {
 type ConcluirAulaRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IdAula        int64                  `protobuf:"varint,1,opt,name=id_aula,json=idAula,proto3" json:"id_aula,omitempty"`
-	IdUsuario     string                 `protobuf:"bytes,2,opt,name=id_usuario,json=idUsuario,proto3" json:"id_usuario,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -406,13 +405,6 @@ func (x *ConcluirAulaRequest) GetIdAula() int64 {
 		return x.IdAula
 	}
 	return 0
-}
-
-func (x *ConcluirAulaRequest) GetIdUsuario() string {
-	if x != nil {
-		return x.IdUsuario
-	}
-	return ""
 }
 
 type ConcluirAulaResponse struct {
@@ -470,7 +462,6 @@ func (x *ConcluirAulaResponse) GetSucesso() bool {
 type ConcluirModuloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IdModulo      string                 `protobuf:"bytes,1,opt,name=id_modulo,json=idModulo,proto3" json:"id_modulo,omitempty"`
-	IdUsuario     string                 `protobuf:"bytes,2,opt,name=id_usuario,json=idUsuario,proto3" json:"id_usuario,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -508,13 +499,6 @@ func (*ConcluirModuloRequest) Descriptor() ([]byte, []int) {
 func (x *ConcluirModuloRequest) GetIdModulo() string {
 	if x != nil {
 		return x.IdModulo
-	}
-	return ""
-}
-
-func (x *ConcluirModuloRequest) GetIdUsuario() string {
-	if x != nil {
-		return x.IdUsuario
 	}
 	return ""
 }
@@ -1856,18 +1840,14 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x15RealizarLoginResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1a\n" +
 	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x03 \x01(\bR\asucesso\"W\n" +
+	"\asucesso\x18\x03 \x01(\bR\asucesso\"3\n" +
 	"\x13ConcluirAulaRequest\x12\x1c\n" +
-	"\aid_aula\x18\x01 \x01(\x03B\x03\xe0A\x02R\x06idAula\x12\"\n" +
-	"\n" +
-	"id_usuario\x18\x02 \x01(\tB\x03\xe0A\x02R\tidUsuario\"L\n" +
+	"\aid_aula\x18\x01 \x01(\x03B\x03\xe0A\x02R\x06idAula\"L\n" +
 	"\x14ConcluirAulaResponse\x12\x1a\n" +
 	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x02 \x01(\bR\asucesso\"]\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"9\n" +
 	"\x15ConcluirModuloRequest\x12 \n" +
-	"\tid_modulo\x18\x01 \x01(\tB\x03\xe0A\x02R\bidModulo\x12\"\n" +
-	"\n" +
-	"id_usuario\x18\x02 \x01(\tB\x03\xe0A\x02R\tidUsuario\"N\n" +
+	"\tid_modulo\x18\x01 \x01(\tB\x03\xe0A\x02R\bidModulo\"N\n" +
 	"\x16ConcluirModuloResponse\x12\x1a\n" +
 	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
 	"\asucesso\x18\x02 \x01(\bR\asucesso\"\x1a\n" +
@@ -1953,13 +1933,13 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x06opcoes\x18\x03 \x03(\tR\x06opcoes\x12&\n" +
 	"\x0eresposeCorreta\x18\x04 \x01(\x05R\x0eresposeCorreta\x12(\n" +
 	"\x0frespostaUsuario\x18\x05 \x01(\x05R\x0frespostaUsuario\x12\x1a\n" +
-	"\bfeedback\x18\x06 \x01(\tR\bfeedback2\x96\f\n" +
+	"\bfeedback\x18\x06 \x01(\tR\bfeedback2\xe4\v\n" +
 	"\x12EnsinaRendaService\x12q\n" +
 	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
 	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12s\n" +
-	"\rRealizarLogin\x12\".ensina_renda.RealizarLoginRequest\x1a#.ensina_renda.RealizarLoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/aluno/auth\x12\x87\x01\n" +
-	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v1/aluno/{id_usuario}/aula/{id_aula}\x12\x91\x01\n" +
-	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"4\x82\xd3\xe4\x93\x02.:\x01*\")/v1/aluno/{id_usuario}/modulo/{id_modulo}\x12}\n" +
+	"\rRealizarLogin\x12\".ensina_renda.RealizarLoginRequest\x1a#.ensina_renda.RealizarLoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/aluno/auth\x12p\n" +
+	"\fConcluirAula\x12!.ensina_renda.ConcluirAulaRequest\x1a\".ensina_renda.ConcluirAulaResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/aluno/aula\x12x\n" +
+	"\x0eConcluirModulo\x12#.ensina_renda.ConcluirModuloRequest\x1a$.ensina_renda.ConcluirModuloResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/aluno/modulo\x12}\n" +
 	"\x11ListarModuloAulas\x12&.ensina_renda.ListarModuloAulasRequest\x1a'.ensina_renda.ListarModuloAulasResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/aluno/aulas\x12\x87\x01\n" +
 	"\x13GetUsuarioPeloEmail\x12(.ensina_renda.GetUsuarioPeloEmailRequest\x1a).ensina_renda.GetUsuarioPeloEmailResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/usuario/{email}\x12w\n" +
 	"\x0eAtualizarSenha\x12#.ensina_renda.AtualizarSenhaRequest\x1a$.ensina_renda.AtualizarSenhaResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\x1a\x0f/v1/aluno/senha\x12k\n" +

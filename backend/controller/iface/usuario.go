@@ -14,4 +14,6 @@ type UsuarioController interface {
 	GetUsuarioPeloEmail(ctx context.Context, email string) (*model.Usuario, error)
 	AtualizarSenha(ctx context.Context, usuario *model.Usuario, senha string) error
 	GetUsuarioPeloId(ctx context.Context, id string) (*model.Usuario, error)
+	ProvisionarUsuarioModulos(ctx context.Context, usuario *model.Usuario, modulos []*model.Modulo) error
+	ProvisionarUsuarioAulas(ctx context.Context, usuario *model.Usuario, aulas []*model.Aula) error
 }

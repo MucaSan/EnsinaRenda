@@ -48,6 +48,38 @@
         ]
       }
     },
+    "/v1/aluno/aula": {
+      "post": {
+        "operationId": "EnsinaRendaService_ConcluirAula",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaConcluirAulaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaConcluirAulaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/aluno/aulas": {
       "get": {
         "operationId": "EnsinaRendaService_ListarModuloAulas",
@@ -94,6 +126,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ensina_rendaRealizarLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
+    "/v1/aluno/modulo": {
+      "post": {
+        "operationId": "EnsinaRendaService_ConcluirModulo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaConcluirModuloResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaConcluirModuloRequest"
             }
           }
         ],
@@ -165,95 +229,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "EnsinaRendaService"
-        ]
-      }
-    },
-    "/v1/aluno/{idUsuario}/aula/{idAula}": {
-      "post": {
-        "operationId": "EnsinaRendaService_ConcluirAula",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ensina_rendaConcluirAulaResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "idUsuario",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "idAula",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "int64"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnsinaRendaServiceConcluirAulaBody"
-            }
-          }
-        ],
-        "tags": [
-          "EnsinaRendaService"
-        ]
-      }
-    },
-    "/v1/aluno/{idUsuario}/modulo/{idModulo}": {
-      "post": {
-        "operationId": "EnsinaRendaService_ConcluirModulo",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/ensina_rendaConcluirModuloResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "idUsuario",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "idModulo",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnsinaRendaServiceConcluirModuloBody"
-            }
           }
         ],
         "tags": [
@@ -417,12 +392,6 @@
     }
   },
   "definitions": {
-    "EnsinaRendaServiceConcluirAulaBody": {
-      "type": "object"
-    },
-    "EnsinaRendaServiceConcluirModuloBody": {
-      "type": "object"
-    },
     "ensina_rendaAtualizarSenhaRequest": {
       "type": "object",
       "properties": {
@@ -494,6 +463,18 @@
         }
       }
     },
+    "ensina_rendaConcluirAulaRequest": {
+      "type": "object",
+      "properties": {
+        "idAula": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "idAula"
+      ]
+    },
     "ensina_rendaConcluirAulaResponse": {
       "type": "object",
       "properties": {
@@ -504,6 +485,17 @@
           "type": "boolean"
         }
       }
+    },
+    "ensina_rendaConcluirModuloRequest": {
+      "type": "object",
+      "properties": {
+        "idModulo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "idModulo"
+      ]
     },
     "ensina_rendaConcluirModuloResponse": {
       "type": "object",

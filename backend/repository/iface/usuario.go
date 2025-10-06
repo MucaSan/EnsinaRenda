@@ -18,4 +18,6 @@ type UsuarioRepository interface {
 	GetUsuarioPeloEmail(ctx context.Context, email string) (*model.Usuario, error)
 	AtualizarUsuario(ctx context.Context, usuario *model.Usuario) error
 	GetUsuarioPeloId(ctx context.Context, id string) (*model.Usuario, error)
+	ProvisionarUsuarioModulos(ctx context.Context, usuarioModulos []*model.UsuarioModulo) error
+	ProvisionarUsuarioAulas(ctx context.Context, usuarioAulas []*model.UsuarioAula) error
 }
