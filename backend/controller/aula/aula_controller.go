@@ -56,3 +56,12 @@ func (uc *AulaController) ListarUsuarioAulaModulo(
 
 	return moduloAulaMapa, nil
 }
+
+func (uc *AulaController) ListarAulas(ctx context.Context) ([]*model.Aula, error) {
+	aulas, err := uc.aulaRepository.ListarAulas(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao listar aulas: %v", err)
+	}
+
+	return aulas, nil
+}

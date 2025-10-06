@@ -3,6 +3,7 @@ package concluir_modulo
 import (
 	"context"
 	pb "ensina-renda/adapter/grpc/pb"
+	"ensina-renda/config/auth"
 	"ensina-renda/controller/modulo/converter"
 	"ensina-renda/domain/model"
 	"errors"
@@ -27,7 +28,7 @@ func (uc *UsuarioModuloConverter) ToDomain(ctx context.Context) (*model.UsuarioM
 		return nil, errors.New("nao foi possivel converter base para concluir_aula_request")
 	}
 
-	idUsuario, err := uuid.Parse(concluirModuloRequest.IdUsuario)
+	idUsuario, err := uuid.Parse(auth.GetUserUuidPeloContext(ctx))
 	if err != nil {
 		return nil, errors.New("nao foi possivel converter o ID do usuario para UUID v4")
 	}

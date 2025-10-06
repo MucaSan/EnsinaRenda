@@ -40,3 +40,12 @@ func (uc *ModuloController) GetUsuarioModulo(ctx context.Context, idAula int, id
 
 	return usuarioModulo, nil
 }
+
+func (uc *ModuloController) ListarModulos(ctx context.Context) ([]*model.Modulo, error) {
+	modulos, err := uc.moduloRepository.ListarModulos(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("erro ao listar modulos: %v", err)
+	}
+
+	return modulos, nil
+}

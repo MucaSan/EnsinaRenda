@@ -28,6 +28,17 @@ func (r *ModuloRepository) CompletarModulo(ctx context.Context, idModulo int, id
 	return nil
 }
 
+func (r *ModuloRepository) ListarModulos(ctx context.Context) ([]*model.Modulo, error) {
+	var modulos []*model.Modulo
+
+	err := database.GetDB(ctx).Table("modulo").Find(&modulos).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return modulos, nil
+}
+
 func (r *ModuloRepository) GetUsuarioModulo(ctx context.Context, idModulo int, idUsuario uuid.UUID) (*model.UsuarioModulo, error) {
 	var usuarioModulo *model.UsuarioModulo
 

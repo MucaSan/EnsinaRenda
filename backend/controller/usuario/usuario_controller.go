@@ -129,3 +129,49 @@ func (uc *UsuarioController) AtualizarSenha(ctx context.Context, usuario *model.
 
 	return nil
 }
+
+func (uc *UsuarioController) ProvisionarUsuarioModulos(
+	ctx context.Context,
+	usuario *model.Usuario,
+	modulos []*model.Modulo,
+) error {
+	usuarioModulos := make([]*model.UsuarioModulo, 0)
+
+	for _, modulo := range modulos {
+		usuarioModulos = append(usuarioModulos, &model.UsuarioModulo{
+			IDUsuario: usuario.Id,
+			IDModulo:  modulo.ID,
+			Concluido: false,
+		})
+	}
+
+	err := uc.usuarioRepository.ProvisionarUsuarioModulos(ctx, usuarioModulos)
+	if err != nil {
+		return fmt.Errorf("houve um erro ao tentar provisionar usuario modulos: %s", err.Error())
+	}
+
+	return nil
+}
+
+func (uc *UsuarioController) ProvisionarUsuarioAulas(
+	ctx context.Context,
+	usuario *model.Usuario,
+	aulas []*model.Aula,
+) error {
+	usuarioAulas := make([]*model.UsuarioAula, 0)
+
+	for _, aula := range aulas {
+		usuarioAulas = append(usuarioAulas, &model.UsuarioAula{
+			IDUsuario: usuario.Id,
+			IDAula:    aula.ID,
+			Concluido: false,
+		})
+	}
+
+	err := uc.usuarioRepository.ProvisionarUsuarioAulas(ctx, usuarioAulas)
+	if err != nil {
+		return fmt.Errorf("houve um erro ao tentar provisionar usuario aulas: %s", err.Error())
+	}
+
+	return nil
+}

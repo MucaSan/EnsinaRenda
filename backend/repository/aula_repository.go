@@ -65,3 +65,14 @@ func (r *AulaRepository) ListarUsuarioModuloAulas(ctx context.Context, id_usuari
 
 	return moduloAulas, nil
 }
+
+func (r *AulaRepository) ListarAulas(ctx context.Context) ([]*model.Aula, error) {
+	var aulas []*model.Aula
+
+	err := database.GetDB(ctx).Table("aula").Find(&aulas).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return aulas, nil
+}
