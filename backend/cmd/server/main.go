@@ -20,6 +20,7 @@ import (
 	"sync"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -96,6 +97,12 @@ func subirServidorGRPC() error {
 		moduloController.NewModuloController(moduloRepository),
 		provaController.NewProvaController(provaRepository, agenteProfessor),
 	)
+
+	err = godotenv.Load()
+	if err != nil {
+		// Se o arquivo não for encontrado, exibe um erro e encerra
+		log.Fatal("Erro ao carregar o arquivo .env")
+	}
 
 	// Registra, respectivamente, o servidor gRPC (com os interceptors nele) e o serviço com a API gRPC.
 	servidorGrpc := grpc.NewServer(
