@@ -33,6 +33,13 @@ func main() {
 	// Inicia um canal de erros com tamanho 2
 	canalErro := make(chan error, 2)
 
+	// Inicializa variáveis de ambiente
+	err := godotenv.Load()
+	if err != nil {
+		// Se o arquivo não for encontrado, exibe um erro e encerra
+		log.Fatal("Erro ao carregar o arquivo .env: ", err.Error())
+	}
+
 	// Inicialização da variável de grupo de espera
 	var wg sync.WaitGroup
 	// Adiciona duas go rotinas para o processo de paralelismo
@@ -63,7 +70,7 @@ func main() {
 	// Caso ocorra um erro, só entrará nos logs de parada caso os dois falhem.
 	wg.Wait()
 
-	err := <-canalErro
+	err = <-canalErro
 	if err != nil {
 		log.Printf("Erro encontrado: %v \n", err.Error())
 		return
@@ -97,12 +104,6 @@ func subirServidorGRPC() error {
 		moduloController.NewModuloController(moduloRepository),
 		provaController.NewProvaController(provaRepository, agenteProfessor),
 	)
-
-	err = godotenv.Load()
-	if err != nil {
-		// Se o arquivo não for encontrado, exibe um erro e encerra
-		log.Fatal("Erro ao carregar o arquivo .env")
-	}
 
 	// Registra, respectivamente, o servidor gRPC (com os interceptors nele) e o serviço com a API gRPC.
 	servidorGrpc := grpc.NewServer(
