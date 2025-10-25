@@ -14,6 +14,7 @@ import (
 	"ensina-renda/repository"
 	"flag"
 	"fmt"
+	"github.com/rs/cors"
 	"log"
 	"net"
 	"net/http"
@@ -134,6 +135,16 @@ func subirProxyReversoHTTP() error {
 		return err
 	}
 
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type", "Grpc-Metadata-Token"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
+
+	handlerComCORS := c.Handler(mux)
+
 	// Inicializa o servidor do proxy reverso com a configuração do MUX na porta 8081 (evitar subir o frontend e o backend na mesma porta)
-	return http.ListenAndServe(":8081", mux)
+	return http.ListenAndServe(":8081", handlerComCORS)
 }
