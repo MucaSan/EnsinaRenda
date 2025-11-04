@@ -20,9 +20,13 @@ func NewEmailService() domain.EmailService {
 }
 
 func (s *EmailService) EnviarEmail(email, token string) error {
-	from := mail.NewEmail("Equipe Ensina Renda", "nao-responda@ensinarenda.com.br")
+	emailEnsinaRenda := "nao-responda@ensinarenda.com.br"
+
+	from := mail.NewEmail("Equipe Ensina Renda", emailEnsinaRenda)
 
 	subject := "Redefinição de Senha - EnsinaRenda"
+
+	fmt.Println("Email do usuário: ", email)
 
 	to := mail.NewEmail("Usuário do EnsinaRenda", email)
 
