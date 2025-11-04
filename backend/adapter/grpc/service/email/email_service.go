@@ -20,13 +20,13 @@ func NewEmailService() domain.EmailService {
 }
 
 func (s *EmailService) EnviarEmail(email, token string) error {
-	from := mail.NewEmail("Equipe Ensina Renda", "nao-responda@ensinararenda.com.br")
+	from := mail.NewEmail("Equipe Ensina Renda", "nao-responda@ensinarenda.com.br")
 
 	subject := "Redefinição de Senha - EnsinaRenda"
 
 	to := mail.NewEmail("Usuário do EnsinaRenda", email)
 
-	resetLink := fmt.Sprintf("https://ensinararenda.com.br/reset?token=%s", token)
+	resetLink := fmt.Sprintf("https://ensinarenda.com.br/reset?token=%s", token)
 
 	plainTextContent := fmt.Sprintf("Olá! Para redefinir sua senha, clique no link: %s", resetLink)
 
