@@ -190,7 +190,7 @@ message Usuario{
 }
 
 message AtualizarSenhaRequest {
-    string id = 1 [(google.api.field_behavior) = REQUIRED];
+    string token = 1 [(google.api.field_behavior) = REQUIRED];
     string senha = 2 [(google.api.field_behavior) = REQUIRED];
 }
 

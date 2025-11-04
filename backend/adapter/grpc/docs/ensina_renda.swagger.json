@@ -427,7 +427,7 @@
     "ensina_rendaAtualizarSenhaRequest": {
       "type": "object",
       "properties": {
-        "id": {
+        "token": {
           "type": "string"
         },
         "senha": {
@@ -435,7 +435,7 @@
         }
       },
       "required": [
-        "id",
+        "token",
         "senha"
       ]
     },

@@ -19,4 +19,5 @@ type UsuarioController interface {
 	CriptografarEmail(ctx context.Context, email string) string
 	EnviarEmail(ctx context.Context, email, token string) error
 	GerarToken(ctx context.Context, usuario *model.Usuario) (string, error)
+	BuscarUsuarioPeloJWT(ctx context.Context, token string) (*model.Usuario, error)
 }

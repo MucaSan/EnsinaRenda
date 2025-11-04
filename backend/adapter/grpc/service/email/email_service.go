@@ -27,6 +27,7 @@ func (s *EmailService) EnviarEmail(email, token string) error {
 	subject := "Redefinição de Senha - EnsinaRenda"
 
 	fmt.Println("Email do usuário: ", email)
+	fmt.Println("Token do usuário: ", token)
 
 	to := mail.NewEmail("Usuário do EnsinaRenda", email)
 

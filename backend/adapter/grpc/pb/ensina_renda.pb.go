@@ -937,7 +937,7 @@ func (x *Usuario) GetCriadoEm() *timestamppb.Timestamp {
 
 type AtualizarSenhaRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	Senha         string                 `protobuf:"bytes,2,opt,name=senha,proto3" json:"senha,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -973,9 +973,9 @@ func (*AtualizarSenhaRequest) Descriptor() ([]byte, []int) {
 	return file_ensina_renda_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *AtualizarSenhaRequest) GetId() string {
+func (x *AtualizarSenhaRequest) GetToken() string {
 	if x != nil {
-		return x.Id
+		return x.Token
 	}
 	return ""
 }
@@ -1977,9 +1977,9 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
 	"\x04nome\x18\x03 \x01(\tR\x04nome\x127\n" +
-	"\tcriado_em\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bcriadoEm\"G\n" +
-	"\x15AtualizarSenhaRequest\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tB\x03\xe0A\x02R\x02id\x12\x19\n" +
+	"\tcriado_em\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\bcriadoEm\"M\n" +
+	"\x15AtualizarSenhaRequest\x12\x19\n" +
+	"\x05token\x18\x01 \x01(\tB\x03\xe0A\x02R\x05token\x12\x19\n" +
 	"\x05senha\x18\x02 \x01(\tB\x03\xe0A\x02R\x05senha\"N\n" +
 	"\x16AtualizarSenhaResponse\x12\x1a\n" +
 	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +

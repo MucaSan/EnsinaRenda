@@ -206,3 +206,23 @@ func (uc *UsuarioController) GerarToken(ctx context.Context, usuario *model.Usua
 
 	return token, nil
 }
+
+func (uc *UsuarioController) BuscarUsuarioPeloJWT(ctx context.Context, token string) (*model.Usuario, error) {
+	idUsuario, err := uc.jwtService.DecodificarUUID(ctx, token)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"nao foi possivel decodificar token JWT: %s",
+			err.Error(),
+		)
+	}
+
+	usuario, err := uc.usuarioRepository.GetUsuarioPeloId(ctx, idUsuario)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"nao foi possivel buscar usuario por por meio do ID do token: %s",
+			err.Error(),
+		)
+	}
+
+	return usuario, nil
+}

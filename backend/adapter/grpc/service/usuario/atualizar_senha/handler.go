@@ -12,7 +12,7 @@ func Handle(
 	in *pb.AtualizarSenhaRequest,
 ) (*pb.AtualizarSenhaResponse, error) {
 
-	usuario, err := container.UsuarioController().GetUsuarioPeloId(ctx, in.Id)
+	usuario, err := container.UsuarioController().BuscarUsuarioPeloJWT(ctx, in.Token)
 	if err != nil {
 		return RespostaErro(err)
 	}
