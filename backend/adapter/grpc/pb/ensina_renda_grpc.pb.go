@@ -31,6 +31,7 @@ const (
 	EnsinaRendaService_GetProvaGerada_FullMethodName      = "/ensina_renda.EnsinaRendaService/GetProvaGerada"
 	EnsinaRendaService_CorrigirProva_FullMethodName       = "/ensina_renda.EnsinaRendaService/CorrigirProva"
 	EnsinaRendaService_GetProvaCorrigida_FullMethodName   = "/ensina_renda.EnsinaRendaService/GetProvaCorrigida"
+	EnsinaRendaService_EnviarResetSenha_FullMethodName    = "/ensina_renda.EnsinaRendaService/EnviarResetSenha"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
@@ -49,6 +50,7 @@ type EnsinaRendaServiceClient interface {
 	GetProvaGerada(ctx context.Context, in *GetProvaGeradaRequest, opts ...grpc.CallOption) (*GetProvaGeradaResponse, error)
 	CorrigirProva(ctx context.Context, in *CorrigirProvaRequest, opts ...grpc.CallOption) (*CorrigirProvaResponse, error)
 	GetProvaCorrigida(ctx context.Context, in *GetProvaCorrigidaRequest, opts ...grpc.CallOption) (*GetProvaCorrigidaResponse, error)
+	EnviarResetSenha(ctx context.Context, in *EnviarResetSenhaRequest, opts ...grpc.CallOption) (*EnviarResetSenhaResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -179,6 +181,16 @@ func (c *ensinaRendaServiceClient) GetProvaCorrigida(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) EnviarResetSenha(ctx context.Context, in *EnviarResetSenhaRequest, opts ...grpc.CallOption) (*EnviarResetSenhaResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EnviarResetSenhaResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_EnviarResetSenha_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EnsinaRendaServiceServer is the server API for EnsinaRendaService service.
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
@@ -195,6 +207,7 @@ type EnsinaRendaServiceServer interface {
 	GetProvaGerada(context.Context, *GetProvaGeradaRequest) (*GetProvaGeradaResponse, error)
 	CorrigirProva(context.Context, *CorrigirProvaRequest) (*CorrigirProvaResponse, error)
 	GetProvaCorrigida(context.Context, *GetProvaCorrigidaRequest) (*GetProvaCorrigidaResponse, error)
+	EnviarResetSenha(context.Context, *EnviarResetSenhaRequest) (*EnviarResetSenhaResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -240,6 +253,9 @@ func (UnimplementedEnsinaRendaServiceServer) CorrigirProva(context.Context, *Cor
 }
 func (UnimplementedEnsinaRendaServiceServer) GetProvaCorrigida(context.Context, *GetProvaCorrigidaRequest) (*GetProvaCorrigidaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProvaCorrigida not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) EnviarResetSenha(context.Context, *EnviarResetSenhaRequest) (*EnviarResetSenhaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EnviarResetSenha not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -478,6 +494,24 @@ func _EnsinaRendaService_GetProvaCorrigida_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_EnviarResetSenha_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EnviarResetSenhaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).EnviarResetSenha(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_EnviarResetSenha_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).EnviarResetSenha(ctx, req.(*EnviarResetSenhaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EnsinaRendaService_ServiceDesc is the grpc.ServiceDesc for EnsinaRendaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -532,6 +566,10 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetProvaCorrigida",
 			Handler:    _EnsinaRendaService_GetProvaCorrigida_Handler,
+		},
+		{
+			MethodName: "EnviarResetSenha",
+			Handler:    _EnsinaRendaService_EnviarResetSenha_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

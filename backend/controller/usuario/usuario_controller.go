@@ -2,7 +2,9 @@ package controller
 
 import (
 	"context"
-	service "ensina-renda/adapter/grpc/service/auth"
+	jwtService "ensina-renda/adapter/grpc/service/auth"
+	servicosUsuario "ensina-renda/adapter/grpc/service/email"
+
 	"ensina-renda/domain/model"
 	domain "ensina-renda/domain/service"
 	"ensina-renda/repository/iface"
@@ -13,12 +15,16 @@ import (
 type UsuarioController struct {
 	usuarioRepository iface.UsuarioRepository
 	jwtService        domain.JwtServiceInterface
+	emailService      domain.EmailService
+	hashService       domain.HashService
 }
 
 func NewUsuarioController(usuarioRepository iface.UsuarioRepository) *UsuarioController {
 	return &UsuarioController{
 		usuarioRepository: usuarioRepository,
-		jwtService:        service.NewJwtService(),
+		jwtService:        jwtService.NewJwtService(),
+		emailService:      servicosUsuario.NewEmailService(),
+		hashService:       servicosUsuario.NewHashService(),
 	}
 }
 
@@ -174,4 +180,29 @@ func (uc *UsuarioController) ProvisionarUsuarioAulas(
 	}
 
 	return nil
+}
+
+func (uc *UsuarioController) CriptografarEmail(ctx context.Context, email string) string {
+	return uc.hashService.GerarHashSHA256(email)
+}
+
+func (uc *UsuarioController) EnviarEmail(ctx context.Context, email, token string) error {
+	err := uc.emailService.EnviarEmail(email, token)
+	if err != nil {
+		return fmt.Errorf("houve um erro ao tentar enviar email: %s", err.Error())
+	}
+
+	return nil
+}
+
+func (uc *UsuarioController) GerarToken(ctx context.Context, usuario *model.Usuario) (string, error) {
+	token, err := uc.jwtService.GerarJWT(ctx, usuario)
+	if err != nil {
+		return "", fmt.Errorf(
+			"houve um erro ao tentar gerar o jwt de resetar a senha: %s",
+			err.Error(),
+		)
+	}
+
+	return token, nil
 }

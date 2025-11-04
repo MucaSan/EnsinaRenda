@@ -14,11 +14,12 @@ import (
 	"ensina-renda/repository"
 	"flag"
 	"fmt"
-	"github.com/rs/cors"
 	"log"
 	"net"
 	"net/http"
 	"sync"
+
+	"github.com/rs/cors"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/joho/godotenv"

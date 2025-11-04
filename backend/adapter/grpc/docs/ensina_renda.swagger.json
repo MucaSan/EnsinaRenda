@@ -360,6 +360,38 @@
         ]
       }
     },
+    "/v1/reset/senha": {
+      "post": {
+        "operationId": "EnsinaRendaService_EnviarResetSenha",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaEnviarResetSenhaResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaEnviarResetSenhaRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/usuario/{email}": {
       "get": {
         "operationId": "EnsinaRendaService_GetUsuarioPeloEmail",
@@ -534,6 +566,28 @@
         }
       }
     },
+    "ensina_rendaEnviarResetSenhaRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "ensina_rendaEnviarResetSenhaResponse": {
+      "type": "object",
+      "properties": {
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
     "ensina_rendaGerarProvaRequest": {
       "type": "object",
       "properties": {
@@ -628,6 +682,9 @@
             "type": "object",
             "$ref": "#/definitions/ensina_rendaAula"
           }
+        },
+        "moduloConcluido": {
+          "type": "boolean"
         }
       }
     },

@@ -7,6 +7,7 @@ import (
 	"ensina-renda/adapter/grpc/service/aula/listar_modulo_aula"
 	"ensina-renda/adapter/grpc/service/auth/realizar_login"
 	"ensina-renda/adapter/grpc/service/container"
+	"ensina-renda/adapter/grpc/service/email/enviar_reset_senha"
 	"ensina-renda/adapter/grpc/service/modulo/concluir_modulo"
 	"ensina-renda/adapter/grpc/service/prova/corrigir_prova"
 	"ensina-renda/adapter/grpc/service/prova/gerar_prova"
@@ -75,4 +76,8 @@ func (s *EnsinaRendaService) GetProvaGerada(ctx context.Context, req *pb.GetProv
 
 func (s *EnsinaRendaService) GetProvaCorrigida(ctx context.Context, req *pb.GetProvaCorrigidaRequest) (*pb.GetProvaCorrigidaResponse, error) {
 	return get_prova_corrigida.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) EnviarResetSenha(ctx context.Context, req *pb.EnviarResetSenhaRequest) (*pb.EnviarResetSenhaResponse, error) {
+	return enviar_reset_senha.Handle(ctx, s.container, req)
 }

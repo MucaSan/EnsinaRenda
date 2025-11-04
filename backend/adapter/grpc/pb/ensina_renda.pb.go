@@ -652,11 +652,12 @@ func (x *ListarModuloAulasResponse) GetSucesso() bool {
 }
 
 type ModuloAulaAluno struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	IdModulo      string                 `protobuf:"bytes,1,opt,name=id_modulo,json=idModulo,proto3" json:"id_modulo,omitempty"`
-	Aulas         []*Aula                `protobuf:"bytes,2,rep,name=aulas,proto3" json:"aulas,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	IdModulo        string                 `protobuf:"bytes,1,opt,name=id_modulo,json=idModulo,proto3" json:"id_modulo,omitempty"`
+	Aulas           []*Aula                `protobuf:"bytes,2,rep,name=aulas,proto3" json:"aulas,omitempty"`
+	ModuloConcluido bool                   `protobuf:"varint,3,opt,name=modulo_concluido,json=moduloConcluido,proto3" json:"modulo_concluido,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ModuloAulaAluno) Reset() {
@@ -701,6 +702,13 @@ func (x *ModuloAulaAluno) GetAulas() []*Aula {
 		return x.Aulas
 	}
 	return nil
+}
+
+func (x *ModuloAulaAluno) GetModuloConcluido() bool {
+	if x != nil {
+		return x.ModuloConcluido
+	}
+	return false
 }
 
 type Aula struct {
@@ -1551,6 +1559,102 @@ func (x *GetProvaCorrigidaResponse) GetSucesso() bool {
 	return false
 }
 
+type EnviarResetSenhaRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnviarResetSenhaRequest) Reset() {
+	*x = EnviarResetSenhaRequest{}
+	mi := &file_ensina_renda_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnviarResetSenhaRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnviarResetSenhaRequest) ProtoMessage() {}
+
+func (x *EnviarResetSenhaRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnviarResetSenhaRequest.ProtoReflect.Descriptor instead.
+func (*EnviarResetSenhaRequest) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *EnviarResetSenhaRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type EnviarResetSenhaResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Mensagem      string                 `protobuf:"bytes,1,opt,name=mensagem,proto3" json:"mensagem,omitempty"`
+	Sucesso       bool                   `protobuf:"varint,2,opt,name=sucesso,proto3" json:"sucesso,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EnviarResetSenhaResponse) Reset() {
+	*x = EnviarResetSenhaResponse{}
+	mi := &file_ensina_renda_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EnviarResetSenhaResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EnviarResetSenhaResponse) ProtoMessage() {}
+
+func (x *EnviarResetSenhaResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_ensina_renda_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EnviarResetSenhaResponse.ProtoReflect.Descriptor instead.
+func (*EnviarResetSenhaResponse) Descriptor() ([]byte, []int) {
+	return file_ensina_renda_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *EnviarResetSenhaResponse) GetMensagem() string {
+	if x != nil {
+		return x.Mensagem
+	}
+	return ""
+}
+
+func (x *EnviarResetSenhaResponse) GetSucesso() bool {
+	if x != nil {
+		return x.Sucesso
+	}
+	return false
+}
+
 type ProvaRespondida struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	TituloProva         string                 `protobuf:"bytes,1,opt,name=tituloProva,proto3" json:"tituloProva,omitempty"`
@@ -1561,7 +1665,7 @@ type ProvaRespondida struct {
 
 func (x *ProvaRespondida) Reset() {
 	*x = ProvaRespondida{}
-	mi := &file_ensina_renda_proto_msgTypes[29]
+	mi := &file_ensina_renda_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1573,7 +1677,7 @@ func (x *ProvaRespondida) String() string {
 func (*ProvaRespondida) ProtoMessage() {}
 
 func (x *ProvaRespondida) ProtoReflect() protoreflect.Message {
-	mi := &file_ensina_renda_proto_msgTypes[29]
+	mi := &file_ensina_renda_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1586,7 +1690,7 @@ func (x *ProvaRespondida) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvaRespondida.ProtoReflect.Descriptor instead.
 func (*ProvaRespondida) Descriptor() ([]byte, []int) {
-	return file_ensina_renda_proto_rawDescGZIP(), []int{29}
+	return file_ensina_renda_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *ProvaRespondida) GetTituloProva() string {
@@ -1615,7 +1719,7 @@ type QuestaoRespondida struct {
 
 func (x *QuestaoRespondida) Reset() {
 	*x = QuestaoRespondida{}
-	mi := &file_ensina_renda_proto_msgTypes[30]
+	mi := &file_ensina_renda_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1627,7 +1731,7 @@ func (x *QuestaoRespondida) String() string {
 func (*QuestaoRespondida) ProtoMessage() {}
 
 func (x *QuestaoRespondida) ProtoReflect() protoreflect.Message {
-	mi := &file_ensina_renda_proto_msgTypes[30]
+	mi := &file_ensina_renda_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1640,7 +1744,7 @@ func (x *QuestaoRespondida) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuestaoRespondida.ProtoReflect.Descriptor instead.
 func (*QuestaoRespondida) Descriptor() ([]byte, []int) {
-	return file_ensina_renda_proto_rawDescGZIP(), []int{30}
+	return file_ensina_renda_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *QuestaoRespondida) GetNumQuestao() int32 {
@@ -1682,7 +1786,7 @@ type ProvaCorrigida struct {
 
 func (x *ProvaCorrigida) Reset() {
 	*x = ProvaCorrigida{}
-	mi := &file_ensina_renda_proto_msgTypes[31]
+	mi := &file_ensina_renda_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1694,7 +1798,7 @@ func (x *ProvaCorrigida) String() string {
 func (*ProvaCorrigida) ProtoMessage() {}
 
 func (x *ProvaCorrigida) ProtoReflect() protoreflect.Message {
-	mi := &file_ensina_renda_proto_msgTypes[31]
+	mi := &file_ensina_renda_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1707,7 +1811,7 @@ func (x *ProvaCorrigida) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvaCorrigida.ProtoReflect.Descriptor instead.
 func (*ProvaCorrigida) Descriptor() ([]byte, []int) {
-	return file_ensina_renda_proto_rawDescGZIP(), []int{31}
+	return file_ensina_renda_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ProvaCorrigida) GetTituloProva() string {
@@ -1745,7 +1849,7 @@ type QuestaoCorrigida struct {
 
 func (x *QuestaoCorrigida) Reset() {
 	*x = QuestaoCorrigida{}
-	mi := &file_ensina_renda_proto_msgTypes[32]
+	mi := &file_ensina_renda_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1757,7 +1861,7 @@ func (x *QuestaoCorrigida) String() string {
 func (*QuestaoCorrigida) ProtoMessage() {}
 
 func (x *QuestaoCorrigida) ProtoReflect() protoreflect.Message {
-	mi := &file_ensina_renda_proto_msgTypes[32]
+	mi := &file_ensina_renda_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1770,7 +1874,7 @@ func (x *QuestaoCorrigida) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuestaoCorrigida.ProtoReflect.Descriptor instead.
 func (*QuestaoCorrigida) Descriptor() ([]byte, []int) {
-	return file_ensina_renda_proto_rawDescGZIP(), []int{32}
+	return file_ensina_renda_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *QuestaoCorrigida) GetNumQuestao() int32 {
@@ -1855,10 +1959,11 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x19ListarModuloAulasResponse\x12@\n" +
 	"\fmodulo_aulas\x18\x01 \x03(\v2\x1d.ensina_renda.ModuloAulaAlunoR\vmoduloAulas\x12\x1a\n" +
 	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x03 \x01(\bR\asucesso\"X\n" +
+	"\asucesso\x18\x03 \x01(\bR\asucesso\"\x83\x01\n" +
 	"\x0fModuloAulaAluno\x12\x1b\n" +
 	"\tid_modulo\x18\x01 \x01(\tR\bidModulo\x12(\n" +
-	"\x05aulas\x18\x02 \x03(\v2\x12.ensina_renda.AulaR\x05aulas\".\n" +
+	"\x05aulas\x18\x02 \x03(\v2\x12.ensina_renda.AulaR\x05aulas\x12)\n" +
+	"\x10modulo_concluido\x18\x03 \x01(\bR\x0fmoduloConcluido\".\n" +
 	"\x04Aula\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\bR\x06status\"7\n" +
@@ -1910,7 +2015,12 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x19GetProvaCorrigidaResponse\x12'\n" +
 	"\x0fprova_corrigida\x18\x01 \x01(\tR\x0eprovaCorrigida\x12\x1a\n" +
 	"\bmensagem\x18\x02 \x01(\tR\bmensagem\x12\x18\n" +
-	"\asucesso\x18\x03 \x01(\bR\asucesso\"\x86\x01\n" +
+	"\asucesso\x18\x03 \x01(\bR\asucesso\"4\n" +
+	"\x17EnviarResetSenhaRequest\x12\x19\n" +
+	"\x05email\x18\x01 \x01(\tB\x03\xe0A\x02R\x05email\"P\n" +
+	"\x18EnviarResetSenhaResponse\x12\x1a\n" +
+	"\bmensagem\x18\x01 \x01(\tR\bmensagem\x12\x18\n" +
+	"\asucesso\x18\x02 \x01(\bR\asucesso\"\x86\x01\n" +
 	"\x0fProvaRespondida\x12 \n" +
 	"\vtituloProva\x18\x01 \x01(\tR\vtituloProva\x12Q\n" +
 	"\x13questoesRespondidas\x18\x02 \x03(\v2\x1f.ensina_renda.QuestaoRespondidaR\x13questoesRespondidas\"\x93\x01\n" +
@@ -1933,7 +2043,7 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"\x06opcoes\x18\x03 \x03(\tR\x06opcoes\x12&\n" +
 	"\x0eresposeCorreta\x18\x04 \x01(\x05R\x0eresposeCorreta\x12(\n" +
 	"\x0frespostaUsuario\x18\x05 \x01(\x05R\x0frespostaUsuario\x12\x1a\n" +
-	"\bfeedback\x18\x06 \x01(\tR\bfeedback2\xe4\v\n" +
+	"\bfeedback\x18\x06 \x01(\tR\bfeedback2\xe3\f\n" +
 	"\x12EnsinaRendaService\x12q\n" +
 	"\x0eCadastrarAluno\x12#.ensina_renda.CadastrarAlunoRequest\x1a$.ensina_renda.CadastrarAlunoResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/aluno\x12~\n" +
 	"\x0eVerificarAluno\x12#.ensina_renda.VerificarAlunoRequest\x1a$.ensina_renda.VerificarAlunoResponse\"!\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/aluno/{email}/{senha}\x12s\n" +
@@ -1947,7 +2057,8 @@ const file_ensina_renda_proto_rawDesc = "" +
 	"GerarProva\x12\x1f.ensina_renda.GerarProvaRequest\x1a .ensina_renda.GerarProvaResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/prova/gerar\x12\x81\x01\n" +
 	"\x0eGetProvaGerada\x12#.ensina_renda.GetProvaGeradaRequest\x1a$.ensina_renda.GetProvaGeradaResponse\"$\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v1/prova/gerada/{id_modulo}\x12w\n" +
 	"\rCorrigirProva\x12\".ensina_renda.CorrigirProvaRequest\x1a#.ensina_renda.CorrigirProvaResponse\"\x1d\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/prova/corrigir\x12\x8d\x01\n" +
-	"\x11GetProvaCorrigida\x12&.ensina_renda.GetProvaCorrigidaRequest\x1a'.ensina_renda.GetProvaCorrigidaResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/prova/corrigida/{id_modulo}B\bZ\x06.;grpcb\x06proto3"
+	"\x11GetProvaCorrigida\x12&.ensina_renda.GetProvaCorrigidaRequest\x1a'.ensina_renda.GetProvaCorrigidaResponse\"'\x82\xd3\xe4\x93\x02!\x12\x1f/v1/prova/corrigida/{id_modulo}\x12}\n" +
+	"\x10EnviarResetSenha\x12%.ensina_renda.EnviarResetSenhaRequest\x1a&.ensina_renda.EnviarResetSenhaResponse\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v1/reset/senhaB\bZ\x06.;grpcb\x06proto3"
 
 var (
 	file_ensina_renda_proto_rawDescOnce sync.Once
@@ -1961,7 +2072,7 @@ func file_ensina_renda_proto_rawDescGZIP() []byte {
 	return file_ensina_renda_proto_rawDescData
 }
 
-var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_ensina_renda_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_ensina_renda_proto_goTypes = []any{
 	(*CadastrarAlunoRequest)(nil),       // 0: ensina_renda.CadastrarAlunoRequest
 	(*CadastrarAlunoResponse)(nil),      // 1: ensina_renda.CadastrarAlunoResponse
@@ -1992,20 +2103,22 @@ var file_ensina_renda_proto_goTypes = []any{
 	(*CorrigirProvaResponse)(nil),       // 26: ensina_renda.CorrigirProvaResponse
 	(*GetProvaCorrigidaRequest)(nil),    // 27: ensina_renda.GetProvaCorrigidaRequest
 	(*GetProvaCorrigidaResponse)(nil),   // 28: ensina_renda.GetProvaCorrigidaResponse
-	(*ProvaRespondida)(nil),             // 29: ensina_renda.ProvaRespondida
-	(*QuestaoRespondida)(nil),           // 30: ensina_renda.QuestaoRespondida
-	(*ProvaCorrigida)(nil),              // 31: ensina_renda.ProvaCorrigida
-	(*QuestaoCorrigida)(nil),            // 32: ensina_renda.QuestaoCorrigida
-	(*timestamppb.Timestamp)(nil),       // 33: google.protobuf.Timestamp
+	(*EnviarResetSenhaRequest)(nil),     // 29: ensina_renda.EnviarResetSenhaRequest
+	(*EnviarResetSenhaResponse)(nil),    // 30: ensina_renda.EnviarResetSenhaResponse
+	(*ProvaRespondida)(nil),             // 31: ensina_renda.ProvaRespondida
+	(*QuestaoRespondida)(nil),           // 32: ensina_renda.QuestaoRespondida
+	(*ProvaCorrigida)(nil),              // 33: ensina_renda.ProvaCorrigida
+	(*QuestaoCorrigida)(nil),            // 34: ensina_renda.QuestaoCorrigida
+	(*timestamppb.Timestamp)(nil),       // 35: google.protobuf.Timestamp
 }
 var file_ensina_renda_proto_depIdxs = []int32{
 	12, // 0: ensina_renda.ListarModuloAulasResponse.modulo_aulas:type_name -> ensina_renda.ModuloAulaAluno
 	13, // 1: ensina_renda.ModuloAulaAluno.aulas:type_name -> ensina_renda.Aula
 	16, // 2: ensina_renda.GetUsuarioPeloEmailResponse.usuario:type_name -> ensina_renda.Usuario
-	33, // 3: ensina_renda.Usuario.criado_em:type_name -> google.protobuf.Timestamp
+	35, // 3: ensina_renda.Usuario.criado_em:type_name -> google.protobuf.Timestamp
 	24, // 4: ensina_renda.Prova.questoes:type_name -> ensina_renda.Questao
-	30, // 5: ensina_renda.ProvaRespondida.questoesRespondidas:type_name -> ensina_renda.QuestaoRespondida
-	32, // 6: ensina_renda.ProvaCorrigida.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
+	32, // 5: ensina_renda.ProvaRespondida.questoesRespondidas:type_name -> ensina_renda.QuestaoRespondida
+	34, // 6: ensina_renda.ProvaCorrigida.questoesCorrigidas:type_name -> ensina_renda.QuestaoCorrigida
 	0,  // 7: ensina_renda.EnsinaRendaService.CadastrarAluno:input_type -> ensina_renda.CadastrarAlunoRequest
 	2,  // 8: ensina_renda.EnsinaRendaService.VerificarAluno:input_type -> ensina_renda.VerificarAlunoRequest
 	4,  // 9: ensina_renda.EnsinaRendaService.RealizarLogin:input_type -> ensina_renda.RealizarLoginRequest
@@ -2018,20 +2131,22 @@ var file_ensina_renda_proto_depIdxs = []int32{
 	21, // 16: ensina_renda.EnsinaRendaService.GetProvaGerada:input_type -> ensina_renda.GetProvaGeradaRequest
 	25, // 17: ensina_renda.EnsinaRendaService.CorrigirProva:input_type -> ensina_renda.CorrigirProvaRequest
 	27, // 18: ensina_renda.EnsinaRendaService.GetProvaCorrigida:input_type -> ensina_renda.GetProvaCorrigidaRequest
-	1,  // 19: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
-	3,  // 20: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
-	5,  // 21: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
-	7,  // 22: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
-	9,  // 23: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
-	11, // 24: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
-	15, // 25: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:output_type -> ensina_renda.GetUsuarioPeloEmailResponse
-	18, // 26: ensina_renda.EnsinaRendaService.AtualizarSenha:output_type -> ensina_renda.AtualizarSenhaResponse
-	20, // 27: ensina_renda.EnsinaRendaService.GerarProva:output_type -> ensina_renda.GerarProvaResponse
-	22, // 28: ensina_renda.EnsinaRendaService.GetProvaGerada:output_type -> ensina_renda.GetProvaGeradaResponse
-	26, // 29: ensina_renda.EnsinaRendaService.CorrigirProva:output_type -> ensina_renda.CorrigirProvaResponse
-	28, // 30: ensina_renda.EnsinaRendaService.GetProvaCorrigida:output_type -> ensina_renda.GetProvaCorrigidaResponse
-	19, // [19:31] is the sub-list for method output_type
-	7,  // [7:19] is the sub-list for method input_type
+	29, // 19: ensina_renda.EnsinaRendaService.EnviarResetSenha:input_type -> ensina_renda.EnviarResetSenhaRequest
+	1,  // 20: ensina_renda.EnsinaRendaService.CadastrarAluno:output_type -> ensina_renda.CadastrarAlunoResponse
+	3,  // 21: ensina_renda.EnsinaRendaService.VerificarAluno:output_type -> ensina_renda.VerificarAlunoResponse
+	5,  // 22: ensina_renda.EnsinaRendaService.RealizarLogin:output_type -> ensina_renda.RealizarLoginResponse
+	7,  // 23: ensina_renda.EnsinaRendaService.ConcluirAula:output_type -> ensina_renda.ConcluirAulaResponse
+	9,  // 24: ensina_renda.EnsinaRendaService.ConcluirModulo:output_type -> ensina_renda.ConcluirModuloResponse
+	11, // 25: ensina_renda.EnsinaRendaService.ListarModuloAulas:output_type -> ensina_renda.ListarModuloAulasResponse
+	15, // 26: ensina_renda.EnsinaRendaService.GetUsuarioPeloEmail:output_type -> ensina_renda.GetUsuarioPeloEmailResponse
+	18, // 27: ensina_renda.EnsinaRendaService.AtualizarSenha:output_type -> ensina_renda.AtualizarSenhaResponse
+	20, // 28: ensina_renda.EnsinaRendaService.GerarProva:output_type -> ensina_renda.GerarProvaResponse
+	22, // 29: ensina_renda.EnsinaRendaService.GetProvaGerada:output_type -> ensina_renda.GetProvaGeradaResponse
+	26, // 30: ensina_renda.EnsinaRendaService.CorrigirProva:output_type -> ensina_renda.CorrigirProvaResponse
+	28, // 31: ensina_renda.EnsinaRendaService.GetProvaCorrigida:output_type -> ensina_renda.GetProvaCorrigidaResponse
+	30, // 32: ensina_renda.EnsinaRendaService.EnviarResetSenha:output_type -> ensina_renda.EnviarResetSenhaResponse
+	20, // [20:33] is the sub-list for method output_type
+	7,  // [7:20] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
 	7,  // [7:7] is the sub-list for extension extendee
 	0,  // [0:7] is the sub-list for field type_name
@@ -2048,7 +2163,7 @@ func file_ensina_renda_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_ensina_renda_proto_rawDesc), len(file_ensina_renda_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
