@@ -48,16 +48,24 @@ func (r *AulaRepository) ListarUsuarioModuloAulas(ctx context.Context, id_usuari
 	var moduloAulas []*model.UsuarioModuloAula
 
 	err := database.GetDB(ctx).
-		Table("usuario_aula").
-		Select(`
-					modulo_aula.id_modulo AS id_modulo, 
-					usuario_aula.id_usuario AS id_usuario,
-					usuario_aula.id_aula AS id_aula, 
-					usuario_aula.concluido AS concluido
-					`,
-		).
-		Joins("INNER JOIN modulo_aula ON usuario_aula.id_aula = modulo_aula.id_aula").
-		Where("usuario_aula.id_usuario = ?", id_usuario).
+		Raw(`
+				SELECT
+				ma.id_modulo,
+				ua.id_usuario,
+				ua.id_aula,
+				ua.concluido AS aula_concluida,
+				um.concluido AS modulo_concluido
+					FROM
+						usuario_aula AS ua
+					JOIN
+						modulo_aula AS ma ON ua.id_aula = ma.id_aula
+					JOIN
+						usuario_modulo AS um ON ua.id_usuario = um.id_usuario AND ma.id_modulo = um.id_modulo
+					WHERE
+						ua.id_usuario = ?
+					ORDER BY
+						ma.id_modulo, ua.id_aula;
+`, id_usuario).
 		Find(&moduloAulas).Error
 	if err != nil {
 		return nil, err

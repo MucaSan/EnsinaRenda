@@ -14,7 +14,7 @@ func ConverterMapaParaPb(mapaModuloAula map[int][]*model.UsuarioModuloAula) []*p
 		for _, aula := range aulas {
 			mapModuloPb[idModulo] = append(mapModuloPb[idModulo], &pb.Aula{
 				Id:     strconv.Itoa(aula.IDAula),
-				Status: aula.Concluido,
+				Status: aula.AulaConcluida,
 			})
 		}
 	}
@@ -25,6 +25,12 @@ func ConverterMapaParaPb(mapaModuloAula map[int][]*model.UsuarioModuloAula) []*p
 				IdModulo: strconv.Itoa(pbIdModulo),
 				Aulas:    pbAulas,
 			})
+	}
+
+	for i, moduloAula := range moduloAulas {
+		idModulo, _ := strconv.Atoi(moduloAula.IdModulo)
+
+		moduloAulas[i].ModuloConcluido = mapaModuloAula[idModulo][0].ModuloConcluida
 	}
 
 	return moduloAulas
