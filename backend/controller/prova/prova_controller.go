@@ -10,6 +10,7 @@ import (
 	"ensina-renda/repository/iface"
 	"fmt"
 	"strconv"
+	"sync"
 	"time"
 
 	"github.com/google/uuid"
@@ -186,5 +187,65 @@ func (pc *ProvaController) GetCorrecaoProva(ctx context.Context, idModulo string
 	}
 
 	return correcaoProva, nil
+}
 
+func (pc *ProvaController) ObterResultadoFinal(ctx context.Context) (float32, float32, error) {
+	wg := sync.WaitGroup{}
+
+	wg.Add(3)
+	var media1, media2, media3 float32
+
+	go func() {
+		defer wg.Done()
+
+		media1, _ = pc.calcularMediaIndividual(ctx, "1")
+	}()
+
+	go func() {
+		defer wg.Done()
+
+		media2, _ = pc.calcularMediaIndividual(ctx, "2")
+	}()
+
+	go func() {
+		defer wg.Done()
+
+		media3, _ = pc.calcularMediaIndividual(ctx, "3")
+	}()
+
+	wg.Wait()
+
+	mediaFinal := (media1 + media2 + media3) / 3
+	porcentagemFinal := mediaFinal * 100
+
+	return mediaFinal, porcentagemFinal, nil
+}
+
+func (pc *ProvaController) calcularMediaIndividual(ctx context.Context, idModulo string) (float32, error) {
+	correcaoProva, err := pc.GetCorrecaoProva(ctx, idModulo)
+	if err != nil {
+		return 0, fmt.Errorf("erro ao tentar ao buscar a prova corrigida: %v", err)
+	}
+
+	var provaCorrigida model.ProvaCorrigida
+
+	err = json.Unmarshal([]byte(correcaoProva.ConteudoAnalise), &provaCorrigida)
+	if err != nil {
+		return 0, fmt.Errorf("erro ao transformar conteudo corrigido em estrutura Go: %v", err)
+	}
+
+	var media float32
+	questoesCertas := 0
+	questoesCorrigidas := provaCorrigida.QuestoesCorrigidas
+	quantidadeQuestoes := len(questoesCorrigidas)
+
+	for _, questaoCorrigida := range questoesCorrigidas {
+		if questaoCorrigida.RespostaCorreta == questaoCorrigida.RespostaUsuario {
+			questoesCertas++
+		}
+	}
+
+	media = float32(questoesCertas) / float32(quantidadeQuestoes)
+
+	return media, nil
 }

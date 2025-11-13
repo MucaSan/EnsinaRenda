@@ -11,4 +11,5 @@ type ProvaController interface {
 	GetProvaUsuario(ctx context.Context, idModulo string) (*model.ProvaUsuario, error)
 	CorrigirProva(ctx context.Context, idModulo string, provaRespondida *model.ProvaRespondida) error
 	GetCorrecaoProva(ctx context.Context, idModulo string) (*model.CorrecaoProva, error)
+	ObterResultadoFinal(ctx context.Context) (float32, float32, error)
 }

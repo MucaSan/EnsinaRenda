@@ -13,6 +13,7 @@ import (
 	"ensina-renda/adapter/grpc/service/prova/gerar_prova"
 	"ensina-renda/adapter/grpc/service/prova/get_prova_corrigida"
 	"ensina-renda/adapter/grpc/service/prova/get_prova_gerada"
+	"ensina-renda/adapter/grpc/service/prova/media_final"
 	"ensina-renda/adapter/grpc/service/usuario/atualizar_senha"
 	"ensina-renda/adapter/grpc/service/usuario/cadastrar_aluno"
 	"ensina-renda/adapter/grpc/service/usuario/get_usuario_email"
@@ -80,4 +81,8 @@ func (s *EnsinaRendaService) GetProvaCorrigida(ctx context.Context, req *pb.GetP
 
 func (s *EnsinaRendaService) EnviarResetSenha(ctx context.Context, req *pb.EnviarResetSenhaRequest) (*pb.EnviarResetSenhaResponse, error) {
 	return enviar_reset_senha.Handle(ctx, s.container, req)
+}
+
+func (s *EnsinaRendaService) MediaFinal(ctx context.Context, req *pb.MediaFinalRequest) (*pb.MediaFinalResponse, error) {
+	return media_final.Handle(ctx, s.container, req)
 }

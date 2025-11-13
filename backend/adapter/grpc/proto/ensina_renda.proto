@@ -94,6 +94,12 @@ service EnsinaRendaService {
             body: "*"
         };
     }
+
+    rpc MediaFinal(MediaFinalRequest) returns (MediaFinalResponse){
+        option (google.api.http) = {
+            get: "/v1/media/final"
+        };
+    }
 }
 
 message CadastrarAlunoRequest {
@@ -259,6 +265,16 @@ message EnviarResetSenhaResponse{
    bool sucesso = 2;
 }
 
+message MediaFinalRequest{
+
+}
+
+message MediaFinalResponse{
+   ResultadoFinal resultadoFinal = 1;
+   string mensagem = 2;
+   bool sucesso = 3;
+}
+
 message ProvaRespondida {
   string tituloProva = 1;
   repeated QuestaoRespondida questoesRespondidas = 2;
@@ -284,4 +300,9 @@ message QuestaoCorrigida {
   int32 resposeCorreta = 4;
   int32 respostaUsuario = 5;
   string feedback = 6;
+}
+
+message ResultadoFinal{
+  float mediaFinal = 1;
+  float porcentagemMedia = 2;
 }

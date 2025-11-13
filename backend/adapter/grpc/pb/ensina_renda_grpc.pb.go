@@ -32,6 +32,7 @@ const (
 	EnsinaRendaService_CorrigirProva_FullMethodName       = "/ensina_renda.EnsinaRendaService/CorrigirProva"
 	EnsinaRendaService_GetProvaCorrigida_FullMethodName   = "/ensina_renda.EnsinaRendaService/GetProvaCorrigida"
 	EnsinaRendaService_EnviarResetSenha_FullMethodName    = "/ensina_renda.EnsinaRendaService/EnviarResetSenha"
+	EnsinaRendaService_MediaFinal_FullMethodName          = "/ensina_renda.EnsinaRendaService/MediaFinal"
 )
 
 // EnsinaRendaServiceClient is the client API for EnsinaRendaService service.
@@ -51,6 +52,7 @@ type EnsinaRendaServiceClient interface {
 	CorrigirProva(ctx context.Context, in *CorrigirProvaRequest, opts ...grpc.CallOption) (*CorrigirProvaResponse, error)
 	GetProvaCorrigida(ctx context.Context, in *GetProvaCorrigidaRequest, opts ...grpc.CallOption) (*GetProvaCorrigidaResponse, error)
 	EnviarResetSenha(ctx context.Context, in *EnviarResetSenhaRequest, opts ...grpc.CallOption) (*EnviarResetSenhaResponse, error)
+	MediaFinal(ctx context.Context, in *MediaFinalRequest, opts ...grpc.CallOption) (*MediaFinalResponse, error)
 }
 
 type ensinaRendaServiceClient struct {
@@ -191,6 +193,16 @@ func (c *ensinaRendaServiceClient) EnviarResetSenha(ctx context.Context, in *Env
 	return out, nil
 }
 
+func (c *ensinaRendaServiceClient) MediaFinal(ctx context.Context, in *MediaFinalRequest, opts ...grpc.CallOption) (*MediaFinalResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MediaFinalResponse)
+	err := c.cc.Invoke(ctx, EnsinaRendaService_MediaFinal_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EnsinaRendaServiceServer is the server API for EnsinaRendaService service.
 // All implementations must embed UnimplementedEnsinaRendaServiceServer
 // for forward compatibility.
@@ -208,6 +220,7 @@ type EnsinaRendaServiceServer interface {
 	CorrigirProva(context.Context, *CorrigirProvaRequest) (*CorrigirProvaResponse, error)
 	GetProvaCorrigida(context.Context, *GetProvaCorrigidaRequest) (*GetProvaCorrigidaResponse, error)
 	EnviarResetSenha(context.Context, *EnviarResetSenhaRequest) (*EnviarResetSenhaResponse, error)
+	MediaFinal(context.Context, *MediaFinalRequest) (*MediaFinalResponse, error)
 	mustEmbedUnimplementedEnsinaRendaServiceServer()
 }
 
@@ -256,6 +269,9 @@ func (UnimplementedEnsinaRendaServiceServer) GetProvaCorrigida(context.Context, 
 }
 func (UnimplementedEnsinaRendaServiceServer) EnviarResetSenha(context.Context, *EnviarResetSenhaRequest) (*EnviarResetSenhaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnviarResetSenha not implemented")
+}
+func (UnimplementedEnsinaRendaServiceServer) MediaFinal(context.Context, *MediaFinalRequest) (*MediaFinalResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MediaFinal not implemented")
 }
 func (UnimplementedEnsinaRendaServiceServer) mustEmbedUnimplementedEnsinaRendaServiceServer() {}
 func (UnimplementedEnsinaRendaServiceServer) testEmbeddedByValue()                            {}
@@ -512,6 +528,24 @@ func _EnsinaRendaService_EnviarResetSenha_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EnsinaRendaService_MediaFinal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MediaFinalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EnsinaRendaServiceServer).MediaFinal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EnsinaRendaService_MediaFinal_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EnsinaRendaServiceServer).MediaFinal(ctx, req.(*MediaFinalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EnsinaRendaService_ServiceDesc is the grpc.ServiceDesc for EnsinaRendaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -570,6 +604,10 @@ var EnsinaRendaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EnviarResetSenha",
 			Handler:    _EnsinaRendaService_EnviarResetSenha_Handler,
+		},
+		{
+			MethodName: "MediaFinal",
+			Handler:    _EnsinaRendaService_MediaFinal_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

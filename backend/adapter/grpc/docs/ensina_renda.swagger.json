@@ -236,6 +236,28 @@
         ]
       }
     },
+    "/v1/media/final": {
+      "get": {
+        "operationId": "EnsinaRendaService_MediaFinal",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ensina_rendaMediaFinalResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "EnsinaRendaService"
+        ]
+      }
+    },
     "/v1/prova/corrigida/{idModulo}": {
       "get": {
         "operationId": "EnsinaRendaService_GetProvaCorrigida",
@@ -670,6 +692,20 @@
         }
       }
     },
+    "ensina_rendaMediaFinalResponse": {
+      "type": "object",
+      "properties": {
+        "resultadoFinal": {
+          "$ref": "#/definitions/ensina_rendaResultadoFinal"
+        },
+        "mensagem": {
+          "type": "string"
+        },
+        "sucesso": {
+          "type": "boolean"
+        }
+      }
+    },
     "ensina_rendaModuloAulaAluno": {
       "type": "object",
       "properties": {
@@ -716,6 +752,19 @@
         },
         "sucesso": {
           "type": "boolean"
+        }
+      }
+    },
+    "ensina_rendaResultadoFinal": {
+      "type": "object",
+      "properties": {
+        "mediaFinal": {
+          "type": "number",
+          "format": "float"
+        },
+        "porcentagemMedia": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
